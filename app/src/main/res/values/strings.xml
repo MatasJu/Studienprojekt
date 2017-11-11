@@ -1,3 +1,20 @@
 <resources>
+
     <string name="app_name">Studienprojekt</string>
+
+
+    <!--activity_what_day-->
+    <string name="whatDay_name">Welche Wochentag ist heute?</string>
+    <string name="what_day_question">Welche Wochentag ist heute?</string>
+    <string name="result">Result:</string>
+    <string name="textview">TextView</string>
+    <string name="tag_test">Wochentag-Test</string>
+
+    <!--Tag Colors-->
+    <string name="tag_color_deceased">Black</string>
+    <string name="tag_color_immediate">Red</string>
+    <string name="tag_color_delayed">Yellow</string>
+    <string name="tag_color_normal">Green</string>
+
+
 </resources>
