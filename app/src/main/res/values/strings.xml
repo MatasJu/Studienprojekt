@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Studienprojekt</string>
+    <string name="nachname">Nachname</string>
+    <string name="vorname">Vorname</string>
 </resources>
