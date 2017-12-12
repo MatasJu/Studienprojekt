@@ -18,6 +18,10 @@
         </activity>
         <activity android:name=".SimulationSettings" />
         <activity android:name=".QuestionsActivity"></activity>
+        <activity android:name=".MeineDaten"
+            android:label="Meine Daten"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

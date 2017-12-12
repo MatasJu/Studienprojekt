@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,4 +29,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void meineDatenRufen(View view) {
+        Intent intent = new Intent(this,MeineDaten.class);
+        startActivity(intent);
+    }
 }
