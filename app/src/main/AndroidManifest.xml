@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MeineDaten"
-            android:label="Meine Daten"
+            android:label="Meine  Daten"
             android:parentActivityName=".MainActivity">
         </activity>
     </application>
