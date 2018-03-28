@@ -7,7 +7,7 @@
     tools:context="de.haw_landshut.studienprojekt.WhatDay">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/speakerTextView"
         android:layout_width="276dp"
         android:layout_height="86dp"
         android:layout_marginEnd="8dp"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/speakerTextView" />
 
     <View
         android:id="@+id/rectangle_at_the_top"
@@ -39,6 +39,6 @@
         android:layout_marginBottom="38dp"
         android:background="#4325"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textView" />
+        app:layout_constraintBottom_toTopOf="@+id/speakerTextView" />
 
 </android.support.constraint.ConstraintLayout>

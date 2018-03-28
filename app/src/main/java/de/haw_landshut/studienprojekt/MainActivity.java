@@ -19,10 +19,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void launchWhatDay(View view) {
-        Log.d(LOG_TAG, "Button clicked!");
+        Log.d(LOG_TAG, "launchWhatDay clicked!");
         Intent intent = new Intent(this, WhatDay.class);
         startActivity(intent);
     }
 
+
+    public void launchSpeakerRecognitionTest(View view) {
+        Log.d(LOG_TAG, "launchSpeakerRecognitionTest clicked!");
+        Intent intent = new Intent(this, SpeakerRecognitionTest.class);
+        startActivity(intent);
+    }
 
 }

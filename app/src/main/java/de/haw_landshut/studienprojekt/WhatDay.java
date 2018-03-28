@@ -104,7 +104,7 @@ public class WhatDay extends AppCompatActivity {
             Log.d(TAG, "onActivityResult() called with: requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "], results.toString()"+results.toString());
 
             // Do something with spokenText
-            TextView tv = (TextView)findViewById(R.id.textView);
+            TextView tv = (TextView)findViewById(R.id.speakerTextView);
             tv.setText(spokenText);
             checkDayAnswer(spokenText);
         }

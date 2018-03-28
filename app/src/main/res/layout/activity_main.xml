@@ -7,7 +7,7 @@
     tools:context="de.haw_landshut.studienprojekt.MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/speakerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -33,5 +33,25 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Speaker Test"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+
+        android:onClick="launchSpeakerRecognitionTest"
+
+
+
+
+
+
+
+
+        />
 
 </android.support.constraint.ConstraintLayout>

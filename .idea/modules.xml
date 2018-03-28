@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Studienprojekt.iml" filepath="$PROJECT_DIR$/Studienprojekt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alize-release/alize-release.iml" filepath="$PROJECT_DIR$/alize-release/alize-release.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
