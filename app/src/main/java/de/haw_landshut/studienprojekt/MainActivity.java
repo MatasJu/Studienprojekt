@@ -17,10 +17,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
-    public void launchWhatDay(View view) {
-        Log.d(LOG_TAG, "Button clicked!");
-        Intent intent = new Intent(this, WhatDay.class);
+    /**Start Button OnClick Event Handler
+     *  Starts an activity, currently the settings for simulation.
+     * @param view - view sent from the button.
+     */
+    public void startButtonEventHandler(View view) {
+        Log.d(LOG_TAG, "StartButton Clicked!");
+        Intent intent = new Intent(this, SimulationSettings.class);
         startActivity(intent);
     }
 
