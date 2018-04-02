@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 public class SimulationSettings extends AppCompatActivity {
 
+    //This constant uses the name of the class itself as the tag.
+    private static final String LOG_TAG = SimulationSettings.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
