@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
@@ -30,13 +31,16 @@ import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 public class QuestionsActivity extends AppCompatActivity {
     //This constant uses the name of the class itself as the tag.
     private static final String TAG = QuestionsActivity.class.getSimpleName();
-
-    //
+    private final int TOTAL_RANDOM_WORD_COUNT = 499;
+    private final int AMOUNT_RANDOM_WORDS = 3;
+    private final String RANDOM_WORD_ID = "random_word";
     private TextToSpeech textToSpeech;
     //For Testing
     private TextView testSpeechRecResult;
-    ArrayList<String> qList;
-    private int qNr = 0;
+    ArrayList<String> questionList;
+    private int questionNr = 0;
+
+    private String[] randomWordsList;
 
     //------
     /** Code for recognising callback from speech recogniser.
@@ -48,35 +52,65 @@ public class QuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
-        qList = makeQuestionList();
+
+        //init Lists
+        questionList = makeQuestionList(); //ArrayList for questions.
+
+        randomWordsList = selectRandomWords(); //String[] for words to remember.
+
+        //TestThings©
         testSpeechRecResult = findViewById(R.id.answer);
+        //--TestThings®
 
-
-
-
-        
-        //Problems if user disabled all the TTS engines.
 
 
         askQuestion();
 
     }
 
-    private void askQuestion(){
+    /**Returns a string with AMOUNT_RANDOM_WORDS random words from the string.xml resource.
+     *
+     * @return String[] with random words.
+     */
+    private String[] selectRandomWords(){
+        String[] r = new String[AMOUNT_RANDOM_WORDS];
 
-        if(qNr==0)
-            askToRemember();
-        else
-            textToSpeech = TTS(qList.get(qNr));
+
+        for (int i = 0; i < r.length; i++) {
+            r[i] = getString(getResources().getIdentifier(RANDOM_WORD_ID+(new Random().nextInt(TOTAL_RANDOM_WORD_COUNT)+1),"string", getPackageName()));
 
         }
 
+        return r;
+    }
 
+    /**Starts asking questions, depends on questionNr to increment through questions.
+     * TODO: improve the flow. after changing the TTS STT functions. Mainly figure another method to run through questions.
+     *
+     */
+    private void askQuestion(){
+        questionNr++;
+
+        if(questionNr ==-1)
+            askToRemember();
+        else
+            textToSpeech = TTS(questionList.get(questionNr));
+
+        }
+
+    /**Function to ask the user to remember words.
+     *
+     */
     private void askToRemember() {
-         textToSpeech = TTS("Bitte erinnern Sie sich an diese drei Wörtern :" +
-                 " Sonne." +
-                 " Waser." +
-                 " Traum.");
+
+        String temp = getString(R.string.remember_words);
+        for (int i = 0; i <AMOUNT_RANDOM_WORDS ; i++) {
+            temp = temp.concat(randomWordsList[i]+".");
+        }
+
+         textToSpeech = TTS(temp);
+
+
     }
 
    private ArrayList<String> makeQuestionList(){
@@ -84,7 +118,6 @@ public class QuestionsActivity extends AppCompatActivity {
         r.add(getString(R.string.what_day_question));
         r.add("Welcher Monat ist es?");
         r.add("Welches Jahr haben wir denn heute?");
-
         return r;
 
     }
@@ -95,6 +128,7 @@ public class QuestionsActivity extends AppCompatActivity {
      */
 
     private TextToSpeech TTS(final String text){
+        Log.d(TAG, "TTS() called with: text = [" + text + "]");
        return new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -108,7 +142,13 @@ public class QuestionsActivity extends AppCompatActivity {
                         @Override
                         public void onDone(String utteranceId) {
                             Log.d(TAG, "TTS finished");
+                            if(questionNr>=0) {
                             displaySpeechRecognizer();
+                            }else {
+                                Log.d(TAG, "onDone() called with: utteranceId = [" + utteranceId + "]");
+                                askQuestion();
+
+                            }
                         }
 
                         @Override
@@ -136,22 +176,25 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     /**Creates and displays an intent to write speech to text.
-     * TODO: Localisation, go over settings and choose the best ones, maybe allow the caller to choose them. Modulise this function
+     * TODO: Localisation, go over settings and choose the best ones, maybe allow the caller to choose them. Modularise this function
      */
     private void displaySpeechRecognizer() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN.toString());
-        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
-        //Offline recognistion will work oply obove api lvl 23, also has to be downloaded outside the app in the language settings.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
-        }
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.what_day_question));
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 2);
 
-        // Start the activity, the intent will be populated with the speech text
-        startActivityForResult(intent, SPEECH_WHAT_DAY_CODE);
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN.toString());
+            intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
+            //Offline recognistion will work oply obove api lvl 23, also has to be downloaded outside the app in the language settings.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
+            }
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.what_day_question));
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 2);
+
+            // Start the activity, the intent will be populated with the speech text
+            startActivityForResult(intent, SPEECH_WHAT_DAY_CODE);
+
+
     }
 
     /** Callback function for STT.
@@ -182,31 +225,32 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void checkAnswer(String result){
-        switch (qNr){
+        switch (questionNr){
+            case -1:
 
+                askQuestion();
+                break;
             case 0:
-                checkDayAnswer(result);
-
+                checkYearAnswer(result);
                 break;
             case 1:
                 checkMonthAnswer(result);
-
                 break;
 
             case 2:
-                checkYearAnswer(result);
 
+                checkDayAnswer(result);
                 break;
 
             case 3:
                 checkWordsAnswer(result);
                 break;
 
-            case 4:
-                checkWordsAnswers(result);
-                break;
         }
 
+    }
+
+    private void giveWordsToRemember() {
     }
 
     private void checkWordsAnswers(String result) {
@@ -226,7 +270,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private void checkMonthAnswer(String result) {
 
-        Log.d(TAG, "checkDayAnswer() called with: result = [" + result + "]");
+        Log.d(TAG, " checkMonthAnswer called with: result = [" + result + "]");
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
@@ -247,12 +291,12 @@ public class QuestionsActivity extends AppCompatActivity {
         //tag the person.
         this.getWindow().getDecorView().setBackgroundColor(tag ? Color.YELLOW : Color.RED);
 
-        qNr++;
+        questionNr++;
         askQuestion();
     }
 
     private void checkYearAnswer(String result) {
-        Log.d(TAG, "checkDayAnswer() called with: result = [" + result + "]");
+        Log.d(TAG, "checkYearAnswer() called with: result = [" + result + "]");
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
@@ -272,8 +316,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
         //tag the person.
         this.getWindow().getDecorView().setBackgroundColor(tag ? Color.YELLOW : Color.RED);
-
-        qNr++;
         askQuestion();
     }
 
@@ -304,7 +346,7 @@ public class QuestionsActivity extends AppCompatActivity {
         //tag the person.
         this.getWindow().getDecorView().setBackgroundColor(tag ? Color.YELLOW : Color.RED);
 
-        qNr++;
+        questionNr++;
         askQuestion();
 
     }
