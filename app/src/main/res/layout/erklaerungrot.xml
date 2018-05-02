@@ -20,6 +20,7 @@
         android:text="Notfall! Notfallkontakte bzw. der Notruf wird betätigt!"
         android:textColor="@android:color/black"
         android:textSize="24sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="33dp"
         tools:layout_editor_absoluteY="331dp" />
 </android.support.constraint.ConstraintLayout>
