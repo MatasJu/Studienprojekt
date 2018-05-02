@@ -6,4 +6,8 @@
     <string name="größe">Größe</string>
     <string name="geschlecht">Geschlecht</string>
     <string name="gewicht">Gewicht</string>
+
+
+    <!--Standort values -->
+    <string name="standortTxt">Dein Standort ist uns wichtig.</string>
 </resources>

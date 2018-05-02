@@ -1,22 +1,22 @@
-   <?xml version="1.0" encoding="utf-8"?>
-   <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:app="http://schemas.android.com/apk/res-auto"
-       xmlns:tools="http://schemas.android.com/tools"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       tools:layout_editor_absoluteY="81dp">
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
-       <EditText
-           android:id="@+id/editText"
-           android:layout_width="135dp"
-           android:layout_height="0dp"
-           android:layout_marginStart="8dp"
-           android:layout_marginTop="8dp"
-           android:ems="10"
-           android:inputType="textPersonName"
-           android:text="Nachname"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/editText2" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="135dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nachname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <EditText
         android:id="@+id/editText2"
@@ -179,142 +179,143 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
+
+<TextView
+android:id="@+id/textView_vorname"
+android:layout_width="75dp"
+android:layout_height="20dp"
+
+android:layout_marginStart="16dp"
+android:layout_marginTop="88dp"
+android:text="@string/vorname"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+tools:text="@string/vorname" />
+
+<TextView
+android:id="@+id/textView_nachname"
+android:layout_width="75dp"
+android:layout_height="20dp"
+android:layout_marginLeft="16dp"
+android:layout_marginStart="16dp"
+android:layout_marginTop="44dp"
+android:text="@string/nachname"
+app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/textView_vorname" />
+
+<EditText
+android:id="@+id/editText_vorname"
+android:layout_width="wrap_content"
+android:layout_height="40dp"
+android:layout_marginStart="40dp"
+android:layout_marginTop="76dp"
+android:ems="10"
+android:inputType="textPersonName"
+app:layout_constraintStart_toEndOf="@+id/textView_vorname"
+app:layout_constraintTop_toTopOf="parent" />
+
+<EditText
+android:id="@+id/editText_nachname"
+android:layout_width="wrap_content"
+android:layout_height="40dp"
+android:layout_marginStart="40dp"
+android:ems="10"
+android:inputType="textPersonName"
+app:layout_constraintStart_toEndOf="@+id/textView_nachname"
+tools:layout_editor_absoluteY="142dp" />
+
+<TextView
+android:id="@+id/textView_gebtag"
+android:layout_width="75dp"
+android:layout_height="20dp"
+android:layout_marginTop="40dp"
+android:text="Geburtstag"
+app:layout_constraintTop_toBottomOf="@+id/textView_nachname"
+tools:layout_editor_absoluteX="16dp" />
+
+<EditText
+android:id="@+id/editText_gebtag"
+android:layout_width="wrap_content"
+android:layout_height="40dp"
+android:layout_marginStart="40dp"
+android:ems="10"
+android:inputType="datetime"
+android:numeric="integer"
+android:scrollbars="horizontal"
+android:selectAllOnFocus="true"
+android:singleLine="true"
+app:layout_constraintStart_toEndOf="@+id/textView_gebtag"
+tools:layout_editor_absoluteY="203dp" />
+
+<TextView
+android:id="@+id/textView_size"
+android:layout_width="75dp"
+android:layout_height="20dp"
+android:layout_marginLeft="16dp"
+android:layout_marginStart="16dp"
+android:layout_marginTop="52dp"
+android:text="Größe"
+app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/textView_gebtag" />
+
+<TextView
+android:id="@+id/textView_sex"
+android:layout_width="75dp"
+android:layout_height="20dp"
+android:layout_marginLeft="16dp"
+android:layout_marginStart="16dp"
+android:layout_marginTop="48dp"
+android:text="Geschlecht"
+app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/textView_size" />
+
+<TextView
+android:id="@+id/textView_weight"
+android:layout_width="75dp"
+android:layout_height="20dp"
+android:layout_marginLeft="16dp"
+android:layout_marginStart="16dp"
+android:layout_marginTop="36dp"
+android:text="Gewicht"
+app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/textView_sex" />
+
+<NumberPicker
+android:id="@+id/numberPicker"
+android:layout_width="212dp"
+android:layout_height="40dp"
+android:layout_marginStart="40dp"
+android:clickable="true"
+android:scrollbarAlwaysDrawHorizontalTrack="true"
+android:scrollbars="horizontal"
+android:visibility="visible"
+app:layout_constraintStart_toEndOf="@+id/textView_size"
+tools:layout_editor_absoluteY="276dp" />
+
+<Spinner
+android:id="@+id/editText_sex"
+android:layout_width="210dp"
+android:layout_height="40dp"
+android:dropDownSelector="@android:drawable/arrow_down_float"
+android:dropDownWidth="?attr/dialogPreferredPadding"
+android:entries="@android:color/darker_gray"
+android:scrollbarAlwaysDrawVerticalTrack="true"
+android:scrollbars="horizontal"
+app:layout_constraintStart_toEndOf="@+id/textView_sex"
+tools:layout_editor_absoluteY="340dp" />
+
+<NumberPicker
+android:id="@+id/editText_weight"
+android:layout_width="210dp"
+android:layout_height="40dp"
+android:layout_marginStart="40dp"
+app:layout_constraintStart_toEndOf="@+id/textView_weight"
+tools:layout_editor_absoluteY="400dp" />
+
 </android.support.constraint.ConstraintLayout>
-
-
-    <TextView
-        android:id="@+id/textView_vorname"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="88dp"
-        android:text="@string/vorname"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/vorname" />
-
-    <TextView
-        android:id="@+id/textView_nachname"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/nachname"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_vorname" />
-
-    <EditText
-        android:id="@+id/editText_vorname"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="76dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/textView_vorname"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText_nachname"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/textView_nachname"
-        tools:layout_editor_absoluteY="142dp" />
-
-    <TextView
-        android:id="@+id/textView_gebtag"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="40dp"
-        android:text="Geburtstag"
-        app:layout_constraintTop_toBottomOf="@+id/textView_nachname"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <EditText
-        android:id="@+id/editText_gebtag"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:ems="10"
-        android:inputType="datetime"
-        android:numeric="integer"
-        android:scrollbars="horizontal"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        app:layout_constraintStart_toEndOf="@+id/textView_gebtag"
-        tools:layout_editor_absoluteY="203dp" />
-
-    <TextView
-        android:id="@+id/textView_size"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
-        android:text="Größe"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_gebtag" />
-
-    <TextView
-        android:id="@+id/textView_sex"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:text="Geschlecht"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_size" />
-
-    <TextView
-        android:id="@+id/textView_weight"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:text="Gewicht"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_sex" />
-
-    <NumberPicker
-        android:id="@+id/numberPicker"
-        android:layout_width="212dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:clickable="true"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:scrollbars="horizontal"
-        android:visibility="visible"
-        app:layout_constraintStart_toEndOf="@+id/textView_size"
-        tools:layout_editor_absoluteY="276dp" />
-
-    <Spinner
-        android:id="@+id/editText_sex"
-        android:layout_width="210dp"
-        android:layout_height="40dp"
-        android:dropDownSelector="@android:drawable/arrow_down_float"
-        android:dropDownWidth="?attr/dialogPreferredPadding"
-        android:entries="@android:color/darker_gray"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="horizontal"
-        app:layout_constraintStart_toEndOf="@+id/textView_sex"
-        tools:layout_editor_absoluteY="340dp" />
-
-    <NumberPicker
-        android:id="@+id/editText_weight"
-        android:layout_width="210dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        app:layout_constraintStart_toEndOf="@+id/textView_weight"
-        tools:layout_editor_absoluteY="400dp" />
-
