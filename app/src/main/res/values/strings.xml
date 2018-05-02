@@ -3,6 +3,10 @@
     <string name="app_name">Studienprojekt</string>
     <string name="nachname">Nachname</string>
     <string name="vorname">Vorname</string>
+    <string name="geburtstag">Geburtstag</string>
+    <string name="größe">Größe</string>
+    <string name="geschlecht">Geschlecht</string>
+    <string name="gewicht">Gewicht</string>
 
 
     <!--MainActivity-->
