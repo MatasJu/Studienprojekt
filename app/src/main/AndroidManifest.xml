@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MeineDaten"
+            android:label="Meine Daten"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Standort"></activity>
+
         <activity android:name=".SimulationSettings" />
         <activity android:name=".QuestionsActivity"></activity>
         <activity android:name=".MeineDaten"

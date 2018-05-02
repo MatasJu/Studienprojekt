@@ -9,6 +9,10 @@
     <string name="gewicht">Gewicht</string>
 
 
+    <!--Standort values -->
+    <string name="standortTxt">Dein Standort ist uns wichtig.</string>
+
+
     <!--MainActivity-->
     <string name="remember_words">"Bitte merken sie sich diese drei Wörter."</string>
 
