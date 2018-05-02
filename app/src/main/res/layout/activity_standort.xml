@@ -4,17 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minWidth="@android:dimen/thumbnail_width"
+    android:visibility="visible"
     tools:context="de.haw_landshut.studienprojekt.Standort">
 
     <TextView
-        android:id="@+id/explanationTxt"
-        android:layout_width="561dp"
-        android:layout_height="283dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/textView2"
+        android:layout_width="337dp"
+        android:layout_height="253dp"
+        android:autoSizeStepGranularity="@android:dimen/thumbnail_height"
+        android:autoSizeTextType="uniform"
+        android:autoText="true"
+        android:background="@android:color/background_light"
+        android:fontFamily="sans-serif"
+        android:text="Dein Standort ist uns wichtig, denn es kann dein Leben retten. Im Not wird dein Standort an den Rettungsdienst weitergeleitet, damit die Ärzte dir vor Ort weiterhelfen können."
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColorLink="@android:color/holo_blue_bright"
+        android:textDirection="rtl"
+        android:textIsSelectable="true"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="78dp"
+        tools:textColorLink="@color/colorAccent" />
 
-        android:text="@string/standortTxt"
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:text="Aktivieren"
+        tools:layout_editor_absoluteX="280dp"
+        tools:layout_editor_absoluteY="376dp" />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:text="Nicht Jetzt"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="376dp" />
+
 </android.support.constraint.ConstraintLayout>
