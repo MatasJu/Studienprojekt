@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="226dp"
+        android:layout_height="162dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Wie stark ist Ihre Verletzung?"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="92dp"
+        android:layout_height="78dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="364dp" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="97dp"
+        android:layout_height="79dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="363dp" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="94dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/colorAccent"
+        tools:layout_editor_absoluteX="262dp"
+        tools:layout_editor_absoluteY="364dp" />
+</android.support.constraint.ConstraintLayout>
