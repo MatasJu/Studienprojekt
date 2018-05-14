@@ -1,5 +1,6 @@
 package de.haw_landshut.studienprojekt;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.speech.RecognizerIntent;
@@ -12,16 +13,44 @@ import android.util.Log;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
+
+enum Questions {
+    REMEMBER_WORDS(QuestionsActivity.getContext().getString(R.string.remember_words), QuestionsActivity.CODE_REMEMBER_WORDS),
+    WHAT_YEAR(QuestionsActivity.getContext().getString(R.string.what_year_question), QuestionsActivity.CODE_WHAT_YEAR),
+    WHAT_MONTH(QuestionsActivity.getContext().getString(R.string.what_month_question), QuestionsActivity.CODE_WHAT_MONTH),
+    WHAT_DAY(QuestionsActivity.getContext().getString(R.string.what_day_question), QuestionsActivity.CODE_WHAT_DAY),
+    REPEAT_WORDS(QuestionsActivity.getContext().getString(R.string.repeat_words_please), QuestionsActivity.CODE_REPEAT_WORDS);
+
+
+    public int qID;
+    public String qString;
+
+    Questions(String qString, int qID) {
+        this.qID = qID;
+        this.qString = qString;
+    }
+
+    private static Questions[] values = values();
+
+    public boolean hasNext(){
+        return this.ordinal()<=values.length;
+    }
+
+    public Questions next(){
+        return values[(this.ordinal()+1)%values.length];
+    }
+}
 
 /**
  * An Activity for asking Questions and taking answers with TTS and STT.
@@ -30,10 +59,20 @@ import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
  * than takes an answer through speech and looks for answer keywords in the returned String.
  * <p>
  * TODO: Separate TTS and STT into their own classes could be a good idea?
+ * TODO: need to stop everything when app goes toStop() or otherwise "minimised", and than continue it well forward... right now it's speaking in the background.
  */
 public class QuestionsActivity extends AppCompatActivity {
+
+
     //This constant uses the name of the class itself as the tag.
     private static final String TAG = QuestionsActivity.class.getSimpleName();
+    //so we can reference to this from enum
+    private static Context mContext;
+    private int correct=0;
+
+    public static Context getContext() {
+        return mContext;
+    }
 
 
 
@@ -99,10 +138,11 @@ public class QuestionsActivity extends AppCompatActivity {
 
     /*===============START STT VARIABLES=====================*/
 
-    /**
-     * Code for recognising callback from speech recogniser.
-     */
-    private static final int SPEECH_WHAT_DAY_CODE = 7;
+    //HANDLER TAGS:
+
+    private static final int REPEAT_OR_FORWARD = 652;
+
+    String STTresultString;
 
 
     /*===============END STT VARIABLES=================*/
@@ -114,28 +154,21 @@ public class QuestionsActivity extends AppCompatActivity {
     /*==============START QUESTIONNAIRE VARIABLES============*/
 
     private final int TOTAL_RANDOM_WORD_COUNT = 499;
+    public static final int CODE_REMEMBER_WORDS = 100;
+    public static final int CODE_WHAT_YEAR = 200;
+    public static final int CODE_WHAT_DAY = 300;
+    public static final int CODE_WHAT_MONTH = 400;
+    public static final int CODE_REPEAT_WORDS = 500;
     private final int AMOUNT_RANDOM_WORDS = 3;
     private final String RANDOM_WORD_ID = "random_word";
 
 
-    private int questionNr = -2;
-    ArrayList<String> questionList;
-
-    private int currentQuestionID;
+    private Questions currentQuestion;
 
     private String[] randomWordsList;
 
-    private final ArrayList<String> makeQuestionList = new ArrayList<>();
 
-    {
 
-        makeQuestionList.add(getString(R.string.remember_words));
-        makeQuestionList.add(getString(R.string.what_year_question));
-        makeQuestionList.add(getString(R.string.what_month_question));
-        makeQuestionList.add(getString(R.string.what_day_question));
-        makeQuestionList.add(getString(R.string.repeat_words_please));
-
-    }
 
 
     /*==============END QUESTIONNAIRE VARIABLES============*/
@@ -156,6 +189,7 @@ public class QuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
+        mContext = this;
 
         //init Lists
         randomWordsList = selectRandomWords(); //String[] for words to remember.    //init Lists
@@ -177,12 +211,12 @@ public class QuestionsActivity extends AppCompatActivity {
         //check if settings arrived well:
         testSpeechRecResult.append("\nisWalking = " + settingsBundle.getBoolean("isWalking"));
         testSpeechRecResult.append("\nisMoving = " + settingsBundle.getBoolean("isMoving"));
-        testSpeechRecResult.append("\n RRate = " + settingsBundle.getInt("RRate"));
-        testSpeechRecResult.append("\n HRate = " + settingsBundle.getInt("HRate"));
+        testSpeechRecResult.append("\nRRate = " + settingsBundle.getInt("RRate"));
+        testSpeechRecResult.append("\nHRate = " + settingsBundle.getInt("HRate"));
         //--TestThings®
 
 
-        currentQuestionID = 0;
+        currentQuestion = Questions.REMEMBER_WORDS;
 
         //try to start TTS, we are hoping the default google TTS is in place.
         try {
@@ -205,22 +239,20 @@ public class QuestionsActivity extends AppCompatActivity {
      */
     private boolean questionsFlow() {
 
-        switch (currentQuestionID) {
-
-            case 0: // Ask to Remember the Words
-                isAskingQuestion = true;
-                askToRemember();
-                break;
-
-
+        if(currentQuestion.qID==CODE_REMEMBER_WORDS) {
+            askToRemember();
+        }else {
+            askQuestion();
         }
 
         return false;
     }
 
-    private boolean askQuestion(String question) {
-
-        return false;
+    /**Asks a normal question""
+     *
+     */
+    private void askQuestion() {
+        addToTTSandFlush(currentQuestion.qString,String.valueOf(currentQuestion.qID));
     }
 
     /**
@@ -233,29 +265,40 @@ public class QuestionsActivity extends AppCompatActivity {
             temp = temp.concat(randomWordsList[i] + TTS_PAUSE);
         }
 
-        addToTTSandFlush(temp, "askToRemember");
+        addToTTSandFlush(temp, "QuestionDone");
     }
 
     private void checkAnswer(String result) {
-        switch (currentQuestionID) {
-            case 0:
+        switch (currentQuestion.qID) {
 
-                //askQuestion();
-                break;
-            case 1:
-                checkYearAnswer(result);
-                break;
+            case CODE_WHAT_YEAR:
+                if(checkYearAnswer(result)){
+                    correct++;
+                }else {
+                    repeatOrForward();
+                }
 
-            case 2:
-                checkMonthAnswer(result);
                 break;
 
-            case 3:
-                checkDayAnswer(result);
+            case CODE_WHAT_MONTH:
+                if(checkMonthAnswer(result)){
+                    correct++;
+                }else {
+                    repeatOrForward();
+                }
                 break;
 
-            case 4:
-                checkWordsAnswer(result);
+            case CODE_WHAT_DAY:
+                if(checkDayAnswer(result)){
+                    correct++;
+                }else {
+                    repeatOrForward();
+                }
+                break;
+            //TODO: So currently if a person repeats the three words he gets extra points, why not? must be conscious if he can repeat them many times...
+            case CODE_REPEAT_WORDS:
+                correct+=checkWordsAnswer(result);
+                repeatOrForward();
                 break;
 
         }
@@ -309,11 +352,26 @@ public class QuestionsActivity extends AppCompatActivity {
      */
 
     private void TTSonDoneHandler(String utteranceId) {
-        if (utteranceId.equals("TTSdone")) {
-            questionsFlow();
+        switch (utteranceId) {
+            case "TTSdone":
+                questionsFlow();
+                break;
+            case "QuestionDone":
+                askToRepeatOrGoForward();
+                break;
+            case "AskedWhatToDo":
+                displaySpeechRecognizer(getString(R.string.next_question) + getString(R.string.repeat_question), REPEAT_OR_FORWARD);
+                break;
+            default:
+                displaySpeechRecognizer(currentQuestion.qString, currentQuestion.qID);
+                break;
         }
 
-        testSpeechRecResult.append("Just Asked the words.");
+
+    }
+
+    private void askToRepeatOrGoForward() {
+        addToTTSandFlush(getString(R.string.next_question) + TTS_PAUSE + getString(R.string.repeat_question), "AskedWhatToDo");
     }
 
     /*================END TTS METHODS==================*/
@@ -322,10 +380,13 @@ public class QuestionsActivity extends AppCompatActivity {
 
     /**
      * Creates and displays an intent to write speech to text.
-     * <p>
-     * TODO: Localisation, go over settings and choose the best ones, maybe allow the caller to choose them. Modularise this function
+     *
+     * @param question    The question to be display on title.
+     * @param requestCode requestCode to be handled on done for STThandler();
+     *                    <p>
+     *                    TODO: Localisation, go over settings and choose the best ones, maybe allow the caller to choose them. Modularise this function
      */
-    private void displaySpeechRecognizer() {
+    private void displaySpeechRecognizer(String question, int requestCode) {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -336,11 +397,13 @@ public class QuestionsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
         }
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.what_day_question));
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 2);
+        //Title for the intent
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, question);
+        //how many extra recognised strings we want, as i understood the first is the most likely, so for now 1 extra is more than needed.
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
 
         // Start the activity, the intent will be populated with the speech text
-        startActivityForResult(intent, SPEECH_WHAT_DAY_CODE);
+        startActivityForResult(intent, requestCode);
 
 
     }
@@ -357,25 +420,64 @@ public class QuestionsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == SPEECH_WHAT_DAY_CODE && resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             //the result at place 0 is the best guess at this time....
-            String spokenText = results.get(0);
+            STTresultString = results.get(0);
 
 
             if (DEBUG) {
-                testSpeechRecResult.append("Spoken Text: " + spokenText);
+                testSpeechRecResult.append("Spoken Text: " + STTresultString);
             }
             //Call a handler with the text.
-            checkAnswer(spokenText);
+            TTSHandler(requestCode);
 
         }
-        super.onActivityResult(requestCode, resultCode, data);
+
+        //super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    /**
+     * Handles the TTS result.
+     */
+
+    private void TTSHandler(int requestCode) {
+        switch (requestCode) {
+            case REPEAT_OR_FORWARD:
+                repeatOrForward();
+            default:
+                checkAnswer(STTresultString);
+        }
+    }
+
+    private void repeatOrForward() {
+        //if result had "forward" in it select next question.
+        if (STTresultString.contains(getString(R.string.answer_next_question))) {
+            if(currentQuestion.hasNext()) {
+                currentQuestion= currentQuestion.next();
+                questionsFlow();
+            }
+        //else just repeat same question.
+        } else {
+            questionsFlow();
+        }
+
     }
 
 
+
+
     /*============== END STT functions====================*/
+
+    /**When we done with questions:
+     * TODO: THIS;
+     */
+    private void done() {
+    }
+
+
 
 
     //---------------------DONE Functions, low priority.
