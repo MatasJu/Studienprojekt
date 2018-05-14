@@ -299,7 +299,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
             // Do something with spokenText
 
-            testSpeechRecResult.setText(spokenText);
+            testSpeechRecResult.append("Spoken Text: "+ spokenText);
             checkAnswer(spokenText);
 
         }
