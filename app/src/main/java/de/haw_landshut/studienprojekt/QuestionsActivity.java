@@ -82,6 +82,17 @@ public class QuestionsActivity extends AppCompatActivity {
     private boolean isAskingQuestion = false;
     private int currentQuestionID;
 
+    private ArrayList<String> makeQuestionList = new ArrayList<>();
+
+    {
+
+        makeQuestionList.add(getString(R.string.remember_words));
+        makeQuestionList.add(getString(R.string.what_year_question));
+        makeQuestionList.add(getString(R.string.what_month_question));
+        makeQuestionList.add(getString(R.string.what_day_question));
+        makeQuestionList.add(getString(R.string.repeat_words_please));
+
+    }
 
 
     //For Testing
@@ -105,10 +116,9 @@ public class QuestionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questions);
 
         //init Lists
-        questionList = makeQuestionList(); //ArrayList for questions.
+
 
         randomWordsList = selectRandomWords(); //String[] for words to remember.    //init Lists
-        questionList = makeQuestionList(); //ArrayList for questions.
 
         //pass along the settings for the simulated evaluation.
         settingsBundle = new Bundle();
@@ -170,27 +180,11 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         };
 
-
-
-
-
-    /**
-     * Starts asking questions, depends on questionNr to increment through questions.
-     * TODO: improve the flow. after changing the TTS STT functions. Mainly figure another method to run through questions.
+    /** this controls the whole Questioning spiel.
+     * depends on the currentQuestionID to ask the next question.
+     *@see <code>currentQuestionID</code>
+     * @return true wenn all questions have been asked.
      */
-    private void askQuestion() {
-        questionNr++;
-        if (questionNr < questionList.size()) {
-            if (questionNr == -1)
-                askToRemember();
-            else
-                textToSpeech = TTS(questionList.get(questionNr));
-        } else {
-            testSpeechRecResult.append("\nOutside questionList.");
-        }
-    }
-
-
     private boolean questionsFlow(){
 
         switch (currentQuestionID){
@@ -224,45 +218,10 @@ public class QuestionsActivity extends AppCompatActivity {
         addToTTSandFlush(temp,"askToRemember");
     }
 
-    private ArrayList<String> makeQuestionList() {
-        ArrayList<String> r = new ArrayList<>();
-        r.add("Welches Jahr haben wir denn heute?");
-        r.add("Welcher Monat ist es?");
-        r.add(getString(R.string.what_day_question));
-        r.add("Bitte wiederholen Sie die 3 Wörter von vorher!!!");
 
 
-        return r;
-
-    }
-
-    /**
-     * Creates new TTS intent and reads the given text.
-     *
-     * @return
-     */
-
-    private TextToSpeech TTS(final String text) {
-        Log.d(TAG, "TTS() called with: text = [" + text + "]");
-        return new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-
-                if (status == TextToSpeech.SUCCESS) {
-
-                    Log.d(TAG, "onInit: TTS start success");
 
 
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "UniqueID");
-
-
-                    textToSpeech.speak(text, TextToSpeech.QUEUE_ADD, map);
-
-                }
-            }
-        });
-    }
 
     /**Adds strings to the end of TTS queue to be spoken out.
      *
@@ -351,21 +310,21 @@ public class QuestionsActivity extends AppCompatActivity {
         switch (questionNr) {
             case -1:
 
-                askQuestion();
-                break;
-            case 0:
-                checkYearAnswer(result);
+                //askQuestion();
                 break;
             case 1:
-                checkMonthAnswer(result);
+                checkYearAnswer(result);
                 break;
 
             case 2:
-
-                checkDayAnswer(result);
+                checkMonthAnswer(result);
                 break;
 
             case 3:
+                checkDayAnswer(result);
+                break;
+
+            case 4:
                 checkWordsAnswer(result);
                 break;
 
@@ -373,11 +332,18 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
-    private void checkWordsAnswer(String result) {
+    //---------------------DONE Functions, low priority.
 
-        Log.d(TAG, " checkWordsAnswer called with: result = [" + result + "]");
+    /**Checks the result string for 3 words mentioned before. Returns an int of correct answers.
+     *
+     * @param result string to be checked for 3 words.
+     * @return amount of correct answers.
+     */
+    private int checkWordsAnswer(String result) {
+
+
         int correct = 0;
-        testSpeechRecResult.append("\nWords that have been asked to remember:");
+
 
 
         for (String aRandomWordsList : randomWordsList) {
@@ -385,30 +351,32 @@ public class QuestionsActivity extends AppCompatActivity {
             if (result.toLowerCase().contains(aRandomWordsList.toLowerCase()))
                 correct++;
         }
-
-        testSpeechRecResult.append("\nTTS Answer:" + result);
-        testSpeechRecResult.append("\nCorrect:" + correct);
-
-
+        if (DEBUG) {
+            Log.d(TAG, " checkWordsAnswer called with: result = [" + result + "]");
+            testSpeechRecResult.append("\nTTS Answer:" + result);
+            testSpeechRecResult.append("\nCorrect:" + correct);
+            testSpeechRecResult.append("\nWords that have been asked to remember:");
+        }
+        return correct;
     }
 
 
-    /**
-     * TODO: this.
+
+
+    /** Checks if the String has the current month in it.
      *
-     * @param result
+     *
+     * @param result string to be checked.
      */
+    private boolean checkMonthAnswer(String result) {
 
-
-    private void checkMonthAnswer(String result) {
-
-        Log.d(TAG, " checkMonthAnswer called with: result = [" + result + "]");
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         String currentMonth = new SimpleDateFormat("MMM", Locale.GERMAN).format(date.getTime());
 
         if (DEBUG) {
+            Log.d(TAG, " checkMonthAnswer called with: result = [" + result + "]");
             testSpeechRecResult.append("\nCurrent Month:" + currentMonth);
             testSpeechRecResult.append("\nAnswer:" + result);
             testSpeechRecResult.append("\nAnswer contains Month:" + result.contains(currentMonth));
@@ -420,70 +388,57 @@ public class QuestionsActivity extends AppCompatActivity {
         else
             tag = false;
 
-        //tag the person.
-        this.getWindow().getDecorView().setBackgroundColor(tag ? Color.YELLOW : Color.RED);
-
-
-        askQuestion();
     }
 
-    private void checkYearAnswer(String result) {
-        Log.d(TAG, "checkYearAnswer() called with: result = [" + result + "]");
+    /**Checks if the string has current year in it.
+     *
+     * @param result
+     */
+    private boolean checkYearAnswer(String result) {
+
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         String currentYear = new SimpleDateFormat("YYYY", Locale.GERMAN).format(date.getTime());
 
         if (DEBUG) {
+            Log.d(TAG, "checkYearAnswer() called with: result = [" + result + "]");
             testSpeechRecResult.append("\nCurrent Day:" + currentYear);
             testSpeechRecResult.append("\nAnswer:" + result);
             testSpeechRecResult.append("\nAnswer contains Current Day:" + result.contains(currentYear));
         }
-        boolean tag = false;
 
-        if (result.contains(currentYear))
-            tag = true;
-        else
-            tag = false;
+        return result.contains(currentYear);
 
-        //tag the person.
-        this.getWindow().getDecorView().setBackgroundColor(tag ? Color.YELLOW : Color.RED);
-        askQuestion();
+
+
     }
 
 
-    /**
-     * Check the string for mentioning of the day
+    /**Check the string for mentioning of the day
+     *
      * TODO : Localisation.
      */
-    private void checkDayAnswer(String result) {
-        Log.d(TAG, "checkDayAnswer() called with: result = [" + result + "]");
+    private boolean checkDayAnswer(String result) {
+
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         String currentDay = new SimpleDateFormat("EEEE", Locale.GERMAN).format(date.getTime());
 
         if (DEBUG) {
+            Log.d(TAG, "checkDayAnswer() called with: result = [" + result + "]");
             testSpeechRecResult.append("\nCurrent Day:" + currentDay);
             testSpeechRecResult.append("\nAnswer:" + result);
             testSpeechRecResult.append("\nAnswer contains Current Day:" + result.contains(currentDay));
         }
-        boolean tag = false;
 
-        if (result.contains(currentDay))
-            tag = true;
-        else
-            tag = false;
+        return result.contains(currentDay);
 
-        //tag the person.
-        this.getWindow().getDecorView().setBackgroundColor(tag ? Color.YELLOW : Color.RED);
-
-
-        askQuestion();
 
     }
 
-    //---------------------DONE Functions, low priority.
+
     /**
      * Returns a string with AMOUNT_RANDOM_WORDS random words from the string.xml resource.
      *
@@ -494,7 +449,10 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < r.length; i++) {
-            r[i] = getString(getResources().getIdentifier(RANDOM_WORD_ID + (new Random().nextInt(TOTAL_RANDOM_WORD_COUNT) + 1), "string", getPackageName()));
+            r[i] = getString(getResources().getIdentifier(
+                    RANDOM_WORD_ID +(new Random().nextInt(TOTAL_RANDOM_WORD_COUNT) + 1),
+                    "string", getPackageName())
+            );
 
         }
 
