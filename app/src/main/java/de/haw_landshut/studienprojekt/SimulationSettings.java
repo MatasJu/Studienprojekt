@@ -15,7 +15,7 @@ public class SimulationSettings extends AppCompatActivity {
     //This constant uses the name of the class itself as the tag.
     private static final String LOG_TAG = SimulationSettings.class.getSimpleName();
 
-    //
+    //view vars
     private SeekBar HRseekbar;
     private SeekBar RRseekbar;
     private TextView HRtag;
@@ -24,6 +24,7 @@ public class SimulationSettings extends AppCompatActivity {
     private TextView RRTextView;
     private Button continueBtn;
 
+    //Constants for what is normal an high for Respiratory and Heart rates. Low is considered below Normal
     private final int RRHIGH =120;
     private final int RRNORM =51;
 
@@ -36,7 +37,7 @@ public class SimulationSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulation_settings);
 
-        //init
+        //initialise the private view vars.
         HRseekbar = (SeekBar) findViewById(R.id.HRseekBar);
         RRseekbar = (SeekBar) findViewById(R.id.RRseekBar);
 
@@ -56,22 +57,16 @@ public class SimulationSettings extends AppCompatActivity {
 
     }
 
-    // The seek bar notification listener https://developer.android.com/reference/android/widget/SeekBar.html
+    /**The seek bar notification listener
+     *
+     * see https://developer.android.com/reference/android/widget/SeekBar.html
+     *
+     */
     private SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
             updateStatusValues();
-//            switch(seekBar.getId())
-//            {
-//                case R.id.HRseekBar:
-//                    HRTextView.setText(Integer.toString(i));
-//                    return;
-//                case R.id.RRseekBar:
-//                    RRTextView.setText(Integer.toString(i));
-//                    return;
-//
-//            }
 
         }
 
@@ -89,6 +84,9 @@ public class SimulationSettings extends AppCompatActivity {
 
     };
 
+    /**Updates the values of the multiple seekbars and textviews. To be used after changes to them.
+     *
+     */
     private void updateStatusValues(){
         HRTextView.setText(Integer.toString(HRseekbar.getProgress()));
         RRTextView.setText(Integer.toString(RRseekbar.getProgress()));
@@ -126,15 +124,16 @@ public class SimulationSettings extends AppCompatActivity {
 
     }
 
-
+    /**Button click handler
+     *
+     * @param view
+     */
     public void onClickBtn(View view) {
         if(view.getId()== continueBtn.getId() )
-            {
-                Log.d(LOG_TAG, "continueBtn Clicked!");
-                Intent intent = new Intent(this, QuestionsActivity.class);
-                startActivity(intent);
-            }
-
-
+        {
+            Log.d(LOG_TAG, "continueBtn Clicked!");
+            Intent intent = new Intent(this, QuestionsActivity.class);
+            startActivity(intent);
+        }
     }
 }
