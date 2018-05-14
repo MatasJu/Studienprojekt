@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class SimulationSettings extends AppCompatActivity {
     private TextView HRTextView;
     private TextView RRTextView;
     private Button continueBtn;
+    private CheckBox isMoving;
+    private CheckBox isWalking;
 
     //Constants for what is normal an high for Respiratory and Heart rates. Low is considered below Normal
     private final int RRHIGH =120;
@@ -48,6 +51,9 @@ public class SimulationSettings extends AppCompatActivity {
         RRtag = (TextView) findViewById(R.id.RRtag);
 
         continueBtn = (Button) findViewById(R.id.continueBtn);
+
+        isMoving = findViewById(R.id.movementCheckBox);
+        isWalking = findViewById(R.id.walkingCheckBox3);
 
         updateStatusValues();
 
@@ -133,7 +139,35 @@ public class SimulationSettings extends AppCompatActivity {
         {
             Log.d(LOG_TAG, "continueBtn Clicked!");
             Intent intent = new Intent(this, QuestionsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("HRRate",getHRseekbarProgress());
+            bundle.putInt("RRRate",getRRseekbarProgress());
+            bundle.putBoolean("isWalking",true);
+            bundle.putBoolean("isMoving",true);
+
+
             startActivity(intent);
         }
     }
+
+
+
+    //=========Getters/Setters=========
+    public boolean getIsWalking(){
+        return isWalking.isChecked();
+    }
+
+    public boolean getIsMoving(){
+        return isMoving.isChecked();
+    }
+
+    public int getHRseekbarProgress() {
+        return HRseekbar.getProgress();
+    }
+
+    public int getRRseekbarProgress() {
+        return RRseekbar.getProgress();
+    }
+    //=========END Getters/Setters=========
+
 }
