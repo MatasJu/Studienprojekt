@@ -27,7 +27,7 @@ public class SimulationSettings extends AppCompatActivity {
     private CheckBox isMoving;
     private CheckBox isWalking;
 
-    //Constants for what is normal an high for Respiratory and Heart rates. Low is considered below Normal
+    //Constants for what is normal and high for Respiratory and Heart rates. Low is considered below Normal
     private final int RRHIGH =120;
     private final int RRNORM =51;
 
@@ -39,6 +39,8 @@ public class SimulationSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulation_settings);
+
+        Log.d("intent URI", getIntent().toUri(0));
 
         //initialise the private view vars.
         HRseekbar = (SeekBar) findViewById(R.id.HRseekBar);
@@ -90,7 +92,7 @@ public class SimulationSettings extends AppCompatActivity {
 
     };
 
-    /**Updates the values of the multiple seekbars and textviews. To be used after changes to them.
+    /**Updates the values of the multiple seekBars and textViews. To be used after changes to them.
      *
      */
     private void updateStatusValues(){
@@ -130,6 +132,8 @@ public class SimulationSettings extends AppCompatActivity {
 
     }
 
+
+
     /**Button click handler
      *
      * @param view
@@ -140,12 +144,11 @@ public class SimulationSettings extends AppCompatActivity {
             Log.d(LOG_TAG, "continueBtn Clicked!");
             Intent intent = new Intent(this, QuestionsActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("HRRate",getHRseekbarProgress());
-            bundle.putInt("RRRate",getRRseekbarProgress());
-            bundle.putBoolean("isWalking",true);
-            bundle.putBoolean("isMoving",true);
-
-
+            bundle.putInt("HRate",getHRseekbarProgress());
+            bundle.putInt("RRate",getRRseekbarProgress());
+            bundle.putBoolean("isWalking",getIsWalking());
+            bundle.putBoolean("isMoving",getIsMoving());
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     }
