@@ -32,16 +32,65 @@ import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 public class QuestionsActivity extends AppCompatActivity {
     //This constant uses the name of the class itself as the tag.
     private static final String TAG = QuestionsActivity.class.getSimpleName();
+
+
+
+    //TTS vars
+
+    //name for the TTS engine we want to use, in this case we make sure that the user has the default android TTS, and init with it.
+    private final String googleTTSPackage = "com.google.android.tts";
+
+    /**Listener for TTS to know when it has been initialised.
+     *
+     * @return the TextToSpeech.OnInitListener.
+     */
+    private TextToSpeech.OnInitListener TTSonInitListener =
+            new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if (status == TextToSpeech.SUCCESS) {
+                        setupTTS();
+                    }else {
+                        handleTTSinitError();
+                    }
+
+                }
+            };
+
+    /**This function is run after TTS is initialised. We need TTS to start asking questions, so it also starts our questioning after setting up some settings.
+     * We use TTS to start questioning when every TTS setup is done by speaking out empty string and catching it with utteranceProgressListener.
+     * TODO: set language should be according to the localisation.
+     */
+    private void setupTTS() {
+        textToSpeech.setOnUtteranceProgressListener(utteranceProgressListener);
+        textToSpeech.setLanguage(Locale.GERMANY);
+
+        //this will start the questioning.
+        addToTTSandFlush(" ","TTSdone");
+
+    }
+
+    private final String TTS_PAUSE = "... ";
+
+    //For Questioning
+
     private final int TOTAL_RANDOM_WORD_COUNT = 499;
     private final int AMOUNT_RANDOM_WORDS = 3;
     private final String RANDOM_WORD_ID = "random_word";
     private TextToSpeech textToSpeech;
+
+    private boolean isAskingQuestion = false;
+    private int currentQuestionID;
+
+
+
     //For Testing
     private TextView testSpeechRecResult;
     ArrayList<String> questionList;
     private int questionNr = -2;
 
     private String[] randomWordsList;
+    private Bundle settingsBundle;
 
     //------
     /**
@@ -58,33 +107,72 @@ public class QuestionsActivity extends AppCompatActivity {
         //init Lists
         questionList = makeQuestionList(); //ArrayList for questions.
 
-        randomWordsList = selectRandomWords(); //String[] for words to remember.
+        randomWordsList = selectRandomWords(); //String[] for words to remember.    //init Lists
+        questionList = makeQuestionList(); //ArrayList for questions.
+
+        //pass along the settings for the simulated evaluation.
+        settingsBundle = new Bundle();
+
+        settingsBundle.putAll(getIntent().getExtras());
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
 
         //TestThings©
         testSpeechRecResult = findViewById(R.id.answer);
+        //check if settings arrived well:
+        testSpeechRecResult.append("\nisWalking = " + settingsBundle.getBoolean("isWalking"));
+        testSpeechRecResult.append("\nisMoving = " + settingsBundle.getBoolean("isMoving"));
+        testSpeechRecResult.append("\n RRate = " + settingsBundle.getInt("RRate"));
+        testSpeechRecResult.append("\n HRate = " + settingsBundle.getInt("HRate"));
         //--TestThings®
 
 
-        askQuestion();
 
-    }
+        currentQuestionID = 0;
 
-    /**
-     * Returns a string with AMOUNT_RANDOM_WORDS random words from the string.xml resource.
-     *
-     * @return String[] with random words.
-     */
-    private String[] selectRandomWords() {
-        String[] r = new String[AMOUNT_RANDOM_WORDS];
-
-
-        for (int i = 0; i < r.length; i++) {
-            r[i] = getString(getResources().getIdentifier(RANDOM_WORD_ID + (new Random().nextInt(TOTAL_RANDOM_WORD_COUNT) + 1), "string", getPackageName()));
-
+        //try to start TTS, we are hoping the default google TTS is in place.
+        try {
+            textToSpeech = new TextToSpeech(getApplicationContext(), TTSonInitListener, googleTTSPackage);
+        }catch (Exception e){
+            Log.e(TAG, "onStart: ",e );
         }
 
-        return r;
     }
+
+    /**TTS progress listener to know when TTS has finished speaking and other states.
+     *
+     * @return the UtteranceProgressListener;
+     */
+    private UtteranceProgressListener utteranceProgressListener =
+         new UtteranceProgressListener() {
+
+            @Override
+            public void onDone(String utteranceId) {
+                isAskingQuestion = false;
+                TTSonDoneHandler(utteranceId);
+            }
+
+            @Override
+            public void onError(String utteranceId) {
+                isAskingQuestion = false;
+                Log.d(TAG, "TTS error");
+            }
+
+            @Override
+            public void onStart(String utteranceId) {
+                isAskingQuestion = true;
+                Log.d(TAG, "TTS start");
+            }
+        };
+
+
+
+
 
     /**
      * Starts asking questions, depends on questionNr to increment through questions.
@@ -102,6 +190,27 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
+
+    private boolean questionsFlow(){
+
+        switch (currentQuestionID){
+
+            case 0: // Ask to Remember the Words
+                isAskingQuestion = true;
+                askToRemember();
+                break;
+
+
+
+        }
+
+        return false;
+    }
+
+    private boolean askQuestion(String question){
+
+        return false;
+    }
     /**
      * Function to ask the user to remember words.
      */
@@ -109,10 +218,10 @@ public class QuestionsActivity extends AppCompatActivity {
 
         String temp = getString(R.string.remember_words);
         for (int i = 0; i < AMOUNT_RANDOM_WORDS; i++) {
-            temp = temp.concat(randomWordsList[i] + ".");
+            temp = temp.concat(randomWordsList[i] + TTS_PAUSE);
         }
 
-        textToSpeech = TTS(temp);
+        addToTTSandFlush(temp,"askToRemember");
     }
 
     private ArrayList<String> makeQuestionList() {
@@ -142,40 +251,49 @@ public class QuestionsActivity extends AppCompatActivity {
                 if (status == TextToSpeech.SUCCESS) {
 
                     Log.d(TAG, "onInit: TTS start success");
-                    textToSpeech.setLanguage(Locale.GERMANY);
-                    textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
-                        @Override
-                        public void onDone(String utteranceId) {
-                            Log.d(TAG, "TTS finished");
-                            if (questionNr >= 0) {
-                                displaySpeechRecognizer();
-                            } else {
-                                Log.d(TAG, "onDone() called with: utteranceId = [" + utteranceId + "]");
-                                askQuestion();
 
-                            }
-                        }
-
-                        @Override
-                        public void onError(String utteranceId) {
-                            Log.d(TAG, "TTS error");
-                        }
-
-                        @Override
-                        public void onStart(String utteranceId) {
-                            Log.d(TAG, "TTS start");
-                        }
-                    });
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "UniqueID");
-                    map.put(TextToSpeech.Engine.KEY_PARAM_VOLUME, "1");
+
 
                     textToSpeech.speak(text, TextToSpeech.QUEUE_ADD, map);
 
                 }
             }
         });
+    }
+
+    /**Adds strings to the end of TTS queue to be spoken out.
+     *
+     * @param text String to speak out.
+     * @param uniqueID unique id that will be used to call out response handling function.
+     */
+
+    private void addToTTSQueue(String text, String uniqueID){
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, uniqueID);
+        textToSpeech.speak(text, TextToSpeech.QUEUE_ADD, map);
+
+    }
+    private void addToTTSandFlush(String text, String uniqueID){
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, uniqueID);
+        textToSpeech.speak(text, TextToSpeech.QUEUE_ADD, map);
+
+    }
+
+    /**Handles the call from TTS when it is done speaking.
+     *
+     * @param utteranceId TTS returns the calls "unique" id.
+     */
+
+    private void TTSonDoneHandler(String utteranceId) {
+        if(utteranceId.equals("TTSdone")){
+            questionsFlow();
+        }
+
+        testSpeechRecResult.append("Just Asked the words.");
     }
 
 
@@ -363,5 +481,30 @@ public class QuestionsActivity extends AppCompatActivity {
 
         askQuestion();
 
+    }
+
+    //---------------------DONE Functions, low priority.
+    /**
+     * Returns a string with AMOUNT_RANDOM_WORDS random words from the string.xml resource.
+     *
+     * @return String[] with random words.
+     */
+    private String[] selectRandomWords() {
+        String[] r = new String[AMOUNT_RANDOM_WORDS];
+
+
+        for (int i = 0; i < r.length; i++) {
+            r[i] = getString(getResources().getIdentifier(RANDOM_WORD_ID + (new Random().nextInt(TOTAL_RANDOM_WORD_COUNT) + 1), "string", getPackageName()));
+
+        }
+
+        return r;
+    }
+
+
+    /**TODO:A handler for when a TTS engine fails to initialise.
+     *
+     */
+    private void handleTTSinitError() {
     }
 }
