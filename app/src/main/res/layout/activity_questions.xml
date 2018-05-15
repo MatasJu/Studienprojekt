@@ -12,7 +12,10 @@
         android:layout_height="369dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="44dp"
-        android:text="TextView"
+        android:isScrollContainer="true"
+        android:maxLines="15"
+        android:scrollbars="vertical"
+        android:text="For TESTING:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

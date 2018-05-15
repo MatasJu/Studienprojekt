@@ -9,6 +9,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -44,7 +45,7 @@ enum Questions {
     private static Questions[] values = values();
 
     public boolean hasNext(){
-        return this.ordinal()<=values.length;
+        return this.ordinal()<values.length-1;
     }
 
     public Questions next(){
@@ -213,10 +214,12 @@ public class QuestionsActivity extends AppCompatActivity {
         testSpeechRecResult.append("\nisMoving = " + settingsBundle.getBoolean("isMoving"));
         testSpeechRecResult.append("\nRRate = " + settingsBundle.getInt("RRate"));
         testSpeechRecResult.append("\nHRate = " + settingsBundle.getInt("HRate"));
+        testSpeechRecResult.setMovementMethod(new ScrollingMovementMethod());
         //--TestThings®
 
 
         currentQuestion = Questions.REMEMBER_WORDS;
+
 
         //try to start TTS, we are hoping the default google TTS is in place.
         try {
@@ -252,7 +255,7 @@ public class QuestionsActivity extends AppCompatActivity {
      *
      */
     private void askQuestion() {
-        addToTTSandFlush(currentQuestion.qString,"GetAnswer");
+        addToTTSQueue(currentQuestion.qString,"GetAnswer");
     }
 
     /**
@@ -265,7 +268,7 @@ public class QuestionsActivity extends AppCompatActivity {
             temp = temp.concat(randomWordsList[i] + TTS_PAUSE);
         }
 
-        addToTTSandFlush(temp, "QuestionDone");
+        addToTTSQueue(temp, "QuestionDone");
     }
 
     private void checkAnswer(String result) {
@@ -274,31 +277,31 @@ public class QuestionsActivity extends AppCompatActivity {
             case CODE_WHAT_YEAR:
                 if(checkYearAnswer(result)){
                     correct++;
-                }else {
-                    repeatOrForward();
                 }
+                    askToRepeatOrGoForward() ;
+
 
                 break;
 
             case CODE_WHAT_MONTH:
                 if(checkMonthAnswer(result)){
                     correct++;
-                }else {
-                    repeatOrForward();
                 }
+                    askToRepeatOrGoForward();
+
                 break;
 
             case CODE_WHAT_DAY:
-                if(checkDayAnswer(result)){
+                if(checkDayAnswer(result)) {
                     correct++;
-                }else {
-                    repeatOrForward();
                 }
+                    askToRepeatOrGoForward();
+
                 break;
             //TODO: So currently if a person repeats the three words he gets extra points, why not? must be conscious if he can repeat them many times...
             case CODE_REPEAT_WORDS:
                 correct+=checkWordsAnswer(result);
-                repeatOrForward();
+                askToRepeatOrGoForward();
                 break;
 
         }
@@ -341,7 +344,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private void addToTTSandFlush(String text, String uniqueID) {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, uniqueID);
-        TTSEngine.speak(text, TextToSpeech.QUEUE_ADD, map);
+        TTSEngine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
 
     }
 
@@ -355,6 +358,7 @@ public class QuestionsActivity extends AppCompatActivity {
         switch (utteranceId) {
             case "GetAnswer":
                 displaySpeechRecognizer(currentQuestion.qString,currentQuestion.qID);
+                break;
             case "QuestionDone":
                 askToRepeatOrGoForward();
                 break;
@@ -422,15 +426,12 @@ public class QuestionsActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-            //the result at place 0 is the best guess at this time....
-            STTresultString = results.get(0);
-
-
             if (DEBUG) {
-                testSpeechRecResult.append("Spoken Text: " + STTresultString);
+                testSpeechRecResult.append("Spoken Text: " + results.get(0));
             }
             //Call a handler with the text.
-            STTHandler(requestCode);
+            //the result at place 0 is the best guess at this time....
+            STTHandler(requestCode,results.get(0));
 
         }
 
@@ -442,21 +443,25 @@ public class QuestionsActivity extends AppCompatActivity {
      * Handles the STT result.
      */
 
-    private void STTHandler(int requestCode) {
+    private void STTHandler(int requestCode,String result) {
         switch (requestCode) {
             case REPEAT_OR_FORWARD:
-                repeatOrForward();
+                repeatOrForward(result);
+                break;
             default:
-                checkAnswer(STTresultString);
+                checkAnswer(result);
+                break;
         }
     }
 
-    private void repeatOrForward() {
+    private void repeatOrForward(String result) {
         //if result had "forward" in it select next question.
-        if (STTresultString.contains(getString(R.string.answer_next_question))) {
+        if (result.contains(getString(R.string.answer_next_question))) {
             if(currentQuestion.hasNext()) {
                 currentQuestion= currentQuestion.next();
                 questionsFlow();
+            }else {
+                done();
             }
         //else just repeat same question.
         } else {
@@ -474,6 +479,7 @@ public class QuestionsActivity extends AppCompatActivity {
      * TODO: THIS;
      */
     private void done() {
+        testSpeechRecResult.append("Points:" +correct);
     }
 
 
@@ -545,9 +551,9 @@ public class QuestionsActivity extends AppCompatActivity {
 
         if (DEBUG) {
             Log.d(TAG, "checkYearAnswer() called with: result = [" + result + "]");
-            testSpeechRecResult.append("\nCurrent Day:" + currentYear);
+            testSpeechRecResult.append("\nCurrent Year:" + currentYear);
             testSpeechRecResult.append("\nAnswer:" + result);
-            testSpeechRecResult.append("\nAnswer contains Current Day:" + result.contains(currentYear));
+            testSpeechRecResult.append("\nAnswer contains Current Year:" + result.contains(currentYear));
         }
 
         return result.contains(currentYear);
