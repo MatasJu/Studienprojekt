@@ -1,0 +1,68 @@
+@startuml
+
+[*] --> QuestionActivity:simulationSettings Bundle
+
+state QuestionActivity {
+   state onCreate{
+  onCreate-down->TextToSpeach:TTSonInitListener
+  onCreate:save simulationSettingsBundle
+ }
+
+  setupTTS:SetLanguage
+  setupTTS:setProgressListener
+  handleTTSinitError:TODO
+
+  setupTTS-->TTSFlush:uniqueID
+
+    askToRepeatOrGoForward-->TTSFlush:uniqueID="AskedWhatToDo"
+
+    state TTSHandler{
+     TTSHandler->questionsFlow:default
+     TTSHandler-right->askToRepeatOrGoForward:uniqueID=QuestionDone
+     TTSHandler-up->displaySpeechRecognizer:code="getAnswer"
+    }
+
+    state questionsFlow{
+    questionsFlow-down->TTSFlush:AskQuestion
+
+    }
+
+
+    state STTHandler{
+      STTHandler-left->checkAnswer:default
+    }
+    state checkAnswer{
+checkAnswer-left->questionsFlow:default
+checkAnswer:Change current Question
+    }
+
+}
+questionsFlow-down->[*]
+state SpeachToText{
+    state displaySpeechRecognizer{
+      displaySpeechRecognizer->onActivityResult:resultCode,requestCode,Data
+    }
+    state onActivityResult{
+    onActivityResult-->STTHandler
+    }
+}
+
+state TextToSpeach {
+    [*]->onInitListener:TTSonInitListener
+    onInitListener-->setupTTS:SUCCESS
+    onInitListener-->handleTTSinitError:FAILURE
+    onInitListener:TTSEngine init listener
+
+
+   state TTSFlush{
+   TTSFlush :Remove all TTS Queue
+   TTSFlush :Speak the given String
+   }
+
+   TTSFlush->TTSHandler:uniqueID
+
+
+
+
+}
+@enduml

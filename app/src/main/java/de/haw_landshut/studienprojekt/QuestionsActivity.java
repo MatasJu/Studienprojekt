@@ -112,7 +112,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 @Override
                 public void onDone(String utteranceId) {
                     isAskingQuestion = false;
-                    TTSonDoneHandler(utteranceId);
+                    TTSHandler(utteranceId);
                 }
 
                 @Override
@@ -252,7 +252,7 @@ public class QuestionsActivity extends AppCompatActivity {
      *
      */
     private void askQuestion() {
-        addToTTSandFlush(currentQuestion.qString,String.valueOf(currentQuestion.qID));
+        addToTTSandFlush(currentQuestion.qString,"GetAnswer");
     }
 
     /**
@@ -351,11 +351,10 @@ public class QuestionsActivity extends AppCompatActivity {
      * @param utteranceId TTS returns the calls "unique" id.
      */
 
-    private void TTSonDoneHandler(String utteranceId) {
+    private void TTSHandler(String utteranceId) {
         switch (utteranceId) {
-            case "TTSdone":
-                questionsFlow();
-                break;
+            case "GetAnswer":
+                displaySpeechRecognizer(currentQuestion.qString,currentQuestion.qID);
             case "QuestionDone":
                 askToRepeatOrGoForward();
                 break;
@@ -363,7 +362,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 displaySpeechRecognizer(getString(R.string.next_question) + getString(R.string.repeat_question), REPEAT_OR_FORWARD);
                 break;
             default:
-                displaySpeechRecognizer(currentQuestion.qString, currentQuestion.qID);
+                questionsFlow();
                 break;
         }
 
@@ -431,7 +430,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 testSpeechRecResult.append("Spoken Text: " + STTresultString);
             }
             //Call a handler with the text.
-            TTSHandler(requestCode);
+            STTHandler(requestCode);
 
         }
 
@@ -440,10 +439,10 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles the TTS result.
+     * Handles the STT result.
      */
 
-    private void TTSHandler(int requestCode) {
+    private void STTHandler(int requestCode) {
         switch (requestCode) {
             case REPEAT_OR_FORWARD:
                 repeatOrForward();
