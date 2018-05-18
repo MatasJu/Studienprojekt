@@ -34,15 +34,15 @@ enum Questions {
     REPEAT_WORDS(QuestionsActivity.getContext().getString(R.string.repeat_words_please), QuestionsActivity.CODE_REPEAT_WORDS);
 
 
-    public int qID;
-    public String qString;
+    public final int qID;
+    public final String qString;
 
     Questions(String qString, int qID) {
         this.qID = qID;
         this.qString = qString;
     }
 
-    private static Questions[] values = values();
+    private static final Questions[] values = values();
 
     public boolean hasNext(){
         return this.ordinal()<values.length-1;
@@ -80,33 +80,27 @@ public class QuestionsActivity extends AppCompatActivity {
     /*===============TTS VARIABLES=================*/
 
 
-    //name for the TTS engine we want to use, in this case we make sure that the user has the default android TTS, and init with it.
-    private final String googleTTSPackage = "com.google.android.tts";
-
     /**
      * Listener for TTS to know when it has been initialised.
      *
-     * @return the TextToSpeech.OnInitListener.
+     *
      */
-    private TextToSpeech.OnInitListener TTSonInitListener =
-            new TextToSpeech.OnInitListener() {
-                @Override
-                public void onInit(int status) {
-                    if (status == TextToSpeech.SUCCESS) {
-                        setupTTS();
-                    } else {
-                        handleTTSinitError();
-                    }
-
+    private final TextToSpeech.OnInitListener TTSonInitListener =
+            status -> {
+                if (status == TextToSpeech.SUCCESS) {
+                    setupTTS();
+                } else {
+                    handleTTSinitError();
                 }
+
             };
 
     /**
      * TTS progress listener to know when TTS has finished speaking and other states.
      *
-     * @return the UtteranceProgressListener;
+     *
      */
-    private UtteranceProgressListener utteranceProgressListener =
+    private final UtteranceProgressListener utteranceProgressListener =
             new UtteranceProgressListener() {
 
                 @Override
@@ -153,14 +147,12 @@ public class QuestionsActivity extends AppCompatActivity {
 
     /*==============START QUESTIONNAIRE VARIABLES============*/
 
-    private final int TOTAL_RANDOM_WORD_COUNT = 499;
     public static final int CODE_REMEMBER_WORDS = 100;
     public static final int CODE_WHAT_YEAR = 200;
     public static final int CODE_WHAT_DAY = 300;
     public static final int CODE_WHAT_MONTH = 400;
     public static final int CODE_REPEAT_WORDS = 500;
     private final int AMOUNT_RANDOM_WORDS = 3;
-    private final String RANDOM_WORD_ID = "random_word";
 
 
     private Questions currentQuestion;
@@ -213,6 +205,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         //try to start TTS, we are hoping the default google TTS is in place.
         try {
+            String googleTTSPackage = "com.google.android.tts";
             TTSEngine = new TextToSpeech(getApplicationContext(), TTSonInitListener, googleTTSPackage);
         } catch (Exception e) {
             Log.e(TAG, "onStart: ", e);
@@ -325,14 +318,14 @@ public class QuestionsActivity extends AppCompatActivity {
      */
 
     private void addToTTSQueue(String text, String uniqueID) {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, uniqueID);
         TTSEngine.speak(text, TextToSpeech.QUEUE_ADD, map);
 
     }
 
     private void addToTTSandFlush(String text, String uniqueID) {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, uniqueID);
         TTSEngine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
 
@@ -535,7 +528,7 @@ public class QuestionsActivity extends AppCompatActivity {
     /**
      * Checks if the string has current year in it.
      *
-     * @param result
+     * @param result true false
      */
     private boolean checkYearAnswer(String result) {
 
@@ -590,6 +583,8 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < r.length; i++) {
+            String RANDOM_WORD_ID = "random_word";
+            int TOTAL_RANDOM_WORD_COUNT = 499;
             r[i] = getString(getResources().getIdentifier(
                     RANDOM_WORD_ID + (new Random().nextInt(TOTAL_RANDOM_WORD_COUNT) + 1),
                     "string", getPackageName())

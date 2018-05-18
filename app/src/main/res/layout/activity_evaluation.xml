@@ -24,12 +24,24 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="8dp"
         android:text="Bewegt sich der Patient?"
         android:textIsSelectable="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/MSBOx" />
 
+
+    <CheckBox
+        android:id="@+id/MSBOx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Memtal State"
+        android:textIsSelectable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <SeekBar
         android:id="@+id/RRseekBar"
@@ -41,7 +53,8 @@
         android:max="130"
         android:progress="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:layout_marginLeft="8dp" />
 
     <SeekBar
         android:id="@+id/HRseekBar"
@@ -53,7 +66,8 @@
         android:max="30"
         android:progress="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -80,7 +94,9 @@
         android:textIsSelectable="false"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RRseekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/RRseekBar"
+        android:layout_marginLeft="8dp"
+        tools:ignore="UnusedAttribute" />
 
     <TextView
         android:id="@+id/RRTextView"
@@ -126,8 +142,9 @@
         android:id="@+id/continueBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:layout_marginStart="148dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginStart="280dp"
         android:onClick="onClickBtn"
         android:text="Weiter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -143,5 +160,34 @@
         android:text="Simulation Settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/PersonalTAG"
+        android:layout_width="244dp"
+        android:layout_height="153dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HRseekBar" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="89dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:text="Correct Answers:"
+        app:layout_constraintStart_toEndOf="@+id/MSBOx"
+        app:layout_constraintTop_toTopOf="@+id/MSBOx" />
+
+    <TextView
+        android:id="@+id/correctTV"
+        android:layout_width="84dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
 </android.support.constraint.ConstraintLayout>
