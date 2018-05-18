@@ -2,6 +2,7 @@ package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,23 @@ import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+enum State{
+    ZERO,LOW,NORMAL,HIGH,FALSE,TRUE;
+}
+
+enum Tags{
+    RED,YELLOW,BLACK,GREEN;
+}
+
+
 public class Evaluation extends AppCompatActivity {
+
+
+    static public List<State> States = new ArrayList<State>();
+
 
     //This constant uses the name of the class itself as the tag.
     private static final String LOG_TAG = Evaluation.class.getSimpleName();
@@ -142,15 +159,49 @@ public class Evaluation extends AppCompatActivity {
         if(view.getId()== continueBtn.getId() )
         {
             Log.d(LOG_TAG, "continueBtn Clicked!");
-            Intent intent = new Intent(this, QuestionsActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("HRate",getHRseekbarProgress());
-            bundle.putInt("RRate",getRRseekbarProgress());
-            bundle.putBoolean("isWalking",getIsWalking());
-            bundle.putBoolean("isMoving",getIsMoving());
-            intent.putExtras(bundle);
-            startActivity(intent);
+//            Intent intent = new Intent(this, QuestionsActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("HRate",getHRseekbarProgress());
+//            bundle.putInt("RRate",getRRseekbarProgress());
+//            bundle.putBoolean("isWalking",getIsWalking());
+//            bundle.putBoolean("isMoving",getIsMoving());
+//            intent.putExtras(bundle);
+//            startActivity(intent);
         }
+    }
+
+    /**Calculates Tag with given values.
+     *
+     * @param RR Respiratory Rate.
+     * @param HR Heart Rate.
+     * @param MS Mental State.
+     * @param W Walking State.
+     * @return
+     */
+    public Tags calcTag(State RR,State HR,State MS,State W) {
+        Tags tag = Tags.BLACK;
+        if(W==State.TRUE){
+            tag = Tags.GREEN;
+        }else {
+            //If RR == LOW or HIGH
+            if (RR==State.LOW||RR==State.HIGH){
+                if (HR==State.NORMAL){
+                    tag = Tags.YELLOW;
+                }else {
+                    tag = Tags.RED;
+                }
+            }
+            //IF RR == Normal
+            if (RR==State.NORMAL){
+                if (MS==State.TRUE){
+                    tag = Tags.GREEN;
+                }else {
+                    tag = Tags.YELLOW;
+                }
+            }
+
+        }
+        return tag;
     }
 
 
