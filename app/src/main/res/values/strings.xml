@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">Studienprojekt</string>
 
@@ -333,7 +333,7 @@
     <string name="random_word224">"Der Anzug"</string>
     <string name="random_word225">"Der Eine"</string>
     <string name="random_word226">"Die Richtung"</string>
-    <string name="random_word227">"Der Wille"</string>
+    <string name="random_word227" tools:ignore="Typos">"Der Wille"</string>
     <string name="random_word228">"Der Hals"</string>
     <string name="random_word229">"Die Mitte"</string>
     <string name="random_word230">"Die Antwort"</string>
@@ -607,6 +607,7 @@
     <string name="random_word498">"Das Auf"</string> Wiedersehen
     <string name="random_word499">"Das Park"</string>
     <string name="random_word500">"Das Frühstück"</string>
+    <string name="contentDescription">Some Image?</string>
 
 
 </resources>

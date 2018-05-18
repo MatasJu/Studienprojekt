@@ -1,8 +1,6 @@
 package de.haw_landshut.studienprojekt;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,18 +14,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 enum State{
-    ZERO,LOW,NORMAL,HIGH,FALSE,TRUE;
+    ZERO,LOW,NORMAL,HIGH,FALSE,TRUE
 }
 
 enum Tags{
-    RED,YELLOW,BLACK,GREEN;
+    RED(Color.RED),YELLOW(Color.YELLOW),BLACK(Color.BLACK),GREEN(Color.GREEN);
+
+    final int color;
+
+    Tags(int c) {
+        color = c;
+    }
 }
 
 
 public class Evaluation extends AppCompatActivity {
 
 
-    static public List<State> States = new ArrayList<State>();
+    static public List<State> States = new ArrayList<>();
 
 
     //This constant uses the name of the class itself as the tag.
@@ -40,39 +44,51 @@ public class Evaluation extends AppCompatActivity {
     private TextView RRtag;
     private TextView HRTextView;
     private TextView RRTextView;
+    private TextView PersonTag;
     private Button continueBtn;
     private CheckBox isMoving;
     private CheckBox isWalking;
+    private State RR = State.ZERO;
+    private State HR = State.ZERO;
+    private State MS = State.ZERO;
+    private State W = State.ZERO;
+    private Tags pTag = Tags.BLACK;
 
-    //Constants for what is normal and high for Respiratory and Heart rates. Low is considered below Normal
-    private final int RRHIGH =120;
-    private final int RRNORM =51;
-
-    private final int HRHIGH = 20;
-    private final int HRNORM = 12;
-
+    //test
+    TextView t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simulation_settings);
+        setContentView(R.layout.activity_evaluation);
+
+        int correct = getIntent().getIntExtra("correct", 0);
+        if(correct >=3){
+            MS= State.TRUE;
+        }else {
+            MS =State.FALSE;
+        }
 
         Log.d("intent URI", getIntent().toUri(0));
 
         //initialise the private view vars.
-        HRseekbar = (SeekBar) findViewById(R.id.HRseekBar);
-        RRseekbar = (SeekBar) findViewById(R.id.RRseekBar);
+        HRseekbar = findViewById(R.id.HRseekBar);
+        RRseekbar = findViewById(R.id.RRseekBar);
 
-        HRTextView = (TextView) findViewById(R.id.HRTextView);
-        RRTextView = (TextView) findViewById(R.id.RRTextView);
+        HRTextView = findViewById(R.id.HRTextView);
+        RRTextView = findViewById(R.id.RRTextView);
 
-        HRtag = (TextView) findViewById(R.id.HRtag);
-        RRtag = (TextView) findViewById(R.id.RRtag);
+        HRtag = findViewById(R.id.HRtag);
+        RRtag = findViewById(R.id.RRtag);
 
-        continueBtn = (Button) findViewById(R.id.continueBtn);
+        PersonTag = findViewById(R.id.PersonalTAG);
+
+        continueBtn = findViewById(R.id.continueBtn);
 
         isMoving = findViewById(R.id.movementCheckBox);
         isWalking = findViewById(R.id.walkingCheckBox3);
+        t = findViewById(R.id.correctTV);
+        t.setText(String.valueOf(correct));
 
         updateStatusValues();
 
@@ -87,7 +103,7 @@ public class Evaluation extends AppCompatActivity {
      * see https://developer.android.com/reference/android/widget/SeekBar.html
      *
      */
-    private SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -117,35 +133,55 @@ public class Evaluation extends AppCompatActivity {
         RRTextView.setText(Integer.toString(RRseekbar.getProgress()));
 
         //HR TAG COLORS AND TEXT
-        if((HRseekbar.getProgress()>=HRHIGH)){
+        int HRHIGH = 20;
+        if((HRseekbar.getProgress()>= HRHIGH)){
             HRtag.setBackgroundColor(Color.RED);
             HRtag.setText("HIGH");
+            HR = State.HIGH;
         }
-        if((HRseekbar.getProgress()>=HRNORM) && HRseekbar.getProgress()<HRHIGH){
+        int HRNORM = 12;
+        if((HRseekbar.getProgress()>= HRNORM) && HRseekbar.getProgress()< HRHIGH){
             HRtag.setBackgroundColor(Color.GREEN);
             HRtag.setText("NORMAL");
+            HR = State.NORMAL;
         }
 
-        if(HRseekbar.getProgress()<HRNORM){
+        if(HRseekbar.getProgress()< HRNORM){
             HRtag.setBackgroundColor(Color.RED);
             HRtag.setText("LOW");
+            HR = State.LOW;
         }
 
 
         //RR TAG COLORS AND TEXT
-        if((RRseekbar.getProgress()>=RRHIGH)){
+        int RRHIGH = 120;
+        if((RRseekbar.getProgress()>= RRHIGH)){
             RRtag.setBackgroundColor(Color.RED);
             RRtag.setText("HIGH");
+            RR = State.HIGH;
+
         }
-        if((RRseekbar.getProgress()>=RRNORM) && RRseekbar.getProgress()<RRHIGH){
+        int RRNORM = 51;
+        if((RRseekbar.getProgress()>= RRNORM) && RRseekbar.getProgress()< RRHIGH){
             RRtag.setBackgroundColor(Color.GREEN);
             RRtag.setText("NORMAL");
+            HR = State.NORMAL;
         }
 
-        if(RRseekbar.getProgress()<RRNORM){
+        if(RRseekbar.getProgress()< RRNORM){
             RRtag.setBackgroundColor(Color.RED);
             RRtag.setText("LOW");
+            RR= State.LOW;
         }
+        if(getIsWalking()){
+            W = State.TRUE;
+        }else {
+            W = State.FALSE;
+        }
+
+        calcTag();
+
+        PersonTag.setBackgroundColor(pTag.color);
 
     }
 
@@ -153,7 +189,7 @@ public class Evaluation extends AppCompatActivity {
 
     /**Button click handler
      *
-     * @param view
+     * @param view TODO
      */
     public void onClickBtn(View view) {
         if(view.getId()== continueBtn.getId() )
@@ -172,13 +208,9 @@ public class Evaluation extends AppCompatActivity {
 
     /**Calculates Tag with given values.
      *
-     * @param RR Respiratory Rate.
-     * @param HR Heart Rate.
-     * @param MS Mental State.
-     * @param W Walking State.
-     * @return
+     * return
      */
-    public Tags calcTag(State RR,State HR,State MS,State W) {
+    private void calcTag() {
         Tags tag = Tags.BLACK;
         if(W==State.TRUE){
             tag = Tags.GREEN;
@@ -201,13 +233,15 @@ public class Evaluation extends AppCompatActivity {
             }
 
         }
-        return tag;
+        pTag=tag;
+
+
     }
 
 
 
     //=========Getters/Setters=========
-    public boolean getIsWalking(){
+    private boolean getIsWalking(){
         return isWalking.isChecked();
     }
 
