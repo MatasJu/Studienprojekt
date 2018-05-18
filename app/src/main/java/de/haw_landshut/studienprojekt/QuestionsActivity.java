@@ -470,9 +470,14 @@ public class QuestionsActivity extends AppCompatActivity {
      */
     private void done() {
         testSpeechRecResult.append("Points:" +correct);
+        TTSEngine.stop();
+
+
+        Intent intent = new Intent(this, Evaluation.class);
+        intent.putExtra("correct",correct);
+        startActivity(intent);
+
     }
-
-
 
 
     //---------------------DONE Functions, low priority.
