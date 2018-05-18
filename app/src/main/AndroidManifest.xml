@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SimulationSettings" />
+        <activity android:name=".Evaluation" />
         <activity android:name=".QuestionsActivity"></activity>
     </application>
 
