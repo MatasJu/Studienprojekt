@@ -11,10 +11,10 @@ import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class SimulationSettings extends AppCompatActivity {
+public class Evaluation extends AppCompatActivity {
 
     //This constant uses the name of the class itself as the tag.
-    private static final String LOG_TAG = SimulationSettings.class.getSimpleName();
+    private static final String LOG_TAG = Evaluation.class.getSimpleName();
 
     //view vars
     private SeekBar HRseekbar;

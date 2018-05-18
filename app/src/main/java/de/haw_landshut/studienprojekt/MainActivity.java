@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void startButtonEventHandler(View view) {
         Log.d(LOG_TAG, "StartButton Clicked!");
-        Intent intent = new Intent(this, SimulationSettings.class);
+        Intent intent = new Intent(this, QuestionsActivity.class);
         startActivity(intent);
     }
 
