@@ -79,7 +79,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
     /*===============TTS VARIABLES=================*/
 
-    private boolean isAskingQuestion = false;
 
     //name for the TTS engine we want to use, in this case we make sure that the user has the default android TTS, and init with it.
     private final String googleTTSPackage = "com.google.android.tts";
@@ -112,19 +111,19 @@ public class QuestionsActivity extends AppCompatActivity {
 
                 @Override
                 public void onDone(String utteranceId) {
-                    isAskingQuestion = false;
+
                     TTSHandler(utteranceId);
                 }
 
                 @Override
                 public void onError(String utteranceId) {
-                    isAskingQuestion = false;
+
                     Log.d(TAG, "TTS error");
                 }
 
                 @Override
                 public void onStart(String utteranceId) {
-                    isAskingQuestion = true;
+
                     Log.d(TAG, "TTS start");
                 }
             };
@@ -176,7 +175,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     /*===========START ACTIVITY VARIABLES===========*/
-    private Bundle settingsBundle;
     private TextToSpeech TTSEngine;
 
     private TextView testSpeechRecResult;
@@ -195,10 +193,6 @@ public class QuestionsActivity extends AppCompatActivity {
         //init Lists
         randomWordsList = selectRandomWords(); //String[] for words to remember.    //init Lists
 
-        //save simulated settings from the prev activity. could change in the future how its handled.
-        //TODO:is this the best way to pass variables between activities?
-        settingsBundle = new Bundle();
-        settingsBundle.putAll(getIntent().getExtras());
 
     }
 
@@ -209,11 +203,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         //TestThings©
         testSpeechRecResult = findViewById(R.id.answer);
-        //check if settings arrived well:
-        testSpeechRecResult.append("\nisWalking = " + settingsBundle.getBoolean("isWalking"));
-        testSpeechRecResult.append("\nisMoving = " + settingsBundle.getBoolean("isMoving"));
-        testSpeechRecResult.append("\nRRate = " + settingsBundle.getInt("RRate"));
-        testSpeechRecResult.append("\nHRate = " + settingsBundle.getInt("HRate"));
+        //make the testTextView scrollable:
         testSpeechRecResult.setMovementMethod(new ScrollingMovementMethod());
         //--TestThings®
 
