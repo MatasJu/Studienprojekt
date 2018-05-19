@@ -112,7 +112,7 @@
 
     <string name="answer_next_question">weiter</string>
     <string name="what_year_question">Welches Jahr haben wir denn heute?</string>
-    <string name="what_day_question">Welche Tag ist Heute</string>
+    <string name="what_day_question">Welcher Wochentag ist Heute</string>
     <string name="what_month_question">Welcher Monat ist es?</string>
     <string name="repeat_words_please">Bitte wiederholen Sie die 3 Wörter von vorher!!!</string>
 
