@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.haw_landshut.studienprojekt.Evaluation">
+    tools:context="de.haw_landshut.studienprojekt.Evaluation"
+    tools:ignore="HardcodedText">
 
     <CheckBox
         android:id="@+id/walkingCheckBox3"
@@ -13,7 +14,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Geht der Patient?"
+        android:text="@string/is_patient_walking"
         android:textIsSelectable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movementCheckBox" />
@@ -25,23 +26,24 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Bewegt sich der Patient?"
+        android:text="@string/is_patient_moving"
         android:textIsSelectable="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MSBOx" />
+        app:layout_constraintTop_toBottomOf="@+id/msCheckBox" />
 
 
     <CheckBox
-        android:id="@+id/MSBOx"
+        android:id="@+id/msCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Memtal State"
+        android:text="Mental State"
         android:textIsSelectable="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="HardcodedText" />
 
     <SeekBar
         android:id="@+id/RRseekBar"
@@ -80,7 +82,8 @@
         android:textIsSelectable="false"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/walkingCheckBox3" />
+        app:layout_constraintTop_toBottomOf="@+id/walkingCheckBox3"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView3"
@@ -96,7 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RRseekBar"
         android:layout_marginLeft="8dp"
-        tools:ignore="UnusedAttribute" />
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
     <TextView
         android:id="@+id/RRTextView"
@@ -106,7 +109,8 @@
         android:textIsSelectable="false"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/HRTextView"
@@ -138,18 +142,6 @@
         app:layout_constraintStart_toEndOf="@+id/HRTextView"
         app:layout_constraintTop_toTopOf="@+id/HRTextView" />
 
-    <Button
-        android:id="@+id/continueBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="280dp"
-        android:layout_marginStart="280dp"
-        android:onClick="onClickBtn"
-        android:text="Weiter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -178,8 +170,8 @@
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:text="Correct Answers:"
-        app:layout_constraintStart_toEndOf="@+id/MSBOx"
-        app:layout_constraintTop_toTopOf="@+id/MSBOx" />
+        app:layout_constraintStart_toEndOf="@+id/msCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/msCheckBox" />
 
     <TextView
         android:id="@+id/correctTV"
