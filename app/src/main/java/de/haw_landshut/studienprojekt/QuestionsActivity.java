@@ -357,7 +357,7 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void askToRepeatOrGoForward() {
-        addToTTSandFlush(getString(R.string.next_question) + TTS_PAUSE + getString(R.string.repeat_question), "AskedWhatToDo");
+        addToTTSandFlush( getString(R.string.repeat_question)+ TTS_PAUSE + getString(R.string.next_question), "AskedWhatToDo");
     }
 
     /*================END TTS METHODS==================*/
