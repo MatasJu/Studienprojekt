@@ -15,7 +15,7 @@
 
 
     <!--MainActivity-->
-    <string name="remember_words">"Bitte merken sie sich diese drei Wörter."</string>
+    <string name="remember_words">"Bitte merken sie sich diese drei Wörter… "</string>
 
     <!--Tag Colors-->
     <string name="tag_color_deceased">Black</string>
