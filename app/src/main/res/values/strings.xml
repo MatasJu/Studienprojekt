@@ -619,6 +619,8 @@
     <string name="random_word499">"Das Park"</string>
     <string name="random_word500">"Das Frühstück"</string>
     <string name="contentDescription">Some Image?</string>
+    <string name="is_patient_walking">Geht der Patient?</string>
+    <string name="is_patient_moving">Bewegt sich der Patient?</string>
 
 
 </resources>
