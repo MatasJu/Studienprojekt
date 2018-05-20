@@ -23,7 +23,6 @@
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".Standort"></activity>
 
-        <activity android:name=".SimulationSettings" />
         <activity android:name=".QuestionsActivity"></activity>
 
     </application>

@@ -11,7 +11,8 @@
         android:layout_height="178dp"
         android:background="@color/colorPrimaryDark"
         tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="88dp" />
+        tools:layout_editor_absoluteY="88dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView6"
@@ -21,5 +22,7 @@
         android:textAlignment="viewStart"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="318dp" />
+        tools:layout_editor_absoluteY="318dp"
+        tools:ignore="MissingConstraints"
+        android:layout_gravity="start" />
 </android.support.constraint.ConstraintLayout>

@@ -12,5 +12,6 @@
         android:backgroundTint="@android:color/background_light"
         android:text="Der notruf wurde betätigt. der notarzt ist in wenigen minuten bei ihnen. bitte bewahren sie ruhe!"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="66dp" />
+        tools:layout_editor_absoluteY="66dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

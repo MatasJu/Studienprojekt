@@ -27,7 +27,8 @@
         android:typeface="serif"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="78dp"
-        tools:textColorLink="@color/colorAccent" />
+        tools:textColorLink="@color/colorAccent"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button3"
@@ -36,7 +37,8 @@
         android:background="@android:color/holo_green_light"
         android:text="Aktivieren"
         tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="376dp" />
+        tools:layout_editor_absoluteY="376dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button4"
@@ -45,6 +47,7 @@
         android:background="@android:color/holo_green_light"
         android:text="Nicht Jetzt"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="376dp" />
+        tools:layout_editor_absoluteY="376dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

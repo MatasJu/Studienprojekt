@@ -15,7 +15,8 @@
         android:text="Einstellungen"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView3"
@@ -25,7 +26,8 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="134dp" />
+        tools:layout_editor_absoluteY="134dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView4"
@@ -35,7 +37,8 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="231dp" />
+        tools:layout_editor_absoluteY="231dp"
+        tools:ignore="MissingConstraints" />
 
     <Switch
         android:id="@+id/switch1"
@@ -44,13 +47,16 @@
         android:layout_marginStart="32dp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        tools:layout_editor_absoluteY="142dp" />
+        tools:layout_editor_absoluteY="142dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="32dp" />
 
     <Switch
         android:id="@+id/switch2"
         android:layout_width="165dp"
         android:layout_height="37dp"
         tools:layout_editor_absoluteX="181dp"
-        tools:layout_editor_absoluteY="237dp" />
+        tools:layout_editor_absoluteY="237dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

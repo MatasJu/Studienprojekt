@@ -621,6 +621,14 @@
     <string name="contentDescription">Some Image?</string>
     <string name="is_patient_walking">Geht der Patient?</string>
     <string name="is_patient_moving">Bewegt sich der Patient?</string>
+    <string name="first_name">Nachname</string>
+    <string name="last_name">Vorname</string>
+    <string name="birhtday_">Geburtstag</string>
+    <string name="height">Größe</string>
+    <string name="gender">Geschlecht</string>
+    <string name="weight">Gewicht</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
 
 
 </resources>

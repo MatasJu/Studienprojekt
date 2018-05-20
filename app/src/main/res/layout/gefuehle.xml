@@ -13,7 +13,8 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="82dp" />
+        tools:layout_editor_absoluteY="82dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button7"
@@ -22,7 +23,8 @@
         android:background="@android:color/holo_green_light"
         android:textColor="@android:color/holo_green_light"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="305dp" />
+        tools:layout_editor_absoluteY="305dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button8"
@@ -30,7 +32,8 @@
         android:layout_height="108dp"
         android:background="@color/colorPrimaryDark"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="306dp" />
+        tools:layout_editor_absoluteY="306dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button9"
@@ -38,5 +41,6 @@
         android:layout_height="107dp"
         android:background="@color/colorAccent"
         tools:layout_editor_absoluteX="269dp"
-        tools:layout_editor_absoluteY="305dp" />
+        tools:layout_editor_absoluteY="305dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

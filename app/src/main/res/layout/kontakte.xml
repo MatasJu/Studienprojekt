@@ -13,7 +13,8 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Sollen wir Ihre Notfallkontakte bzw. den Notruf kontaktieren?"
         tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="53dp" />
+        tools:layout_editor_absoluteY="53dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button16"
@@ -22,7 +23,8 @@
         android:backgroundTint="@android:color/holo_green_light"
         android:text="Ja"
         tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="344dp" />
+        tools:layout_editor_absoluteY="344dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button17"
@@ -32,6 +34,7 @@
         android:backgroundTint="@color/colorAccent"
         android:text="Nein"
         app:layout_constraintStart_toEndOf="@+id/button16"
-        tools:layout_editor_absoluteY="344dp" />
+        tools:layout_editor_absoluteY="344dp"
+        tools:ignore="MissingConstraints,RtlCompat" />
 
 </android.support.constraint.ConstraintLayout>

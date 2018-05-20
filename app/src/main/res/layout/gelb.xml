@@ -12,5 +12,6 @@
         android:backgroundTint="@android:color/holo_green_light"
         android:text="Wir wünschen Ihnen weiterhin alles Gute!"
         tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="73dp" />
+        tools:layout_editor_absoluteY="73dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

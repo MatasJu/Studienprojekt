@@ -12,5 +12,6 @@
         android:backgroundTint="@color/colorAccent"
         android:text="Ihre notfallkontakte werden kontaktiert!"
         tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="47dp" />
+        tools:layout_editor_absoluteY="47dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
