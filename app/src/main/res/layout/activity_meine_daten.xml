@@ -47,7 +47,7 @@
 
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/birhtday_"
+        android:text="@string/birhtday"
         android:textAllCaps="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText6" />

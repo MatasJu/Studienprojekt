@@ -97,7 +97,30 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="what_day_question">Welche Tag ist Heute</string>
+
+
+    <string name="is_patient_walking">Geht der Patient?</string>
+    <string name="is_patient_moving">Bewegt sich der Patient?</string>
+    <string name="contentDescription">Some Image?</string>
+
+    <!--Questions Activity -->
+
+    <!--><string name="repeat_question">Wenn Sie diese Frage wiederholen wolen, sagen sie bitte "noch einmal".</string><-->
+    <!--><string name="answer_repeat_question">noch einam</string><-->
+    <!--> for testing made them shorter.<-->
+
+    <string name="repeat_question">"noch einmal".</string>
+    <string name="next_question">oder "weiter"</string>
+
+
+
+    <string name="answer_next_question">weiter</string>
+    <string name="what_year_question">Welches Jahr haben wir denn heute?</string>
+    <string name="what_day_question">Welcher Wochentag ist Heute</string>
+    <string name="what_month_question">Welcher Monat ist es?</string>
+    <string name="repeat_words_please">Bitte wiederholen Sie die 3 Wörter von vorher!!!</string>
+
+
 
     <string name="random_word1">"Die Zeit"</string>
     <string name="random_word2">"Der Mann"</string>
@@ -599,6 +622,14 @@
     <string name="random_word498">"Das Auf"</string> Wiedersehen
     <string name="random_word499">"Das Park"</string>
     <string name="random_word500">"Das Frühstück"</string>
+    <string name="weight">Gewicht</string>
+    <string name="gender">Geschlecht</string>
+    <string name="height">Größe</string>
+    <string name="birhtday">Geburtstag</string>
+    <string name="last_name">Nachname</string>
+    <string name="first_name">Vorname</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
 
 
 </resources>

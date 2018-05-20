@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
+
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,6 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**Saves data to sharedPreferences
+ *
+ * TODO: I think it now doesnt check if the fields are empty and so it overwrites the saved values with empty strings, it should change once we load values
+ * TODO: Load values onCreate.
+ * TODO: Maybe use a TextField array or data binding to make the code simpler.
+ *
+ *
+ *
+ */
 public class MeineDaten extends AppCompatActivity {
     //TextViews
     TextView firstNameTV;
@@ -68,6 +77,7 @@ public class MeineDaten extends AppCompatActivity {
         }
         if (view.getId() == R.id.saveBtn) {
             //save
+
             editor.putString(SPenum.FIRST_NAME.toString(),firstNameTV.getText().toString());
             editor.putString(SPenum.LAST_NAME.toString(), lastNameTV.getText().toString());
             editor.putString(SPenum.GENDER.toString(), genderTV.getText().toString());
