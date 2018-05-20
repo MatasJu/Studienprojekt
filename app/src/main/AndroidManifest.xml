@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Evaluation" />
+
         <activity
             android:name=".MeineDaten"
             android:label="Meine Daten"
@@ -24,6 +25,7 @@
         <activity android:name=".Standort"></activity>
 
         <activity android:name=".QuestionsActivity"></activity>
+
 
     </application>
 
