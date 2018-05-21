@@ -265,5 +265,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Spinner
+        android:id="@+id/gender_Spinner"
+        android:layout_width="227dp"
+        android:layout_height="42dp"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/editText6"
+        app:layout_constraintTop_toTopOf="@+id/editText6" />
+
 
 </android.support.constraint.ConstraintLayout>
