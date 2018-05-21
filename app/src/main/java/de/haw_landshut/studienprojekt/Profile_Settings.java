@@ -64,6 +64,20 @@ public class Profile_Settings extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Load the Fields from SharedPreferences
+        firstNameTV.setText(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(),""));
+        lastNameTV.setText(sharedPrefs.getString(SPkeys.LAST_NAME.toString(),""));
+         genderTV.setText(sharedPrefs.getString(SPkeys.GENDER.toString(),""));
+        birthdayTV.setText(sharedPrefs.getString(SPkeys.BIRTHDAY.toString(),""));
+       heightTV.setText(sharedPrefs.getString(SPkeys.HEIGHT.toString(),""));
+        weightTV.setText(sharedPrefs.getString(SPkeys.WEIGHT.toString(),""));
+        emailTV.setText(sharedPrefs.getString(SPkeys.EMAIL.toString(),""));
+
+    }
+
     /**Listens to the button clicks.
      *
      * @param view is passed on by the event.
@@ -81,13 +95,13 @@ public class Profile_Settings extends AppCompatActivity {
         if (view.getId() == R.id.saveBtn) {
             //save
             editor = sharedPrefs.edit();
-            editor.putString(SPnames.FIRST_NAME.toString(),firstNameTV.getText().toString());
-            editor.putString(SPnames.LAST_NAME.toString(), lastNameTV.getText().toString());
-            editor.putString(SPnames.GENDER.toString(), genderTV.getText().toString());
-            editor.putString(SPnames.BIRTHDAY.toString(), birthdayTV.getText().toString());
-            editor.putString(SPnames.HEIGHT.toString(), heightTV.getText().toString());
-            editor.putString(SPnames.WEIGHT.toString(), weightTV.getText().toString());
-            editor.putString(SPnames.EMAIL.toString(), emailTV.getText().toString());
+            editor.putString(SPkeys.FIRST_NAME.toString(),firstNameTV.getText().toString());
+            editor.putString(SPkeys.LAST_NAME.toString(), lastNameTV.getText().toString());
+            editor.putString(SPkeys.GENDER.toString(), genderTV.getText().toString());
+            editor.putString(SPkeys.BIRTHDAY.toString(), birthdayTV.getText().toString());
+            editor.putString(SPkeys.HEIGHT.toString(), heightTV.getText().toString());
+            editor.putString(SPkeys.WEIGHT.toString(), weightTV.getText().toString());
+            editor.putString(SPkeys.EMAIL.toString(), emailTV.getText().toString());
             editor.apply();
 
             if(BuildConfig.DEBUG){
@@ -111,7 +125,7 @@ public class Profile_Settings extends AppCompatActivity {
 /**Enum for SharedPrefferences strings for this activity.
  *
  */
-enum SPnames {
+enum SPkeys {
     USER_INFO_FILE("user_info"),
     FIRST_NAME("first_name"),
     LAST_NAME("last_name"),
@@ -123,7 +137,7 @@ enum SPnames {
 
     private final String string;
 
-    SPnames(String name){this.string = name;}
+    SPkeys(String name){this.string = name;}
 
     @Override
     public String toString() {
