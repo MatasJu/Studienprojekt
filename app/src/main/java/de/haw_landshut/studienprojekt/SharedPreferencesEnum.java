@@ -1,6 +1,6 @@
 package de.haw_landshut.studienprojekt;
 
-public enum sharedPreferencesEnum {
+public enum SharedPreferencesEnum {
      USER_INFO_FILE("user_info"),
      FIRST_NAME("first_name"),
      LAST_NAME("last_name"),
@@ -12,7 +12,7 @@ public enum sharedPreferencesEnum {
 
     private final String string;
 
-    sharedPreferencesEnum(String name){this.string = name;}
+    SharedPreferencesEnum(String name){this.string = name;}
 
     @Override
     public String toString() {

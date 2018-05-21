@@ -19,7 +19,7 @@
         <activity android:name=".Evaluation" />
 
         <activity
-            android:name=".MeineDaten"
+            android:name=".Profile_Settings"
             android:label="Meine Daten"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".Standort"></activity>

@@ -15,14 +15,14 @@ import android.widget.Toast;
 
 /**Saves data to sharedPreferences
  *
- * TODO: I think it now doesnt check if the fields are empty and so it overwrites the saved values with empty strings, it should change once we load values
- * TODO: Load values onCreate.
- * TODO: Maybe use a TextField array or data binding to make the code simpler.
+ *
+ *
+ *
  *
  *
  *
  */
-public class MeineDaten extends AppCompatActivity {
+public class Profile_Settings extends AppCompatActivity {
     //TextViews
     TextView firstNameTV;
     TextView lastNameTV;
@@ -37,13 +37,13 @@ public class MeineDaten extends AppCompatActivity {
     //Other
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
-    sharedPreferencesEnum SPenum;
+    SharedPreferencesEnum SPenum;
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meine_daten);
+        setContentView(R.layout.activity_profile_settings);
         //init TxtViews
         this.firstNameTV = findViewById(R.id.firstName);
         this.lastNameTV = findViewById(R.id.lastName);
@@ -61,7 +61,7 @@ public class MeineDaten extends AppCompatActivity {
         //other
         context = this;
         sharedPrefs = getPreferences(MODE_PRIVATE);
-        editor = sharedPrefs.edit();
+
 
     }
 
@@ -73,18 +73,19 @@ public class MeineDaten extends AppCompatActivity {
     private void buttonClickListener(View view) {
         if (view.getId() == R.id.cancelBtn) {
             //cancel
+            finish();
 
         }
         if (view.getId() == R.id.saveBtn) {
             //save
-
-            editor.putString(SPenum.FIRST_NAME.toString(),firstNameTV.getText().toString());
-            editor.putString(SPenum.LAST_NAME.toString(), lastNameTV.getText().toString());
-            editor.putString(SPenum.GENDER.toString(), genderTV.getText().toString());
-            editor.putString(SPenum.BIRTHDAY.toString(), birthdayTV.getText().toString());
-            editor.putString(SPenum.HEIGHT.toString(), heightTV.getText().toString());
-            editor.putString(SPenum.WEIGHT.toString(), weightTV.getText().toString());
-            editor.putString(SPenum.EMAIL.toString(), emailTV.getText().toString());
+            editor = sharedPrefs.edit();
+            editor.putString(SharedPreferencesEnum.FIRST_NAME.toString(),firstNameTV.getText().toString());
+            editor.putString(SharedPreferencesEnum.LAST_NAME.toString(), lastNameTV.getText().toString());
+            editor.putString(SharedPreferencesEnum.GENDER.toString(), genderTV.getText().toString());
+            editor.putString(SharedPreferencesEnum.BIRTHDAY.toString(), birthdayTV.getText().toString());
+            editor.putString(SharedPreferencesEnum.HEIGHT.toString(), heightTV.getText().toString());
+            editor.putString(SharedPreferencesEnum.WEIGHT.toString(), weightTV.getText().toString());
+            editor.putString(SharedPreferencesEnum.EMAIL.toString(), emailTV.getText().toString());
             editor.apply();
 
             if(BuildConfig.DEBUG){
