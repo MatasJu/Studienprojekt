@@ -37,7 +37,6 @@ public class Profile_Settings extends AppCompatActivity {
     //Other
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
-    SharedPreferencesEnum SPenum;
     Context context;
 
     @Override
@@ -71,21 +70,24 @@ public class Profile_Settings extends AppCompatActivity {
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void buttonClickListener(View view) {
+
+        //Cancel Button
         if (view.getId() == R.id.cancelBtn) {
             //cancel
-            finish();
+            finish(); //finishes activity and goes back.
 
         }
+        //Save Button
         if (view.getId() == R.id.saveBtn) {
             //save
             editor = sharedPrefs.edit();
-            editor.putString(SharedPreferencesEnum.FIRST_NAME.toString(),firstNameTV.getText().toString());
-            editor.putString(SharedPreferencesEnum.LAST_NAME.toString(), lastNameTV.getText().toString());
-            editor.putString(SharedPreferencesEnum.GENDER.toString(), genderTV.getText().toString());
-            editor.putString(SharedPreferencesEnum.BIRTHDAY.toString(), birthdayTV.getText().toString());
-            editor.putString(SharedPreferencesEnum.HEIGHT.toString(), heightTV.getText().toString());
-            editor.putString(SharedPreferencesEnum.WEIGHT.toString(), weightTV.getText().toString());
-            editor.putString(SharedPreferencesEnum.EMAIL.toString(), emailTV.getText().toString());
+            editor.putString(SPnames.FIRST_NAME.toString(),firstNameTV.getText().toString());
+            editor.putString(SPnames.LAST_NAME.toString(), lastNameTV.getText().toString());
+            editor.putString(SPnames.GENDER.toString(), genderTV.getText().toString());
+            editor.putString(SPnames.BIRTHDAY.toString(), birthdayTV.getText().toString());
+            editor.putString(SPnames.HEIGHT.toString(), heightTV.getText().toString());
+            editor.putString(SPnames.WEIGHT.toString(), weightTV.getText().toString());
+            editor.putString(SPnames.EMAIL.toString(), emailTV.getText().toString());
             editor.apply();
 
             if(BuildConfig.DEBUG){
@@ -104,4 +106,27 @@ public class Profile_Settings extends AppCompatActivity {
     }
 
 
+}
+
+/**Enum for SharedPrefferences strings for this activity.
+ *
+ */
+enum SPnames {
+    USER_INFO_FILE("user_info"),
+    FIRST_NAME("first_name"),
+    LAST_NAME("last_name"),
+    GENDER("gender"),
+    BIRTHDAY("birthday"),
+    HEIGHT("height"),
+    WEIGHT("weight"),
+    EMAIL("email");
+
+    private final String string;
+
+    SPnames(String name){this.string = name;}
+
+    @Override
+    public String toString() {
+        return this.string;
+    }
 }
