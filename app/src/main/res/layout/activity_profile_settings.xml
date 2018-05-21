@@ -104,11 +104,11 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/editText5"
         app:layout_constraintTop_toTopOf="@+id/editText5" />
 
@@ -120,11 +120,11 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/editText7"
         app:layout_constraintTop_toTopOf="@+id/editText7" />
 
@@ -132,10 +132,9 @@
         android:id="@+id/firstName"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="68dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
@@ -153,7 +152,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
@@ -164,28 +162,11 @@
         app:layout_constraintTop_toTopOf="@+id/editText" />
 
     <EditText
-        android:id="@+id/gender"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textShortMessage"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText6"
-        app:layout_constraintTop_toTopOf="@+id/editText6"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
         android:id="@+id/email"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginStart="68dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textAllCaps="true"
@@ -245,16 +226,20 @@
     <EditText
         android:id="@+id/birthday"
         android:layout_width="140dp"
-        android:layout_height="40dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="32dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="date"
 
+        android:cursorVisible="false"
+        android:longClickable="false"
+        android:onClick="showDatePickerDialog"
+
+
+        android:textIsSelectable="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/editText4"
         app:layout_constraintTop_toTopOf="@+id/editText4" />
 

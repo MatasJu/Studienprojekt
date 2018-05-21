@@ -1,6 +1,10 @@
 package de.haw_landshut.studienprojekt;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -10,8 +14,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 /**Saves data to sharedPreferences
  *
@@ -22,7 +30,7 @@ import android.widget.Toast;
  *
  *
  */
-public class Profile_Settings extends AppCompatActivity {
+public class Profile_Settings extends AppCompatActivity implements Profile_Settings_Fragment {
     //TextViews
     TextView firstNameTV;
     TextView lastNameTV;
@@ -31,6 +39,10 @@ public class Profile_Settings extends AppCompatActivity {
     TextView heightTV;
     TextView weightTV;
     TextView emailTV;
+    //Birthday vars
+    int bDay;
+    int bYear;
+    int bMonth;
     //Buttons
     Button cancelBtn;
     Button saveBtn;
@@ -48,6 +60,18 @@ public class Profile_Settings extends AppCompatActivity {
         this.lastNameTV = findViewById(R.id.lastName);
         this.genderTV = findViewById(R.id.gender);
         this.birthdayTV = findViewById(R.id.birthday);
+
+        //settings so we can use DatePicker instead of keyboard input.
+        birthdayTV.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                    showDatePickerDialog(v);
+            }
+        });
+
+        birthdayTV.setKeyListener(null);
+
         this.heightTV = findViewById(R.id.height);
         this.weightTV = findViewById(R.id.weight);
         this.emailTV = findViewById(R.id.email);
@@ -68,13 +92,18 @@ public class Profile_Settings extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //Load the Fields from SharedPreferences
-        firstNameTV.setText(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(),""));
-        lastNameTV.setText(sharedPrefs.getString(SPkeys.LAST_NAME.toString(),""));
-         genderTV.setText(sharedPrefs.getString(SPkeys.GENDER.toString(),""));
-        birthdayTV.setText(sharedPrefs.getString(SPkeys.BIRTHDAY.toString(),""));
-       heightTV.setText(sharedPrefs.getString(SPkeys.HEIGHT.toString(),""));
-        weightTV.setText(sharedPrefs.getString(SPkeys.WEIGHT.toString(),""));
-        emailTV.setText(sharedPrefs.getString(SPkeys.EMAIL.toString(),""));
+        firstNameTV.append(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(),""));
+        lastNameTV.append(sharedPrefs.getString(SPkeys.LAST_NAME.toString(),""));
+         genderTV.append(sharedPrefs.getString(SPkeys.GENDER.toString(),""));
+       heightTV.append(sharedPrefs.getString(SPkeys.HEIGHT.toString(),""));
+        weightTV.append(sharedPrefs.getString(SPkeys.WEIGHT.toString(),""));
+        emailTV.append(sharedPrefs.getString(SPkeys.EMAIL.toString(),""));
+
+
+        setBirthdayTV(
+                sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(),1),
+                sharedPrefs.getInt(SPkeys.BIRTHDAY_MONTH.toString(),1),
+                sharedPrefs.getInt(SPkeys.BIRTHDAY_YEAR.toString(),1950));
 
     }
 
@@ -98,7 +127,9 @@ public class Profile_Settings extends AppCompatActivity {
             editor.putString(SPkeys.FIRST_NAME.toString(),firstNameTV.getText().toString());
             editor.putString(SPkeys.LAST_NAME.toString(), lastNameTV.getText().toString());
             editor.putString(SPkeys.GENDER.toString(), genderTV.getText().toString());
-            editor.putString(SPkeys.BIRTHDAY.toString(), birthdayTV.getText().toString());
+            editor.putInt(SPkeys.BIRTHDAY_DAY.toString(), bDay);
+            editor.putInt(SPkeys.BIRTHDAY_MONTH.toString(), bMonth);
+            editor.putInt(SPkeys.BIRTHDAY_YEAR.toString(), bYear);
             editor.putString(SPkeys.HEIGHT.toString(), heightTV.getText().toString());
             editor.putString(SPkeys.WEIGHT.toString(), weightTV.getText().toString());
             editor.putString(SPkeys.EMAIL.toString(), emailTV.getText().toString());
@@ -108,7 +139,7 @@ public class Profile_Settings extends AppCompatActivity {
                 StringBuilder temp = new StringBuilder();
                 temp.append("Saved Text:\n");
                 sharedPrefs.getAll().forEach((key, value) ->
-                        temp.append(key).append(" = ").append((String) value).append('\n'));
+                     temp.append(key).append(" = ").append(value).append('\n'));
                 Toast toast = Toast.makeText(context,temp,Toast.LENGTH_LONG);
                 toast.show();
 
@@ -120,7 +151,49 @@ public class Profile_Settings extends AppCompatActivity {
     }
 
 
+    public void setBirthdayTV(int day,int month, int year){
+        bDay=day;
+        bMonth=month;
+        bYear=year;
+        birthdayTV.append(String.format(Locale.getDefault(),"%d.%d.%d", day, month, year));
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        newFragment.show(fragmentManager, "datePicker");
+    }
+
+
+    /**Fragment for Date Picker
+     * @see "https://developer.android.com/guide/topics/ui/controls/pickers"
+     *
+     */
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+            Profile_Settings_Fragment profile_settings_fragment = (Profile_Settings_Fragment) getActivity();
+            profile_settings_fragment.setBirthdayTV(day,month,year);
+        }
+    }
+
 }
+
 
 /**Enum for SharedPrefferences strings for this activity.
  *
@@ -130,7 +203,9 @@ enum SPkeys {
     FIRST_NAME("first_name"),
     LAST_NAME("last_name"),
     GENDER("gender"),
-    BIRTHDAY("birthday"),
+    BIRTHDAY_DAY("birthday day"),
+    BIRTHDAY_MONTH("birthday month"),
+    BIRTHDAY_YEAR("birthday year"),
     HEIGHT("height"),
     WEIGHT("weight"),
     EMAIL("email");
@@ -144,3 +219,4 @@ enum SPkeys {
         return this.string;
     }
 }
+
