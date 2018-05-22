@@ -61,6 +61,7 @@ enum Questions {
  * <p>
  * TODO: Separate TTS and STT into their own classes could be a good idea?
  * TODO: need to stop everything when app goes toStop() or otherwise "minimised", and than continue it well forward... right now it's speaking in the background.
+ * TODO: Change TTS locale acording to app or phone.
  */
 public class QuestionsActivity extends AppCompatActivity {
 
