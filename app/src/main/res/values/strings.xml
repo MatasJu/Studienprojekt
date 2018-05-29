@@ -105,9 +105,9 @@
 
     <!--Questions Activity -->
 
-    <!--><string name="repeat_question">Wenn Sie diese Frage wiederholen wolen, sagen sie bitte "noch einmal".</string><-->
-    <!--><string name="answer_repeat_question">noch einam</string><-->
-    <!--> for testing made them shorter.<-->
+    <!--&gt;<string name="repeat_question">Wenn Sie diese Frage wiederholen wolen, sagen sie bitte "noch einmal".</string><-->
+    <!--&gt;<string name="answer_repeat_question">noch einam</string><-->
+    <!--&gt; for testing made them shorter.<-->
 
     <string name="repeat_question">"noch einmal".</string>
     <string name="next_question">oder "weiter"</string>
@@ -871,6 +871,7 @@
     <string name="first_name">Vorname</string>
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
+    <string name="my_profile_btn">Meine Daten</string>
 
 
 </resources>

@@ -7,7 +7,6 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 
 import android.speech.tts.UtteranceProgressListener;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -51,6 +50,8 @@ enum Questions {
     public Questions next(){
         return values[(this.ordinal()+1)%values.length];
     }
+
+
 }
 
 /**
@@ -63,7 +64,7 @@ enum Questions {
  * TODO: need to stop everything when app goes toStop() or otherwise "minimised", and than continue it well forward... right now it's speaking in the background.
  * TODO: Change TTS locale acording to app or phone.
  */
-public class QuestionsActivity extends AppCompatActivity {
+public class QuestionsActivity extends AndroidBaseActivity {
 
 
     //This constant uses the name of the class itself as the tag.
@@ -304,7 +305,9 @@ public class QuestionsActivity extends AppCompatActivity {
      */
     private void setupTTS() {
         TTSEngine.setOnUtteranceProgressListener(utteranceProgressListener);
-        TTSEngine.setLanguage(Locale.GERMANY);
+
+
+        TTSEngine.setLanguage(Locale.getDefault());
 
         //this will start the questioning.
         addToTTSandFlush(" ", "TTSdone");
@@ -377,10 +380,10 @@ public class QuestionsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN.toString());
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault().toString());
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
 
-        //Offline recognistion will work only above api lvl 23, also has to be downloaded outside the app in the language settings.
+        //Offline recognition will work only above api lvl 23, also has to be downloaded outside the app in the language settings.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
         }
@@ -602,4 +605,5 @@ public class QuestionsActivity extends AppCompatActivity {
      */
     private void handleTTSinitError() {
     }
+
 }

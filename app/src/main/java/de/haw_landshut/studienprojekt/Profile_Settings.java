@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +29,7 @@ import java.util.Locale;
  * TODO: Need More checks on values like email and such.
  *
  */
-public class Profile_Settings extends AppCompatActivity implements Profile_Settings_Fragment {
+public class Profile_Settings extends AndroidBaseActivity implements Profile_Settings_Fragment {
     //TextViews
     TextView firstNameTV;
     TextView lastNameTV;
@@ -57,14 +56,19 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
     Button cancelBtn;
     Button saveBtn;
     //Other
-    SharedPreferences sharedPrefs;
+    static  SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
     Context context;
+
+    private String initialLocale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
+        initialLocale = LocaleHelper.getPersistedLocale(this);
+
+
         //init TxtViews
         this.firstNameTV = findViewById(R.id.firstName);
         this.lastNameTV = findViewById(R.id.lastName);
@@ -113,7 +117,7 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 languageString = parent.getItemAtPosition(position).toString();
-                setLocaleForApp(languageString);
+
             }
 
             @Override
@@ -132,7 +136,7 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
 
         //other
         context = this;
-        sharedPrefs = getPreferences(MODE_PRIVATE);
+        sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(),MODE_PRIVATE);
 
 
     }
@@ -202,29 +206,29 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
 
             }
 
+            recreate();
 
         }
 
+
     }
 
-    void setLocaleForApp(String localeString){
-        switch (localeString){
-            case "English":
-                Locale.setDefault(new Locale("en"));
-                break;
-            case "Englisch":
-                Locale.setDefault(new Locale("en"));
-                break;
-            case "German":
-                Locale.setDefault(new Locale("de"));
-                break;
-            case "Deutsch":
-                Locale.setDefault(new Locale("de"));
-                break;
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (initialLocale != null && !initialLocale.equals(LocaleHelper.getPersistedLocale(this))) {
+            recreate();
         }
-
     }
+
+
+
+
 
 
     public void setBirthdayTV(int day, int month, int year) {
@@ -272,6 +276,8 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
 }
 
 
+
+
 /**
  * Enum for SharedPrefferences strings for this activity.
  */
@@ -294,9 +300,12 @@ enum SPkeys {
         this.string = name;
     }
 
+
+
     @Override
     public String toString() {
         return this.string;
     }
-}
 
+
+}
