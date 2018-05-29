@@ -862,7 +862,7 @@
     <string name="weight">Gewicht</string>
     <string name="gender">Geschlecht</string>
     <string name="height">Größe</string>
-    <string name="birhtday">Geburtstag</string>
+    <string name="birthday">Geburtstag</string>
     <string name="last_name">Nachname</string>
     <string name="first_name">Vorname</string>
     <string name="save_button">Save</string>
