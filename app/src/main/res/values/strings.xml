@@ -120,6 +120,10 @@
     <string name="what_month_question">Welcher Monat ist es?</string>
     <string name="repeat_words_please">Bitte wiederholen Sie die 3 Wörter von vorher!!!</string>
 
+    <string-array name="language_array">
+        <item>Englisch</item>
+        <item>Deutsch</item>
+    </string-array>
 
     <string-array name="gender_array">
         <item>Abimegender</item>

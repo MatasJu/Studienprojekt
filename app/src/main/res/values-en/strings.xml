@@ -54,6 +54,10 @@
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
 
+    <string-array name="language_array">
+        <item>English</item>
+        <item>German</item>
+    </string-array>
 
     <string-array name="gender_array">
         <item>Abimegender</item>

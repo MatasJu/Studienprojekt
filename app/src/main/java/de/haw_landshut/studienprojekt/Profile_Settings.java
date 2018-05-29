@@ -42,7 +42,13 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
     //gender
     Spinner genderSpinner;
     String genderString;
+
     ArrayAdapter<CharSequence> genderAdapter;
+
+    Spinner languageSpinner;
+    String languageString;
+    ArrayAdapter<CharSequence> languageAdapter;
+
     //Birthday vars
     int bDay;
     int bYear;
@@ -99,7 +105,24 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
                 //?
             }
         });
+        //Language Spinner
+        languageSpinner = findViewById(R.id.languageSpinner);
+        languageAdapter = ArrayAdapter.createFromResource(this,R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(languageAdapter);
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                languageString = parent.getItemAtPosition(position).toString();
+                setLocaleForApp(languageString);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        languageString = languageAdapter.getItem(0).toString();
 
         //init Buttons.
         this.cancelBtn = findViewById(R.id.cancelBtn);
@@ -124,8 +147,13 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
         weightTV.append(sharedPrefs.getString(SPkeys.WEIGHT.toString(), ""));
         emailTV.append(sharedPrefs.getString(SPkeys.EMAIL.toString(), ""));
         //gender
-        genderSpinner.setSelection(genderAdapter.getPosition(
-                sharedPrefs.getString(SPkeys.GENDER.toString(),"Abimegender")));
+        genderSpinner.setSelection(
+                genderAdapter.getPosition(sharedPrefs.getString(
+                        SPkeys.GENDER.toString(),genderAdapter.getItem(0).toString())));
+        //locale
+        languageSpinner.setSelection(languageAdapter.getPosition(
+                sharedPrefs.getString(
+                        SPkeys.LANGUAGE.toString(),languageAdapter.getItem(0).toString())));
         //birthday
         setBirthdayTV(
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(), 1),
@@ -161,6 +189,7 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
             editor.putString(SPkeys.HEIGHT.toString(), heightTV.getText().toString());
             editor.putString(SPkeys.WEIGHT.toString(), weightTV.getText().toString());
             editor.putString(SPkeys.EMAIL.toString(), emailTV.getText().toString());
+            editor.putString(SPkeys.LANGUAGE.toString(),languageString);
             editor.apply();
 
             if (BuildConfig.DEBUG) {
@@ -178,6 +207,24 @@ public class Profile_Settings extends AppCompatActivity implements Profile_Setti
 
     }
 
+    void setLocaleForApp(String localeString){
+        switch (localeString){
+            case "English":
+                Locale.setDefault(new Locale("en"));
+                break;
+            case "Englisch":
+                Locale.setDefault(new Locale("en"));
+                break;
+            case "German":
+                Locale.setDefault(new Locale("de"));
+                break;
+            case "Deutsch":
+                Locale.setDefault(new Locale("de"));
+                break;
+
+        }
+
+    }
 
 
     public void setBirthdayTV(int day, int month, int year) {
@@ -238,7 +285,8 @@ enum SPkeys {
     BIRTHDAY_YEAR("birthday year"),
     HEIGHT("height"),
     WEIGHT("weight"),
-    EMAIL("email");
+    EMAIL("email"),
+    LANGUAGE("language");
 
     private final String string;
 
