@@ -1,247 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:hapticFeedbackEnabled="true"
-    tools:layout_editor_absoluteY="81dp">
+    android:orientation="vertical">
 
+    <!--Title-->
     <TextView
-        android:id="@+id/editText"
-        android:layout_width="133dp"
-        android:layout_height="21dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:id="@+id/my_profile_title"
+        style="@style/ProfileTitle"
+        android:text="@string/my_profile_title" />
+
+    <!--FirstName-->
+    <TextView
+        android:id="@+id/firstNameTV"
+        style="@style/ProfileTextView"
+
         android:text="@string/first_name"
-        android:textAllCaps="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-    <TextView
-        android:id="@+id/editText2"
-        android:layout_width="133dp"
-        android:layout_height="25dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/last_name"
-        android:textAllCaps="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/editText4"
-        android:layout_width="131dp"
-        android:layout_height="28dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/birthday"
-        android:textAllCaps="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-    <TextView
-        android:id="@+id/editText5"
-        android:layout_width="129dp"
-        android:layout_height="25dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/height"
-        android:textAllCaps="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-    <TextView
-        android:id="@+id/editText6"
-        android:layout_width="140dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/gender"
-        android:textAllCaps="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-    <TextView
-        android:id="@+id/editText7"
-        android:layout_width="134dp"
-        android:layout_height="31dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/weight"
-        android:textAllCaps="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
-
-    <EditText
-        android:id="@+id/height"
-        android:layout_width="133dp"
-        android:layout_height="33dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="56dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toEndOf="@+id/editText5"
-        app:layout_constraintTop_toTopOf="@+id/editText5" />
-
-    <EditText
-        android:id="@+id/weight"
-        android:layout_width="126dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="56dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toEndOf="@+id/editText7"
-        app:layout_constraintTop_toTopOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/my_profile_title" />
 
     <EditText
         android:id="@+id/firstName"
-        android:layout_width="135dp"
-        android:layout_height="29dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
+        style="@style/ProfileEditView"
+        android:hint="@string/first_name"
         android:inputType="textPersonName"
-        android:text=""
-        android:textAllCaps="true"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
-        app:layout_constraintTop_toTopOf="@+id/editText2"
-        tools:ignore="MissingConstraints,RtlCompat" />
+        app:layout_constraintTop_toTopOf="@+id/firstNameTV" />
+
+    <!--Last Name-->
+    <TextView
+        android:id="@+id/lastNameTV"
+        style="@style/ProfileTextView"
+        android:text="@string/last_name"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameTV" />
 
     <EditText
         android:id="@+id/lastName"
-        android:layout_width="122dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="56dp"
-        android:ems="10"
+        style="@style/ProfileEditView"
+        android:hint="@string/last_name"
         android:inputType="textPersonName"
-        android:text=""
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toEndOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        app:layout_constraintTop_toTopOf="@+id/lastNameTV" />
+
+    <!--gender-->
+
+    <TextView
+        android:id="@+id/genderTV"
+        style="@style/ProfileTextView"
+        android:text="@string/gender"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameTV" />
+
+    <Spinner
+        android:id="@+id/gender_Spinner"
+        style="@style/ProfileEditView"
+        android:hint="@string/gender"
+        app:layout_constraintTop_toTopOf="@+id/genderTV" />
+
+    <!--Birthday-->
+    <TextView
+        android:id="@+id/birthdayTV"
+        style="@style/ProfileTextView"
+        android:text="@string/birthday"
+        app:layout_constraintTop_toBottomOf="@+id/genderTV" />
+
+    <EditText
+        android:id="@+id/birthday"
+        style="@style/ProfileEditView"
+        android:cursorVisible="false"
+        android:hint="@string/birthday"
+        android:inputType="date"
+        android:longClickable="false"
+        android:onClick="showDatePickerDialog"
+        android:textIsSelectable="false"
+        app:layout_constraintTop_toTopOf="@+id/birthdayTV" />
+
+    <!--Height-->
+    <TextView
+        android:id="@+id/editText5"
+        style="@style/ProfileTextView"
+        android:text="@string/height"
+        app:layout_constraintTop_toBottomOf="@+id/birthdayTV" />
+
+    <EditText
+        android:id="@+id/height"
+        style="@style/ProfileEditView"
+        android:hint="@string/height"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="@+id/editText5" />
+
+
+    <!--Weight-->
+    <TextView
+        android:id="@+id/weightTV"
+        style="@style/ProfileTextView"
+        android:text="@string/weight"
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+    <EditText
+        android:id="@+id/weightEV"
+        style="@style/ProfileEditView"
+        android:hint="@string/weight"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="@+id/weightTV" />
+
+    <!--Email-->
+    <TextView
+        android:id="@+id/editText15"
+        style="@style/ProfileTextView"
+        android:text="@string/email"
+        app:layout_constraintTop_toBottomOf="@+id/weightTV" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="135dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:ems="10"
+        style="@style/ProfileEditView"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:textAllCaps="true"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText15"
         app:layout_constraintTop_toTopOf="@+id/editText15" />
 
+    <!--Language-->
     <TextView
-        android:id="@+id/editText15"
-        android:layout_width="136dp"
-        android:layout_height="29dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:id="@+id/languageTV"
+        style="@style/ProfileTextView"
+        android:text="@string/language"
+        app:layout_constraintTop_toBottomOf="@+id/editText15" />
 
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="E-Mail"
-        android:textAllCaps="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+    <Spinner
+        android:id="@+id/languageSpinner"
+        style="@style/ProfileEditView"
+        app:layout_constraintTop_toTopOf="@+id/languageTV" />
+
+
+    <!--not finished TODO:add image? rename buttons?-->
+
 
     <ImageButton
         android:id="@+id/imageButton"
 
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="136dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="16dp"
+
         android:adjustViewBounds="true"
         android:contentDescription="TODO"
         android:cropToPadding="true"
         app:layout_constraintBottom_toTopOf="@+id/firstName"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/my_profile_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_sync_black_24dp"
-        tools:ignore="MissingConstraints" />
+        app:srcCompat="@drawable/ic_sync_black_24dp" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="107dp"
-        android:layout_height="23dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:text="Meine Daten"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold|italic"
-
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/birthday"
-        android:layout_width="132dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="56dp"
-
-        android:cursorVisible="false"
-        android:longClickable="false"
-        android:onClick="showDatePickerDialog"
-
-
-        android:textIsSelectable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toEndOf="@+id/editText4"
-        app:layout_constraintTop_toTopOf="@+id/editText4" />
 
     <Button
         android:id="@+id/saveBtn"
@@ -264,36 +169,6 @@
         android:text="@string/cancel_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Spinner
-        android:id="@+id/gender_Spinner"
-        android:layout_width="229dp"
-        android:layout_height="25dp"
-
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/editText6"
-        app:layout_constraintTop_toTopOf="@+id/editText6" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="143dp"
-        android:layout_height="34dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="language"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText15" />
-
-    <Spinner
-        android:id="@+id/languageSpinner"
-        android:layout_width="177dp"
-        android:layout_height="34dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginStart="72dp"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/textView9" />
 
 
 </android.support.constraint.ConstraintLayout>

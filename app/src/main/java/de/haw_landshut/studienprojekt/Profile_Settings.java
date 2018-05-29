@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 
 /**
@@ -75,16 +76,13 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
         this.birthdayTV = findViewById(R.id.birthday);
         this.heightTV = findViewById(R.id.height);
-        this.weightTV = findViewById(R.id.weight);
+        this.weightTV = findViewById(R.id.weightEV);
         this.emailTV = findViewById(R.id.email);
 
         //settings so we can use DatePicker instead of keyboard input.
-        birthdayTV.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    showDatePickerDialog(v);
-            }
+        birthdayTV.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus)
+                showDatePickerDialog(v);
         });
 
         birthdayTV.setKeyListener(null);
@@ -126,7 +124,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
             }
         });
 
-        languageString = languageAdapter.getItem(0).toString();
+        languageString = Objects.requireNonNull(languageAdapter.getItem(0)).toString();
 
         //init Buttons.
         this.cancelBtn = findViewById(R.id.cancelBtn);
@@ -153,11 +151,11 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         //gender
         genderSpinner.setSelection(
                 genderAdapter.getPosition(sharedPrefs.getString(
-                        SPkeys.GENDER.toString(),genderAdapter.getItem(0).toString())));
+                        SPkeys.GENDER.toString(), Objects.requireNonNull(genderAdapter.getItem(0)).toString())));
         //locale
         languageSpinner.setSelection(languageAdapter.getPosition(
                 sharedPrefs.getString(
-                        SPkeys.LANGUAGE.toString(),languageAdapter.getItem(0).toString())));
+                        SPkeys.LANGUAGE.toString(), Objects.requireNonNull(languageAdapter.getItem(0)).toString())));
         //birthday
         setBirthdayTV(
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(), 1),

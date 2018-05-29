@@ -872,6 +872,9 @@
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
     <string name="my_profile_btn">Meine Daten</string>
+    <string name="my_profile_title">Meine Daten</string>
+    <string name="email">Email</string>
+    <string name="language">language</string>
 
 
 </resources>

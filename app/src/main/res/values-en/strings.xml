@@ -54,6 +54,7 @@
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
     <string name="my_profile_btn">My Profile</string>
+    <string name="my_profile_title">My Profile</string>
 
     <string-array name="language_array">
         <item>English</item>
@@ -798,8 +799,8 @@
     <string name="random_word498">"goodbye"</string>
     <string name="random_word499">"parking"</string>
     <string name="random_word500">"breakfast"</string>
-
-
+    <string name="email">Email</string>
+    <string name="language">language</string>
 
 
 </resources>
