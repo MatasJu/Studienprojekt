@@ -39,6 +39,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     TextView weightTV;
     TextView emailTV;
 
+
     //gender
     Spinner genderSpinner;
     String genderString;
@@ -122,8 +123,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
             }
         });
-
-        languageString = Objects.requireNonNull(languageAdapter.getItem(0)).toString();
+        languageString = languageAdapter.getItem(0).toString();
 
         //init Buttons.
         this.cancelBtn = findViewById(R.id.cancelBtn);
@@ -133,8 +133,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
         //other
         sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(),MODE_PRIVATE);
-
-
     }
 
     @Override
@@ -151,15 +149,16 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
                 genderAdapter.getPosition(sharedPrefs.getString(
                         SPkeys.GENDER.toString(), Objects.requireNonNull(genderAdapter.getItem(0)).toString())));
         //locale
+
+        //TODO:Because of how this is implemented, the spinner currently does not support translations.
         languageSpinner.setSelection(languageAdapter.getPosition(
                 sharedPrefs.getString(
-                        SPkeys.LANGUAGE.toString(), Objects.requireNonNull(languageAdapter.getItem(0)).toString())));
+                        SPkeys.LANGUAGE.toString(), languageAdapter.getItem(0).toString())));
         //birthday
         setBirthdayTV(
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(), 1),
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_MONTH.toString(), 1),
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_YEAR.toString(), 1950));
-
     }
 
     /**
@@ -199,14 +198,10 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
                         temp.append(key).append(" = ").append(value).append('\n'));
                 Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
                 toast.show();
-
             }
 
             recreate();
-
         }
-
-
     }
 
     public void setBirthdayTV(int day, int month, int year) {
@@ -250,14 +245,12 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
             profile_settings_fragment.setBirthdayTV(day, month, year);
         }
     }
-
 }
 
 
 
-
 /**
- * Enum for SharedPrefferences strings for this activity.
+ * Enum for SharedPreferences strings for this activity.
  */
 enum SPkeys {
     USER_INFO_FILE("user_info"),
@@ -278,12 +271,9 @@ enum SPkeys {
         this.string = name;
     }
 
-
-
     @Override
     public String toString() {
         return this.string;
     }
-
 
 }

@@ -55,11 +55,11 @@
     <string name="cancel_button">Cancel</string>
     <string name="my_profile_btn">My Profile</string>
     <string name="my_profile_title">My Profile</string>
-
-    <string-array name="language_array">
-        <item>English</item>
-        <item>German</item>
-    </string-array>
+    <!--TODO: Change how languageSpinner gets this string to support translations-->
+    <!--<string-array name="language_array">-->
+        <!--<item>English</item>-->
+        <!--<item>German</item>-->
+    <!--</string-array>-->
 
     <string-array name="gender_array">
         <item>Abimegender</item>
