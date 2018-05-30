@@ -59,15 +59,14 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     //Other
     static  SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
-    Context context;
 
-    private String initialLocale;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
-        initialLocale = LocaleHelper.getPersistedLocale(this);
 
 
         //init TxtViews
@@ -133,7 +132,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         saveBtn.setOnClickListener(this::buttonClickListener);
 
         //other
-        context = this;
         sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(),MODE_PRIVATE);
 
 
@@ -199,7 +197,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
                 temp.append("Saved Text:\n");
                 sharedPrefs.getAll().forEach((key, value) ->
                         temp.append(key).append(" = ").append(value).append('\n'));
-                Toast toast = Toast.makeText(context, temp, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
                 toast.show();
 
             }
@@ -211,24 +209,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
     }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleHelper.onAttach(base));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (initialLocale != null && !initialLocale.equals(LocaleHelper.getPersistedLocale(this))) {
-            recreate();
-        }
-    }
-
-
-
-
-
-
     public void setBirthdayTV(int day, int month, int year) {
         bDay = day;
         bMonth = month;
@@ -236,7 +216,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         birthdayTV.append(String.format(Locale.getDefault(), "%d.%d.%d", day, month, year));
     }
 
-    public void showDatePickerDialog(View v) {
+    private void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         FragmentManager fragmentManager = getFragmentManager();
         newFragment.show(fragmentManager, "datePicker");

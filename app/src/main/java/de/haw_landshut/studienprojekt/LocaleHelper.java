@@ -18,8 +18,6 @@ import java.util.Locale;
  */
 public class LocaleHelper {
 
-    private static String localeString;
-
     public static Context onAttach(Context context) {
         String locale = getPersistedLocale(context);
         return setLocale(context, locale);
@@ -35,7 +33,7 @@ public class LocaleHelper {
      * @param string String, preferably from Profile Settings
      * @return shortened Locale String
      */
-    public static String getStringForLocale(String string){
+    private static String getStringForLocale(String string){
         switch (string){
             case "English":
                 return "en";
