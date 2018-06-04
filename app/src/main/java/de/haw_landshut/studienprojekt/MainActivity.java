@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import de.haw_landshut.studienprojekt.questionnaire.QuestionsActivity;
+import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
+import de.haw_landshut.studienprojekt.settings.Profile_Settings;
+
 public class MainActivity extends AndroidBaseActivity {
 
 

@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt;
+package de.haw_landshut.studienprojekt.settings;
 
 /**Interface to deal with fragments in Profile_Settings;
  *

@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt;
+package de.haw_landshut.studienprojekt.questionnaire;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +22,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+
+import de.haw_landshut.studienprojekt.evaluation.Evaluation;
+import de.haw_landshut.studienprojekt.R;
+import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 

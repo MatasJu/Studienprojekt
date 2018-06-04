@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.haw_landshut.studienprojekt.QuestionsActivity">
+    tools:context="de.haw_landshut.studienprojekt.questionnaire.QuestionsActivity">
 
     <TextView
         android:id="@+id/answer"

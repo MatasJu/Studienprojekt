@@ -1,19 +1,18 @@
-package de.haw_landshut.studienprojekt;
+package de.haw_landshut.studienprojekt.evaluation;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.haw_landshut.studienprojekt.R;
 
 enum State {
     ZERO, LOW, NORMAL, HIGH, FALSE, TRUE

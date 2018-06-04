@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt;
+package de.haw_landshut.studienprojekt.settings;
 
 import android.content.Context;
 import android.os.Bundle;

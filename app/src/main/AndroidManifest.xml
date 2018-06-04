@@ -16,15 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Evaluation" />
+        <activity android:name=".evaluation.Evaluation" />
 
         <activity
-            android:name=".Profile_Settings"
+            android:name=".settings.Profile_Settings"
             android:label="Meine Daten"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".Standort"></activity>
+        <activity android:name=".settings.Standort"></activity>
 
-        <activity android:name=".QuestionsActivity"></activity>
+        <activity android:name=".questionnaire.QuestionsActivity"></activity>
 
 
     </application>

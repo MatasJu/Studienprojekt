@@ -1,11 +1,10 @@
-package de.haw_landshut.studienprojekt;
+package de.haw_landshut.studienprojekt.settings;
 
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +21,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
+
+import de.haw_landshut.studienprojekt.BuildConfig;
+import de.haw_landshut.studienprojekt.R;
 
 
 /**
