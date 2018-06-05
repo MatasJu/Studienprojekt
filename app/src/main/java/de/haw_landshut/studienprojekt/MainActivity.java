@@ -1,7 +1,9 @@
 package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
+
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 
@@ -15,6 +17,8 @@ public class MainActivity extends AndroidBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MotionSensor.instantiate(this);
         setContentView(R.layout.activity_main);
     }
 
