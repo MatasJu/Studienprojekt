@@ -27,6 +27,13 @@
         <activity android:name=".Emergency_Pass"/>
         <activity android:name=".Emergency_Pass_Two" />
         <activity android:name=".erklaerunggelb" />
+        <activity android:name=".gefuehle" />
+        <activity android:name=".erklaerungrot" />
+        <activity android:name=".gruen" />
+        <activity android:name=".verletzung" />
+        <activity android:name=".kontakte_rot" />
+        <activity android:name=".notruf" />
+        <activity android:name=".kontakte" />
 
 
     </application>

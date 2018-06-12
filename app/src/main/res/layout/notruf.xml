@@ -13,5 +13,6 @@
         android:text="Der notruf wurde betätigt. der notarzt ist in wenigen minuten bei ihnen. bitte bewahren sie ruhe!"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="66dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:onClick="onClickListener"/>
 </android.support.constraint.ConstraintLayout>

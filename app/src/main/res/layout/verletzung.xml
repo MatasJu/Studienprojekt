@@ -16,7 +16,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/greenBtn2"
         android:layout_width="92dp"
         android:layout_height="78dp"
         android:backgroundTint="@android:color/holo_green_light"
@@ -25,7 +25,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/yellowBtn2"
         android:layout_width="97dp"
         android:layout_height="79dp"
         android:backgroundTint="@color/colorPrimaryDark"
@@ -34,11 +34,14 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/redBtn2"
         android:layout_width="94dp"
         android:layout_height="80dp"
         android:backgroundTint="@color/colorAccent"
         tools:layout_editor_absoluteX="262dp"
         tools:layout_editor_absoluteY="364dp"
         tools:ignore="MissingConstraints" />
+
+
+
 </android.support.constraint.ConstraintLayout>

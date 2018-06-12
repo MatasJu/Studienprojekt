@@ -38,14 +38,4 @@ public class MainActivity extends AndroidBaseActivity {
         startActivity(intent);
     }
 
-
-
-    public void openMyProfile(View view) {
-        Intent intent = new Intent(this,Profile_Settings.class);
-        startActivity(intent);
-    }
-
-
-
-
 }

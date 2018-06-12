@@ -17,7 +17,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button16"
+        android:id="@+id/jaBtn"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
         android:backgroundTint="@android:color/holo_green_light"
@@ -27,13 +27,13 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button17"
+        android:id="@+id/neinBtn"
         android:layout_width="wrap_content"
         android:layout_height="87dp"
         android:layout_marginStart="56dp"
         android:backgroundTint="@color/colorAccent"
         android:text="Nein"
-        app:layout_constraintStart_toEndOf="@+id/button16"
+        app:layout_constraintStart_toEndOf="@+id/jaBtn"
         tools:layout_editor_absoluteY="344dp"
         tools:ignore="MissingConstraints,RtlCompat" />
 

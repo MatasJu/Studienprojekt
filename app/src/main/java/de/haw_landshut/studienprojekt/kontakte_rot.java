@@ -6,21 +6,17 @@ import android.view.View;
 
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
 
-public class erklaerunggelb extends AndroidBaseActivity {
-
+public class kontakte_rot extends AndroidBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.erklaerunggelb);
+        setContentView(R.layout.erklaerungrot);
 
     }
 
     public void onClickListener(View v){
-        Intent intent = new Intent(getApplicationContext(),erklaerungrot.class);
+        Intent intent = new Intent(getApplicationContext(),gefuehle.class);
         startActivity(intent);
 
     }
-
-
-
 }
