@@ -1,8 +1,12 @@
 package de.haw_landshut.studienprojekt.settings;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+
+import static android.view.View.AUTOFILL_TYPE_NONE;
 
 
 /**A base class for Android depended subclasses. Currently it implements a custom LocaleHelper to deal with changing

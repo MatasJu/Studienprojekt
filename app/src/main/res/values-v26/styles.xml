@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ProfileEditView" parent="TextAppearance.AppCompat">
+        <item name="android:importantForAutofill">noExcludeDescendants</item>
+        <item name="android:textColor">@color/DefaultTextColor</item>
+        <item name="android:background">@color/DefaultTextBackgroundColor</item>
+        <item name="android:textSize">11pt</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+
+    </style>
+</resources>

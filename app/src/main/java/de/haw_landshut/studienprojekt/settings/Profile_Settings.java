@@ -6,13 +6,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,9 +26,8 @@ import de.haw_landshut.studienprojekt.R;
 
 /**
  * Saves data to sharedPreferences
- *
+ * <p>
  * TODO: Need More checks on values like email and such.
- *
  */
 public class Profile_Settings extends AndroidBaseActivity implements Profile_Settings_Fragment {
     //TextViews
@@ -56,14 +53,10 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     int bDay;
     int bYear;
     int bMonth;
-    //Buttons
-    Button cancelBtn;
-    Button saveBtn;
+
     //Other
-    static  SharedPreferences sharedPrefs;
+    static SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
-
-
 
 
     @Override
@@ -72,14 +65,50 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         setContentView(R.layout.activity_profile_settings);
 
 
-        //init TxtViews
-        this.firstNameTV = findViewById(R.id.firstName);
-        this.lastNameTV = findViewById(R.id.lastName);
+        //====Get saved Shared Preferences ====
+        sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(), MODE_PRIVATE);
 
-        this.birthdayTV = findViewById(R.id.birthday);
-        this.heightTV = findViewById(R.id.height);
-        this.weightTV = findViewById(R.id.weightEV);
-        this.emailTV = findViewById(R.id.email);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //---------init Views---------
+
+        //-----First Name-----
+        firstNameTV = findViewById(R.id.firstName);
+        //Load the Fields from SharedPreferences
+        firstNameTV.append(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(), ""));
+        //Set onFocusChange Listener to save data after leaving a field.
+
+
+
+        //-----Last Name-----
+        lastNameTV = findViewById(R.id.lastName);
+        lastNameTV.append(sharedPrefs.getString(SPkeys.LAST_NAME.toString(), ""));
+
+
+        //-----Height-----
+        heightTV = findViewById(R.id.height);
+        heightTV.append(sharedPrefs.getString(SPkeys.HEIGHT.toString(), ""));
+
+
+        //-----Weight-----
+        weightTV = findViewById(R.id.weightEV);
+        weightTV.append(sharedPrefs.getString(SPkeys.WEIGHT.toString(), ""));
+
+
+        //-----Email-----
+        emailTV = findViewById(R.id.email);
+        emailTV.append(sharedPrefs.getString(SPkeys.EMAIL.toString(), ""));
+
+
+
+
+        //------Birthday-----
+        birthdayTV = findViewById(R.id.birthday);
 
         //settings so we can use DatePicker instead of keyboard input.
         birthdayTV.setOnFocusChangeListener((v, hasFocus) -> {
@@ -87,36 +116,61 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
                 showDatePickerDialog(v);
         });
 
+        //this so the on-screen keyboard does not appear
         birthdayTV.setKeyListener(null);
 
+        //Load Values, or set Default ones..
+        setBirthdayTV(
+                sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(), 1),
+                sharedPrefs.getInt(SPkeys.BIRTHDAY_MONTH.toString(), 1),
+                sharedPrefs.getInt(SPkeys.BIRTHDAY_YEAR.toString(), 1950));
+
+
+        //-----Gender-----
+
+
         //populate the gender "Spinner" drop down menu.
-        this.genderSpinner = findViewById(R.id.gender_Spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        genderSpinner = findViewById(R.id.gender_Spinner);
+
+        //Create an ArrayAdapter using the string array and a default spinner layout
         genderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
+
+        //Specify the layout to use when the list of choices appears
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+
+        //Apply the adapter to the spinner
         genderSpinner.setAdapter(genderAdapter);
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 genderString = parent.getItemAtPosition(position).toString();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //?
+
             }
         });
-        //Language Spinner
+
+        //Load saved value.
+        genderSpinner.setSelection(
+                genderAdapter.getPosition(sharedPrefs.getString(
+                        SPkeys.GENDER.toString(), Objects.requireNonNull(genderAdapter.getItem(0)).toString())));
+
+
+
+        //-----Language-----
+
         languageSpinner = findViewById(R.id.languageSpinner);
-        languageAdapter = ArrayAdapter.createFromResource(this,R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
+        languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageAdapter);
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 languageString = parent.getItemAtPosition(position).toString();
+
 
             }
 
@@ -127,90 +181,84 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         });
         languageString = languageAdapter.getItem(0).toString();
 
-        //init Buttons.
-        this.cancelBtn = findViewById(R.id.cancelBtn);
-        cancelBtn.setOnClickListener(this::buttonClickListener);
-        this.saveBtn = findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(this::buttonClickListener);
-
-        //other
-        sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(),MODE_PRIVATE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Load the Fields from SharedPreferences
-        firstNameTV.append(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(), ""));
-        lastNameTV.append(sharedPrefs.getString(SPkeys.LAST_NAME.toString(), ""));
-        heightTV.append(sharedPrefs.getString(SPkeys.HEIGHT.toString(), ""));
-        weightTV.append(sharedPrefs.getString(SPkeys.WEIGHT.toString(), ""));
-        emailTV.append(sharedPrefs.getString(SPkeys.EMAIL.toString(), ""));
-        //gender
-        genderSpinner.setSelection(
-                genderAdapter.getPosition(sharedPrefs.getString(
-                        SPkeys.GENDER.toString(), Objects.requireNonNull(genderAdapter.getItem(0)).toString())));
-        //locale
-
         //TODO:Because of how this is implemented, the spinner currently does not support translations.
         languageSpinner.setSelection(languageAdapter.getPosition(
                 sharedPrefs.getString(
                         SPkeys.LANGUAGE.toString(), languageAdapter.getItem(0).toString())));
-        //birthday
-        setBirthdayTV(
-                sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(), 1),
-                sharedPrefs.getInt(SPkeys.BIRTHDAY_MONTH.toString(), 1),
-                sharedPrefs.getInt(SPkeys.BIRTHDAY_YEAR.toString(), 1950));
+
+
+
     }
+
 
     /**
-     * Listens to the button clicks.
+     * Saves data to SharedPreferences.
      *
-     * @param view is passed on by the event.
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void buttonClickListener(View view) {
+    private void saveData(){
 
-        //Cancel Button
-        if (view.getId() == R.id.cancelBtn) {
-            //cancel
-            finish(); //finishes activity and goes back.
+        //save
+        editor = sharedPrefs.edit();
+        editor.putString(SPkeys.FIRST_NAME.toString(), firstNameTV.getText().toString());
+        editor.putString(SPkeys.LAST_NAME.toString(), lastNameTV.getText().toString());
+        editor.putString(SPkeys.GENDER.toString(), genderString);
+        editor.putInt(SPkeys.BIRTHDAY_DAY.toString(), bDay);
+        editor.putInt(SPkeys.BIRTHDAY_MONTH.toString(), bMonth);
+        editor.putInt(SPkeys.BIRTHDAY_YEAR.toString(), bYear);
+        editor.putString(SPkeys.HEIGHT.toString(), heightTV.getText().toString());
+        editor.putString(SPkeys.WEIGHT.toString(), weightTV.getText().toString());
+        editor.putString(SPkeys.EMAIL.toString(), emailTV.getText().toString());
+        editor.putString(SPkeys.LANGUAGE.toString(), languageString);
+        editor.apply();
 
+        if (BuildConfig.DEBUG) {
+            StringBuilder temp = new StringBuilder();
+            temp.append("Saved Text:\n");
+            sharedPrefs.getAll().forEach((key, value) ->
+                    temp.append(key).append(" = ").append(value).append('\n'));
+            Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
+            toast.show();
         }
-        //Save Button
-        if (view.getId() == R.id.saveBtn) {
-            //save
-            editor = sharedPrefs.edit();
-            editor.putString(SPkeys.FIRST_NAME.toString(), firstNameTV.getText().toString());
-            editor.putString(SPkeys.LAST_NAME.toString(), lastNameTV.getText().toString());
-            editor.putString(SPkeys.GENDER.toString(), genderString);
-            editor.putInt(SPkeys.BIRTHDAY_DAY.toString(), bDay);
-            editor.putInt(SPkeys.BIRTHDAY_MONTH.toString(), bMonth);
-            editor.putInt(SPkeys.BIRTHDAY_YEAR.toString(), bYear);
-            editor.putString(SPkeys.HEIGHT.toString(), heightTV.getText().toString());
-            editor.putString(SPkeys.WEIGHT.toString(), weightTV.getText().toString());
-            editor.putString(SPkeys.EMAIL.toString(), emailTV.getText().toString());
-            editor.putString(SPkeys.LANGUAGE.toString(),languageString);
-            editor.apply();
 
-            if (BuildConfig.DEBUG) {
-                StringBuilder temp = new StringBuilder();
-                temp.append("Saved Text:\n");
-                sharedPrefs.getAll().forEach((key, value) ->
-                        temp.append(key).append(" = ").append(value).append('\n'));
-                Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
-                toast.show();
-            }
 
-            recreate();
+    }
+
+    /**Save on back press.
+     *
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        saveData();
+    }
+
+    /** Save on toolbar back button.
+     *
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                saveData();
+                return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
+
+    /** Helping function to set text to Birthday TextView.
+     * Used in Date Picker Fragment.
+     *
+     * @param day day
+     * @param month month
+     * @param year year
+     */
     public void setBirthdayTV(int day, int month, int year) {
         bDay = day;
         bMonth = month;
         bYear = year;
-        birthdayTV.append(String.format(Locale.getDefault(), "%d.%d.%d", day, month, year));
+        birthdayTV.setText(String.format(Locale.getDefault(), "%d.%d.%d", day, month, year));
     }
 
     private void showDatePickerDialog(View v) {
@@ -225,7 +273,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
      *
      * @see "https://developer.android.com/guide/topics/ui/controls/pickers"
      */
-
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
@@ -248,7 +295,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         }
     }
 }
-
 
 
 /**
