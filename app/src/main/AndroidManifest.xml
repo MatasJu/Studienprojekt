@@ -21,10 +21,12 @@
         <activity
             android:name=".settings.Profile_Settings"
             android:label="Meine Daten"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".settings.Standort"></activity>
+            android:parentActivityName=".MainActivity" />
 
-        <activity android:name=".questionnaire.QuestionsActivity"></activity>
+        <activity android:name=".questionnaire.QuestionsActivity" />
+        <activity android:name=".Emergency_Pass"/>
+        <activity android:name=".Emergency_Pass_Two" />
+        <activity android:name=".erklaerunggelb" />
 
 
     </application>

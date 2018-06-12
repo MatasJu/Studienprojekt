@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:minWidth="@android:dimen/thumbnail_width"
     android:visibility="visible"
-    tools:context="de.haw_landshut.studienprojekt.settings.Standort">
+    tools:context="de.haw_landshut.studienprojekt.Standort">
 
     <TextView
         android:id="@+id/textView2"
@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_green_light"
         android:text="Aktivieren"
+        android:onClick="onClickListener"
         tools:layout_editor_absoluteX="280dp"
         tools:layout_editor_absoluteY="376dp"
         tools:ignore="MissingConstraints" />

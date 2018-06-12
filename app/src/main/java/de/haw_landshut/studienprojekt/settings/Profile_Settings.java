@@ -5,12 +5,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,7 +23,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 import de.haw_landshut.studienprojekt.BuildConfig;
+import de.haw_landshut.studienprojekt.Emergency_Pass;
 import de.haw_landshut.studienprojekt.R;
+
+
 
 
 /**
@@ -37,6 +42,10 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     TextView heightTV;
     TextView weightTV;
     TextView emailTV;
+
+    //buttons
+
+    Button weiterBtn;
 
 
     //gender
@@ -76,6 +85,14 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         super.onStart();
 
         //---------init Views---------
+
+        //weiterBtn
+        weiterBtn = findViewById(R.id.weiterBtn);
+        weiterBtn.setOnClickListener(v -> {
+            saveData();
+            Intent intent = new Intent(getApplicationContext(),Emergency_Pass.class);
+            startActivity(intent);
+        });
 
         //-----First Name-----
         firstNameTV = findViewById(R.id.firstName);
@@ -268,9 +285,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     }
 
 
-    /**
-     * Fragment for Date Picker
-     *
+    /** Fragment for Date Picker
      * @see "https://developer.android.com/guide/topics/ui/controls/pickers"
      */
     public static class DatePickerFragment extends DialogFragment

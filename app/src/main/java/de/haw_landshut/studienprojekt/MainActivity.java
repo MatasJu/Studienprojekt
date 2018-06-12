@@ -34,8 +34,7 @@ public class MainActivity extends AndroidBaseActivity {
      */
     public void startButtonEventHandler(View view) {
         Log.d(LOG_TAG, "StartButton Clicked!");
-        Intent intent = new Intent(this, QuestionsActivity.class);
-
+        Intent intent = new Intent(this,Profile_Settings.class);
         startActivity(intent);
     }
 
