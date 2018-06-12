@@ -8,23 +8,23 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="392dp"
+        android:layout_height="194dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/contentDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"
-        android:contentDescription="@string/contentDescription"
-        android:layout_marginLeft="104dp" />
+        app:srcCompat="@drawable/logo_cropped" />
 
     <Button
         android:id="@+id/button_md"
         android:layout_width="124dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="128dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="52dp"
         android:onClick="openMyProfile"
         android:text="@string/my_profile_btn"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +47,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
         android:text="@string/welcome_msg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
