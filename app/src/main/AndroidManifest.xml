@@ -34,6 +34,7 @@
         <activity android:name=".kontakte_rot" />
         <activity android:name=".notruf" />
         <activity android:name=".kontakte" />
+        <activity android:name=".Standort" />
 
 
     </application>

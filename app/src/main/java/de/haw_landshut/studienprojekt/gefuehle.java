@@ -12,7 +12,7 @@ public class gefuehle extends AndroidBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.erklaerunggelb);
+        setContentView(R.layout.gefuehle);
 
     }
 
@@ -29,7 +29,7 @@ public class gefuehle extends AndroidBaseActivity {
                 startActivity(intent);
                 break;
             case R.id.redBtn:
-                intent = new Intent(getApplicationContext(), erklaerungrot.class);
+                intent = new Intent(getApplicationContext(), kontakte_rot.class);
                 startActivity(intent);
                 break;
         }

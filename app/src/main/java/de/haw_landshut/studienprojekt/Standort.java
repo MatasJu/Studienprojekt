@@ -11,12 +11,12 @@ public class Standort extends AndroidBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_evaluation);
+        setContentView(R.layout.standort);
 
     }
 
     public void onClickListener(View v){
-        Intent intent = new Intent(getApplicationContext(),Emergency_Pass_Two.class);
+        Intent intent = new Intent(getApplicationContext(),erklaerunggelb.class);
         startActivity(intent);
 
     }

@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech;
 
 import android.speech.tts.UtteranceProgressListener;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import java.util.Random;
 import de.haw_landshut.studienprojekt.evaluation.Evaluation;
 import de.haw_landshut.studienprojekt.R;
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
+import de.haw_landshut.studienprojekt.settings.LocaleHelper;
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 
@@ -384,7 +386,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault().toString());
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, LocaleHelper.getPersistedLocale(this));
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
 
         //Offline recognition will work only above api lvl 23, also has to be downloaded outside the app in the language settings.
@@ -398,8 +400,6 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
         // Start the activity, the intent will be populated with the speech text
         startActivityForResult(intent, requestCode);
-
-
     }
 
     /**

@@ -15,7 +15,7 @@ public class kontakte extends AndroidBaseActivity {
     }
 
     public void onClickListener(View v){
-        Intent intent = new Intent(getApplicationContext(),gefuehle.class);
+        Intent intent = new Intent(getApplicationContext(),kontakte_rot.class);
         startActivity(intent);
 
     }
