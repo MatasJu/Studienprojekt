@@ -23,10 +23,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 import de.haw_landshut.studienprojekt.BuildConfig;
-import de.haw_landshut.studienprojekt.Emergency_Pass;
 import de.haw_landshut.studienprojekt.R;
-
-
+import de.haw_landshut.studienprojekt.gefuehle;
 
 
 /**
@@ -90,7 +88,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         weiterBtn = findViewById(R.id.weiterBtn);
         weiterBtn.setOnClickListener(v -> {
             saveData();
-            Intent intent = new Intent(getApplicationContext(),Emergency_Pass.class);
+            Intent intent = new Intent(getApplicationContext(), gefuehle.class);
             startActivity(intent);
         });
 
