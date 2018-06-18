@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,10 +10,12 @@
         android:id="@+id/button18"
         android:layout_width="240dp"
         android:layout_height="151dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="64dp"
         android:backgroundTint="@color/colorAccent"
+        android:onClick="onClickListener"
         android:text="Ihre notfallkontakte werden kontaktiert!"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="47dp"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

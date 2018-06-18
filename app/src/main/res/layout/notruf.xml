@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,10 +10,12 @@
         android:id="@+id/button19"
         android:layout_width="217dp"
         android:layout_height="146dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="76dp"
         android:backgroundTint="@android:color/background_light"
+        android:onClick="onClickListener"
         android:text="Der notruf wurde betätigt. der notarzt ist in wenigen minuten bei ihnen. bitte bewahren sie ruhe!"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="66dp"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

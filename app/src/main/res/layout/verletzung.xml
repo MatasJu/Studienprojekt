@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,39 +8,49 @@
 
     <Button
         android:id="@+id/button11"
-        android:layout_width="226dp"
+        android:layout_width="168dp"
         android:layout_height="162dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="72dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Wie stark ist Ihre Verletzung?"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="58dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/greenBtn2"
         android:layout_width="92dp"
         android:layout_height="78dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="140dp"
         android:backgroundTint="@android:color/holo_green_light"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="364dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button11"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/yellowBtn2"
         android:layout_width="97dp"
         android:layout_height="79dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="140dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="363dp"
+        app:layout_constraintEnd_toStartOf="@+id/redBtn2"
+        app:layout_constraintStart_toEndOf="@+id/greenBtn2"
+        app:layout_constraintTop_toBottomOf="@+id/button11"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/redBtn2"
         android:layout_width="94dp"
         android:layout_height="80dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="140dp"
         android:backgroundTint="@color/colorAccent"
-        tools:layout_editor_absoluteX="262dp"
-        tools:layout_editor_absoluteY="364dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button11"
         tools:ignore="MissingConstraints" />
 
 

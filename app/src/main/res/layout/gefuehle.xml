@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,41 +10,52 @@
         android:id="@+id/textView8"
         android:layout_width="280dp"
         android:layout_height="106dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="72dp"
         android:text="Wie fühlen Sie sich?"
         android:textColor="@android:color/black"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="82dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/greenBtn"
         android:layout_width="107dp"
         android:layout_height="107dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="116dp"
         android:background="@android:color/holo_green_light"
+        android:onClick="onClickListener"
         android:textColor="@android:color/holo_green_light"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="305dp"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/yellowBtn"
         android:layout_width="101dp"
         android:layout_height="108dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="116dp"
         android:background="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="306dp"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        android:onClick="onClickListener"
+        app:layout_constraintEnd_toStartOf="@+id/redBtn"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toEndOf="@+id/greenBtn"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/redBtn"
         android:layout_width="98dp"
         android:layout_height="107dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="116dp"
         android:background="@color/colorAccent"
-        tools:layout_editor_absoluteX="269dp"
-        tools:layout_editor_absoluteY="305dp"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        android:onClick="onClickListener"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
