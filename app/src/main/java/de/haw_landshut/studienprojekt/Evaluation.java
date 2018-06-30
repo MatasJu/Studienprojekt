@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt.evaluation;
+package de.haw_landshut.studienprojekt;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.haw_landshut.studienprojekt.R;
 
 enum State {
     ZERO, LOW, NORMAL, HIGH, FALSE, TRUE

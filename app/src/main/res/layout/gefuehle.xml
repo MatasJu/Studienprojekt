@@ -23,39 +23,62 @@
         android:id="@+id/greenBtn"
         android:layout_width="107dp"
         android:layout_height="107dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="116dp"
         android:background="@android:color/holo_green_light"
         android:onClick="onClickListener"
         android:textColor="@android:color/holo_green_light"
+        app:layout_constraintBottom_toTopOf="@+id/questionnaireBTN"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/yellowBtn"
         android:layout_width="101dp"
         android:layout_height="108dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="116dp"
         android:background="@color/colorPrimaryDark"
         android:onClick="onClickListener"
+        app:layout_constraintBottom_toTopOf="@+id/questionnaireBTN"
         app:layout_constraintEnd_toStartOf="@+id/redBtn"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toEndOf="@+id/greenBtn"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/redBtn"
         android:layout_width="98dp"
         android:layout_height="107dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="116dp"
         android:background="@color/colorAccent"
         android:onClick="onClickListener"
+        app:layout_constraintBottom_toTopOf="@+id/evaliuationBTN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/questionnaireBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:onClick="onClickListener"
+        android:text="@string/questionnaireBTNSTR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/evaliuationBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="onClickListener"
+        android:text="@string/evaliuationBTNSTR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

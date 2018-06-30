@@ -21,7 +21,8 @@
     <string name="my_profile_title">Meine Daten</string>
     <string name="email">Email</string>
     <string name="language">language</string>
-
+    <string name="questionnaireBTNSTR">Fragebogen</string>
+    <string name="evaliuationBTNSTR">Evaliuation</string>
 
     <!--Standort values -->
     <string name="standortTxt">Dein Standort ist uns wichtig.</string>

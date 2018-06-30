@@ -16,14 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".evaluation.Evaluation" />
+        <activity android:name=".Evaluation" />
 
         <activity
             android:name=".settings.Profile_Settings"
             android:label="Meine Daten"
             android:parentActivityName=".MainActivity" />
 
-        <activity android:name=".questionnaire.QuestionsActivity" />
+        <activity android:name=".QuestionsActivity" />
         <activity android:name=".gefuehle" />
         <activity android:name=".gruen" />
         <activity android:name=".verletzung" />

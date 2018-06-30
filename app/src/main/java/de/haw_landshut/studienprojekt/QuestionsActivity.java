@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt.questionnaire;
+package de.haw_landshut.studienprojekt;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.speech.tts.TextToSpeech;
 
 import android.speech.tts.UtteranceProgressListener;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
@@ -24,8 +23,6 @@ import java.util.Locale;
 import java.util.Random;
 
 
-import de.haw_landshut.studienprojekt.evaluation.Evaluation;
-import de.haw_landshut.studienprojekt.R;
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
 import de.haw_landshut.studienprojekt.settings.LocaleHelper;
 
@@ -37,7 +34,6 @@ enum Questions {
     WHAT_MONTH(QuestionsActivity.getContext().getString(R.string.what_month_question), QuestionsActivity.CODE_WHAT_MONTH),
     WHAT_DAY(QuestionsActivity.getContext().getString(R.string.what_day_question), QuestionsActivity.CODE_WHAT_DAY),
     REPEAT_WORDS(QuestionsActivity.getContext().getString(R.string.repeat_words_please), QuestionsActivity.CODE_REPEAT_WORDS);
-
 
     public final int qID;
     public final String qString;

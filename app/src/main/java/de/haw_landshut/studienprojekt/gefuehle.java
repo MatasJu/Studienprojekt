@@ -32,7 +32,13 @@ public class gefuehle extends AndroidBaseActivity {
                 intent = new Intent(getApplicationContext(), kontakte_rot.class);
                 startActivity(intent);
                 break;
+            case R.id.questionnaireBTN:
+                intent = new Intent(getApplicationContext(),QuestionsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.evaliuationBTN:
+                intent = new Intent(getApplicationContext(),Evaluation.class);
+                startActivity(intent);
         }
     }
-
 }
