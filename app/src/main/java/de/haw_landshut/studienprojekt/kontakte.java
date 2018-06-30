@@ -15,8 +15,19 @@ public class kontakte extends AndroidBaseActivity {
     }
 
     public void onClickListener(View v){
-        Intent intent = new Intent(getApplicationContext(),kontakte_rot.class);
-        startActivity(intent);
 
+        Intent intent;
+        switch (v.getId()) {
+
+            case R.id.jaBtn:
+                intent = new Intent(getApplicationContext(),kontakte_rot.class);
+                startActivity(intent);
+                break;
+            case R.id.neinBtn:
+                intent = new Intent(getApplicationContext(), gruen.class);
+                startActivity(intent);
+                break;
+
+        }
     }
 }

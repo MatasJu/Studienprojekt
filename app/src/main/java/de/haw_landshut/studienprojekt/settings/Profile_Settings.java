@@ -95,29 +95,29 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         //-----First Name-----
         firstNameTV = findViewById(R.id.firstName);
         //Load the Fields from SharedPreferences
-        firstNameTV.append(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(), ""));
+        firstNameTV.setText(sharedPrefs.getString(SPkeys.FIRST_NAME.toString(), ""));
         //Set onFocusChange Listener to save data after leaving a field.
 
 
 
         //-----Last Name-----
         lastNameTV = findViewById(R.id.lastName);
-        lastNameTV.append(sharedPrefs.getString(SPkeys.LAST_NAME.toString(), ""));
+        lastNameTV.setText(sharedPrefs.getString(SPkeys.LAST_NAME.toString(), ""));
 
 
         //-----Height-----
         heightTV = findViewById(R.id.height);
-        heightTV.append(sharedPrefs.getString(SPkeys.HEIGHT.toString(), ""));
+        heightTV.setText(sharedPrefs.getString(SPkeys.HEIGHT.toString(), ""));
 
 
         //-----Weight-----
         weightTV = findViewById(R.id.weightEV);
-        weightTV.append(sharedPrefs.getString(SPkeys.WEIGHT.toString(), ""));
+        weightTV.setText(sharedPrefs.getString(SPkeys.WEIGHT.toString(), ""));
 
 
         //-----Email-----
         emailTV = findViewById(R.id.email);
-        emailTV.append(sharedPrefs.getString(SPkeys.EMAIL.toString(), ""));
+        emailTV.setText(sharedPrefs.getString(SPkeys.EMAIL.toString(), ""));
 
 
 

@@ -13,7 +13,6 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="76dp"
         android:backgroundTint="@android:color/background_light"
-        android:onClick="onClickListener"
         android:text="Der notruf wurde betätigt. der notarzt ist in wenigen minuten bei ihnen. bitte bewahren sie ruhe!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
