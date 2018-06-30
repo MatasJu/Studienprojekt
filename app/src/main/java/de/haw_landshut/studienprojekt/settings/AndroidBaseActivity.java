@@ -1,6 +1,7 @@
 package de.haw_landshut.studienprojekt.settings;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -22,6 +23,7 @@ public abstract class AndroidBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Set screen for all activities to prevent from rotating and causing more bugs atm.
         initialLocale = LocaleHelper.getPersistedLocale(this);
     }
 

@@ -28,6 +28,8 @@ import de.haw_landshut.studienprojekt.settings.LocaleHelper;
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 
+/**Custom Enumerator for getting Question strings and their codes to use with TTS and STT.
+ */
 enum Questions {
     REMEMBER_WORDS(QuestionsActivity.getContext().getString(R.string.remember_words), QuestionsActivity.CODE_REMEMBER_WORDS),
     WHAT_YEAR(QuestionsActivity.getContext().getString(R.string.what_year_question), QuestionsActivity.CODE_WHAT_YEAR),
@@ -64,7 +66,7 @@ enum Questions {
  * <p>
  * TODO: Separate TTS and STT into their own classes could be a good idea?
  * TODO: need to stop everything when app goes toStop() or otherwise "minimised", and than continue it well forward... right now it's speaking in the background.
- * TODO: Change TTS locale acording to app or phone.
+ * TODO: Change TTS locale according to app or phone.
  */
 public class QuestionsActivity extends AndroidBaseActivity {
 
@@ -162,10 +164,6 @@ public class QuestionsActivity extends AndroidBaseActivity {
     private Questions currentQuestion;
 
     private String[] randomWordsList;
-
-
-
-
 
     /*==============END QUESTIONNAIRE VARIABLES============*/
 

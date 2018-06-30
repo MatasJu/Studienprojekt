@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
+
 enum State {
     ZERO, LOW, NORMAL, HIGH, FALSE, TRUE
 }
@@ -27,7 +29,7 @@ enum Tags {
 }
 
 
-public class Evaluation extends AppCompatActivity {
+public class Evaluation extends AndroidBaseActivity {
 
 
     static public List<State> States = new ArrayList<>();
