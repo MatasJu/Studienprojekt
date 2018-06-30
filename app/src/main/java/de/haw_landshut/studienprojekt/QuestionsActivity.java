@@ -597,6 +597,16 @@ public class QuestionsActivity extends AndroidBaseActivity {
         return r;
     }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+        if(TTSEngine != null){
+            TTSEngine.shutdown();
+        }
+    }
+
 
     /**
      * TODO:A handler for when a TTS engine fails to initialise.
