@@ -25,8 +25,7 @@ public class MotionSensor {
     //shutoff
     private boolean active = true;
 
-    /***
-     *
+    /**
      * @param cont DeviceContext
      */
 

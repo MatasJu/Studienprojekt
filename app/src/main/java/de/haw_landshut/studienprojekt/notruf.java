@@ -11,7 +11,4 @@ public class notruf extends AndroidBaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notruf);
     }
-
-
-
 }

@@ -90,21 +90,18 @@
         app:layout_constraintVertical_bias="0.963"
         tools:ignore="MissingConstraints" />
 
+
     <Button
         android:id="@+id/motionBtn"
-        android:layout_width="94dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="96dp"
         android:backgroundTint="@color/redColor"
+        android:onClick="onClickListener"
         android:text="Motion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/weiterBtn"
-        app:layout_constraintHorizontal_bias="0.631"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button11"
-        app:layout_constraintVertical_bias="0.965" />
+        app:layout_constraintTop_toBottomOf="@+id/greenBtn2" />
 
 
 </android.support.constraint.ConstraintLayout>
