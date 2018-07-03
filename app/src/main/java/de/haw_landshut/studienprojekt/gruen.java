@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
+import de.haw_landshut.studienprojekt.settings.Profile_Settings;
 
 public class gruen extends AndroidBaseActivity{
 
@@ -19,5 +20,11 @@ public class gruen extends AndroidBaseActivity{
         Intent intent = new Intent(getApplicationContext(),gefuehle.class);
         startActivity(intent);
 
+    }
+
+    public void menügrünButtonEventHandler(View view) {
+        Intent intent = new Intent(this,Profile_Settings.class);
+        startActivity(intent);
+        setContentView(R.layout.activity_profile_settings);
     }
 }

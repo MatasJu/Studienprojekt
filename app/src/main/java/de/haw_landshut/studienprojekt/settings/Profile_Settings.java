@@ -65,7 +65,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     static SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -338,3 +337,4 @@ enum SPkeys {
     }
 
 }
+

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
+import de.haw_landshut.studienprojekt.settings.Profile_Settings;
 
 public class kontakte extends AndroidBaseActivity {
     @Override
@@ -29,5 +30,11 @@ public class kontakte extends AndroidBaseActivity {
                 break;
 
         }
+    }
+
+    public void menükontakteButtonEventHandler(View view) {
+        Intent intent = new Intent(this,Profile_Settings.class);
+        startActivity(intent);
+        setContentView(R.layout.activity_profile_settings);
     }
 }

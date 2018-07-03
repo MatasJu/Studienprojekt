@@ -2,9 +2,11 @@ package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
+import de.haw_landshut.studienprojekt.settings.Profile_Settings;
 
 public class gefuehle extends AndroidBaseActivity {
 
@@ -41,4 +43,11 @@ public class gefuehle extends AndroidBaseActivity {
                 startActivity(intent);
         }
     }
+
+    public void menüButtonEventHandler(View view) {
+        Intent intent = new Intent(this,Profile_Settings.class);
+        startActivity(intent);
+        setContentView(R.layout.activity_profile_settings);
+    }
+
 }

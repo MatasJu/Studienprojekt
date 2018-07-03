@@ -10,6 +10,7 @@ import android.speech.tts.UtteranceProgressListener;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import java.util.Random;
 
 import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
 import de.haw_landshut.studienprojekt.settings.LocaleHelper;
+import de.haw_landshut.studienprojekt.settings.Profile_Settings;
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 
@@ -612,6 +614,12 @@ public class QuestionsActivity extends AndroidBaseActivity {
      * TODO:A handler for when a TTS engine fails to initialise.
      */
     private void handleTTSinitError() {
+    }
+
+    public void menüActivityQButtonEventHandler(View view) {
+        Intent intent = new Intent(this,Profile_Settings.class);
+        startActivity(intent);
+        setContentView(R.layout.activity_profile_settings);
     }
 
 }

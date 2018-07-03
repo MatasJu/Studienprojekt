@@ -10,10 +10,12 @@
         android:id="@+id/button11"
         android:layout_width="168dp"
         android:layout_height="162dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Wie stark ist Ihre Verletzung?"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -25,37 +27,84 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="140dp"
         android:backgroundTint="@android:color/holo_green_light"
+        android:onClick="onClickListener"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button11"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/yellowBtn2"
         android:layout_width="97dp"
         android:layout_height="79dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="140dp"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:onClick="onClickListener"
         app:layout_constraintEnd_toStartOf="@+id/redBtn2"
+        app:layout_constraintHorizontal_bias="0.705"
         app:layout_constraintStart_toEndOf="@+id/greenBtn2"
         app:layout_constraintTop_toBottomOf="@+id/button11"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/redBtn2"
         android:layout_width="94dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginTop="140dp"
         android:backgroundTint="@color/colorAccent"
+        android:onClick="onClickListener"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button11"
-        tools:ignore="MissingConstraints"
-        android:onClick="onClickListener"/>
+        tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/weiterBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="menüverletzungButtonEventHandler"
+        android:text="menü"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/walkingBtn"
+        android:layout_width="94dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Walking"
+        android:backgroundTint="@color/greenColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toEndOf="@+id/weiterBtn"
+        app:layout_constraintTop_toBottomOf="@+id/button11"
+        app:layout_constraintVertical_bias="0.963"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/motionBtn"
+        android:layout_width="94dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/redColor"
+        android:text="Motion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/weiterBtn"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button11"
+        app:layout_constraintVertical_bias="0.965" />
 
 
 </android.support.constraint.ConstraintLayout>
