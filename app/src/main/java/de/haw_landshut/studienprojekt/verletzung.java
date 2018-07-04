@@ -3,6 +3,7 @@ package de.haw_landshut.studienprojekt;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CpuUsageInfo;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.graphics.Color;
@@ -14,10 +15,15 @@ import de.haw_landshut.studienprojekt.settings.Profile_Settings;
 
 public class verletzung extends AndroidBaseActivity {
 
+    private static final String TAG = "verletzung";
 
     MotionSensor ms;
+    MotionSensor ws;
 
     Button motionBtn;
+    Button walkingBtn;
+
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +34,15 @@ public class verletzung extends AndroidBaseActivity {
 
         ms = MotionSensor.getMotionSensor();
         ms.isMovement();
-        ms.isWalking();
+     //   ms.isWalking();
+
+
+        ws = MotionSensor.getMotionSensor();
+        ws.isWalking();
+
 
         motionBtn = findViewById(R.id.motionBtn);
+        walkingBtn = findViewById(R.id.walkingBtn);
     }
 
     public void onClickListener(View v){
@@ -49,9 +61,12 @@ public class verletzung extends AndroidBaseActivity {
                 intent = new Intent(getApplicationContext(), kontakte_rot.class);
                 startActivity(intent);
                 break;
-            case R.id.motionBtn:
+   /*         case R.id.motionBtn:
                 calcMotion();
                 break;
+            case R.id.walkingBtn:
+                calcWalking();
+                break;*/
         }
     }
 
@@ -61,30 +76,60 @@ public class verletzung extends AndroidBaseActivity {
         setContentView(R.layout.activity_profile_settings);
     }
 
-    private void calcMotion() {
-
+    // Switching MotionButton Color - Green / Red
+    public void calcMotion() {
         Log.d("test", "calcMotion: ");
 
         if (ms.isMovement()){
             motionBtn.setBackgroundColor(Color.GREEN);
         }else {
-            motionBtn.setBackgroundColor(Color.GREEN);
+            motionBtn.setBackgroundColor(Color.RED);
         }
-
-        // motion = findViewById(R.id.motionBtn);
-        // motion.backgroundTint(this.motion.redColor);
-
 
     }
 
-//    private void calcWalking() {
-//
-//        if (isWalking()==true){
-//            walkingBtn.setBackgroundTint(R.color.greenColor);
-//        }else {
-//            walkingBtn.setBackgroundTint(R.color.redColor);
-//        }
-//    }
+    // Switching WalkingButton Color - Green / Red
+    public void calcWalking() {
+        Log.d("test", "calcWalking: ");
+
+        if (ws.isWalking()){
+            walkingBtn.setBackgroundColor(Color.GREEN);
+        }   else {
+            walkingBtn.setBackgroundColor(Color.RED);
+        }
+
+    }
+
+    // Starts thread for switching color
+    public void startThread(View view)  {
+
+        // 100000 seconds = ~ 27 hours runtime
+         MotionWalkingThread thread = new MotionWalkingThread(100000);
+         thread.start();
+    }
+
+    // Checks every second the walking and motion value
+    class MotionWalkingThread extends Thread {
+        int seconds;
+
+        MotionWalkingThread(int seconds) {
+            this.seconds = seconds;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < seconds; i++) {
+                calcWalking();
+                calcMotion();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
 }
 

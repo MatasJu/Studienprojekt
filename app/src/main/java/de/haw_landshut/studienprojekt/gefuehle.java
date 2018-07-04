@@ -29,6 +29,7 @@ public class gefuehle extends AndroidBaseActivity {
             case R.id.yellowBtn:
                 intent = new Intent(getApplicationContext(), verletzung.class);
                 startActivity(intent);
+                
                 break;
             case R.id.redBtn:
                 intent = new Intent(getApplicationContext(), kontakte_rot.class);

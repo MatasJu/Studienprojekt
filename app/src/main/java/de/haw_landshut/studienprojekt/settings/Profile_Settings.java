@@ -89,6 +89,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
             saveData();
             Intent intent = new Intent(getApplicationContext(), gefuehle.class);
             startActivity(intent);
+
         });
 
         //-----First Name-----
