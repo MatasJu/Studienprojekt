@@ -10,10 +10,15 @@
         android:id="@+id/button15"
         android:layout_width="222dp"
         android:layout_height="166dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Sollen wir Ihre Notfallkontakte bzw. den Notruf kontaktieren?"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="53dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
