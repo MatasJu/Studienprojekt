@@ -91,7 +91,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="menüButtonEventHandler"
-        android:text="beginn"
+        android:text="profil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/evaliuationBTN"
         app:layout_constraintStart_toEndOf="@+id/questionnaireBTN" />
