@@ -114,6 +114,8 @@ public class MotionSensor {
                         stepTimes = replacement;
                         if (j > 3)
                             walking = true;
+                        else
+                            walking=false;
 
 
                         current = j;
