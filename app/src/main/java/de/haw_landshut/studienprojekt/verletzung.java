@@ -31,18 +31,16 @@ public class verletzung extends AndroidBaseActivity {
         setContentView(R.layout.verletzung);
         MotionSensor.instantiate(this);
 
-
+        // getting boolean for motion and walking
         ms = MotionSensor.getMotionSensor();
-        ms.isMovement();
-     //   ms.isWalking();
-
-
         ws = MotionSensor.getMotionSensor();
-        ws.isWalking();
-
 
         motionBtn = findViewById(R.id.motionBtn);
         walkingBtn = findViewById(R.id.walkingBtn);
+
+        // Starts thread for switching color
+        MotionWalkingThread thread = new MotionWalkingThread(100000);
+        thread.start();
     }
 
     public void onClickListener(View v){
@@ -61,12 +59,6 @@ public class verletzung extends AndroidBaseActivity {
                 intent = new Intent(getApplicationContext(), kontakte_rot.class);
                 startActivity(intent);
                 break;
-   /*         case R.id.motionBtn:
-                calcMotion();
-                break;
-            case R.id.walkingBtn:
-                calcWalking();
-                break;*/
         }
     }
 
@@ -100,13 +92,13 @@ public class verletzung extends AndroidBaseActivity {
 
     }
 
-    // Starts thread for switching color
-    public void startThread(View view)  {
+
+   /* public void startThread(View view)  {
 
         // 100000 seconds = ~ 27 hours runtime
          MotionWalkingThread thread = new MotionWalkingThread(100000);
          thread.start();
-    }
+    }*/
 
     // Checks every second the walking and motion value
     class MotionWalkingThread extends Thread {

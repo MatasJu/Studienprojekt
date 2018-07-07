@@ -60,6 +60,9 @@ public class Evaluation extends AndroidBaseActivity {
     private static final int RRHIGH = 120;
     private static final int RRNORM = 51;
 
+    MotionSensor ms;
+    MotionSensor ws;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,8 @@ public class Evaluation extends AndroidBaseActivity {
         int correct = getIntent().getIntExtra("correct", 0);
 
         Log.d("intent URI", getIntent().toUri(0));
+
+
 
         //initialise the private view vars.
         HRseekbar = findViewById(R.id.HRseekBar);
@@ -128,6 +133,13 @@ public class Evaluation extends AndroidBaseActivity {
         HRseekbar.setOnSeekBarChangeListener(seekBarListener);
         RRseekbar.setOnSeekBarChangeListener(seekBarListener);
 
+
+        // getting boolean for motion and walking
+        ms = MotionSensor.getMotionSensor();
+        ws = MotionSensor.getMotionSensor();
+        // starting thread
+        CBMotionWalkingThread thread = new CBMotionWalkingThread(100000);
+        thread.start();
     }
 
     /**
@@ -268,6 +280,51 @@ public class Evaluation extends AndroidBaseActivity {
 
     }
 
+
+    public void calcMotion() {
+        Log.d("test", "calcMotion: ");
+
+        if (ms.isMovement()){
+            isMoving.setChecked(true);
+        }else {
+            isMoving.setChecked(false);
+        }
+
+    }
+
+    // Switching WalkingButton Color - Green / Red
+    public void calcWalking() {
+        Log.d("test", "calcWalking: ");
+
+        if (ws.isWalking()){
+            isWalking.setChecked(true);
+        }   else {
+            isWalking.setChecked(false);
+        }
+
+    }
+
+    class CBMotionWalkingThread extends Thread {
+        int seconds;
+
+        CBMotionWalkingThread(int seconds) {
+            this.seconds = seconds;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < seconds; i++) {
+                calcWalking();
+                calcMotion();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
     //=========Getters/Setters=========
 

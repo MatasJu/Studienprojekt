@@ -42,6 +42,7 @@ public class MotionSensor {
                 public void onSensorChanged(SensorEvent event) {
                     if (current < bufferLimit) {
                         stepTimes[current] = event.timestamp;
+                        current++;
                     }
                 }
             };
