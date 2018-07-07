@@ -1,10 +1,12 @@
 package de.haw_landshut.studienprojekt;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -134,6 +136,8 @@ public class Evaluation extends AndroidBaseActivity {
         RRseekbar.setOnSeekBarChangeListener(seekBarListener);
 
 
+        isWalking.setEnabled(false);
+        isMoving.setEnabled(false);
         // getting boolean for motion and walking
         ms = MotionSensor.getMotionSensor();
         ws = MotionSensor.getMotionSensor();
@@ -304,6 +308,20 @@ public class Evaluation extends AndroidBaseActivity {
 
     }
 
+    // try to avoid sending false data by accident
+ /*   public void doNothing(View view) {
+        if (ws.isWalking()){
+            isWalking.setChecked(true);
+        }   else {
+            isWalking.setChecked(false);
+        }
+        if (ms.isMovement()){
+            isMoving.setChecked(true);
+        }else {
+            isMoving.setChecked(false);
+        }
+    }*/
+
     class CBMotionWalkingThread extends Thread {
         int seconds;
 
@@ -324,6 +342,11 @@ public class Evaluation extends AndroidBaseActivity {
             }
         }
 
+    }
+
+    public void menüEvaluationButtonEventHandler(View view) {
+        Intent intent = new Intent(this,gefuehle.class);
+        startActivity(intent);
     }
 
     //=========Getters/Setters=========

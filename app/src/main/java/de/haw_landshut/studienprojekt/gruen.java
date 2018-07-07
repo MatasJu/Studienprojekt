@@ -23,8 +23,7 @@ public class gruen extends AndroidBaseActivity{
     }
 
     public void menügrünButtonEventHandler(View view) {
-        Intent intent = new Intent(this,Profile_Settings.class);
+        Intent intent = new Intent(this,gefuehle.class);
         startActivity(intent);
-        setContentView(R.layout.activity_profile_settings);
     }
 }

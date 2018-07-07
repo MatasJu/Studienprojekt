@@ -48,7 +48,6 @@ public class gefuehle extends AndroidBaseActivity {
     public void menüButtonEventHandler(View view) {
         Intent intent = new Intent(this,Profile_Settings.class);
         startActivity(intent);
-        setContentView(R.layout.activity_profile_settings);
     }
 
 }

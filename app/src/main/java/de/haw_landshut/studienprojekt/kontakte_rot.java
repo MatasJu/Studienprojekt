@@ -19,4 +19,10 @@ public class kontakte_rot extends AndroidBaseActivity {
         startActivity(intent);
 
     }
+
+    public void menüKontakte_rot_ButtonEventHandler(View view) {
+        Intent intent = new Intent(this,gefuehle.class);
+        startActivity(intent);
+    }
+
 }

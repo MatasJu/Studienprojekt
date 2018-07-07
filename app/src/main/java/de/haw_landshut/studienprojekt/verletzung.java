@@ -63,9 +63,8 @@ public class verletzung extends AndroidBaseActivity {
     }
 
     public void menüverletzungButtonEventHandler(View view) {
-        Intent intent = new Intent(this,Profile_Settings.class);
+        Intent intent = new Intent(this,gefuehle.class);
         startActivity(intent);
-        setContentView(R.layout.activity_profile_settings);
     }
 
     // Switching MotionButton Color - Green / Red
