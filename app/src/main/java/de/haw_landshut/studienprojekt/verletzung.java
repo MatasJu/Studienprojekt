@@ -23,7 +23,6 @@ public class verletzung extends AndroidBaseActivity {
     Button motionBtn;
     Button walkingBtn;
 
-    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +90,6 @@ public class verletzung extends AndroidBaseActivity {
 
     }
 
-
-   /* public void startThread(View view)  {
-
-        // 100000 seconds = ~ 27 hours runtime
-         MotionWalkingThread thread = new MotionWalkingThread(100000);
-         thread.start();
-    }*/
 
     // Checks every second the walking and motion value
     class MotionWalkingThread extends Thread {
