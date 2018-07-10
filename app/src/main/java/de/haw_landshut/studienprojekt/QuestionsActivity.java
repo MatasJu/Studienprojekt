@@ -144,7 +144,6 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
     private static final int REPEAT_OR_FORWARD = 652;
 
-    String STTresultString;
 
 
     /*===============END STT VARIABLES=================*/
@@ -352,7 +351,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
                 askToRepeatOrGoForward();
                 break;
             case "AskedWhatToDo":
-                displaySpeechRecognizer(getString(R.string.next_question) + getString(R.string.repeat_question), REPEAT_OR_FORWARD);
+                displaySpeechRecognizer(getString(R.string.next_question) + " " +getString(R.string.repeat_question), REPEAT_OR_FORWARD);
                 break;
             default:
                 questionsFlow();

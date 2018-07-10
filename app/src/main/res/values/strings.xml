@@ -122,11 +122,6 @@
     <string name="repeat_question">Wenn Sie diese Frage wiederholen wolen, sagen sie bitte "noch einmal".</string>
     <string name="answer_repeat_question">noch einam</string>
     <string name="next_question">Wenn Sie zur nächsten Aufgabe weiter gehen wollen, sagen Sie bitte "weiter"</string>
-    <!--&gt; for testing made them shorter.<-->
-
-
-
-
 
     <string name="answer_next_question">weiter</string>
     <string name="what_year_question">Welches Jahr haben wir denn heute?</string>
