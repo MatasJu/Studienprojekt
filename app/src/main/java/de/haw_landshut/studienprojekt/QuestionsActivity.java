@@ -383,6 +383,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, LocaleHelper.getPersistedLocale(this));
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
+        intent.putExtra(RecognizerIntent.ACTION_VOICE_SEARCH_HANDS_FREE,true);
 
         //Offline recognition will work only above api lvl 23, also has to be downloaded outside the app in the language settings.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

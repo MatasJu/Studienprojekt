@@ -7,7 +7,9 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -85,8 +87,10 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
         //weiterBtn
         weiterBtn = findViewById(R.id.weiterBtn);
-        weiterBtn.setOnClickListener(v -> {
-            saveData();
+        weiterBtn.setOnClickListener((View v) -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                saveData();
+            }
             Intent intent = new Intent(getApplicationContext(), gefuehle.class);
             startActivity(intent);
 
@@ -210,6 +214,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
      * Saves data to SharedPreferences.
      *
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void saveData(){
 
         //save
@@ -230,7 +235,9 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
             StringBuilder temp = new StringBuilder();
             temp.append("Saved Text:\n");
             sharedPrefs.getAll().forEach((key, value) ->
-                    temp.append(key).append(" = ").append(value).append('\n'));
+            {
+                temp.append(key).append(" = ").append(value).append('\n');
+            });
             Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
             toast.show();
         }
@@ -244,7 +251,9 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        saveData();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            saveData();
+        }
     }
 
     /** Save on toolbar back button.
@@ -254,7 +263,9 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                saveData();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    saveData();
+                }
                 return super.onOptionsItemSelected(item);
             default:
                 return super.onOptionsItemSelected(item);
