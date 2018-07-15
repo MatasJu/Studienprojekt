@@ -57,10 +57,10 @@ public class Evaluation extends AndroidBaseActivity {
     private State W = State.ZERO;
     private Tags pTag = Tags.BLACK;
 
-    private static final int HRHIGH = 20;
-    private static final int HRNORM = 12;
-    private static final int RRHIGH = 120;
-    private static final int RRNORM = 51;
+    private static final int RRHIGH = 20;
+    private static final int RRNORM = 12;
+    private static final int HRHIGH = 120;
+    private static final int HRNORM = 51;
 
     MotionSensor ms;
     MotionSensor ws;
