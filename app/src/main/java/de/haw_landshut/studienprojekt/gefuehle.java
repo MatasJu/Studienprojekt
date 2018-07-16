@@ -2,14 +2,9 @@ package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
-import de.haw_landshut.studienprojekt.settings.Profile_Settings;
-
 public class gefuehle extends AndroidBaseActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

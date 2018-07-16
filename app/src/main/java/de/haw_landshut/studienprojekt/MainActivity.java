@@ -1,17 +1,13 @@
 package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
-
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 
-import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
-import de.haw_landshut.studienprojekt.settings.Profile_Settings;
+
 
 public class MainActivity extends AndroidBaseActivity {
-
 
 
     //This constant uses the name of the class itself as the tag.
@@ -20,9 +16,13 @@ public class MainActivity extends AndroidBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        MotionSensor.instantiate(this);
         setContentView(R.layout.activity_main);
+
+        //Start MotionSensor
+        MotionSensor.instantiate(this);
+
+
+
     }
 
 

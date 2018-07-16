@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt.settings;
+package de.haw_landshut.studienprojekt;
 
 
 import android.app.DatePickerDialog;
@@ -23,11 +23,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
-
-import de.haw_landshut.studienprojekt.BuildConfig;
-import de.haw_landshut.studienprojekt.R;
-import de.haw_landshut.studienprojekt.gefuehle;
-
 
 /**
  * Saves data to sharedPreferences
@@ -72,10 +67,8 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
-
         //====Get saved Shared Preferences ====
         sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(), MODE_PRIVATE);
-
     }
 
 
@@ -338,7 +331,6 @@ enum SPkeys {
     LANGUAGE("language");
 
     private final String string;
-
     SPkeys(String name) {
         this.string = name;
     }
@@ -347,6 +339,5 @@ enum SPkeys {
     public String toString() {
         return this.string;
     }
-
 }
 

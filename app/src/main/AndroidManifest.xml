@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.haw_landshut.studienprojekt">
 
-    <application
+    <application android:name="de.haw_landshut.studienprojekt.BaseApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +19,7 @@
         <activity android:name=".Evaluation" />
 
         <activity
-            android:name=".settings.Profile_Settings"
+            android:name=".Profile_Settings"
             android:label="Meine Daten"
             android:parentActivityName=".MainActivity" />
 
@@ -30,6 +30,7 @@
         <activity android:name=".kontakte_rot" />
         <activity android:name=".kontakte" />
         <activity android:name=".notruf" />
+
 
 
     </application>

@@ -1,4 +1,4 @@
-package de.haw_landshut.studienprojekt.settings;
+package de.haw_landshut.studienprojekt;
 
 import android.annotation.TargetApi;
 import android.content.Context;

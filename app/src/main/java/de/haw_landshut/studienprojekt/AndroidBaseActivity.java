@@ -1,13 +1,9 @@
-package de.haw_landshut.studienprojekt.settings;
+package de.haw_landshut.studienprojekt;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-
-import static android.view.View.AUTOFILL_TYPE_NONE;
 
 
 /**A base class for Android depended subclasses. Currently it implements a custom LocaleHelper to deal with changing
@@ -16,7 +12,8 @@ import static android.view.View.AUTOFILL_TYPE_NONE;
  * Extend from this class to support multiple Languages for the activity.
  *
  */
-public abstract class AndroidBaseActivity extends AppCompatActivity {
+
+public abstract class AndroidBaseActivity extends Activity {
 
     private String initialLocale;
 
@@ -25,12 +22,14 @@ public abstract class AndroidBaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Set screen for all activities to prevent from rotating and causing more bugs atm.
         initialLocale = LocaleHelper.getPersistedLocale(this);
+
     }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleHelper.onAttach(base));
     }
+
 
     @Override
     protected void onResume() {

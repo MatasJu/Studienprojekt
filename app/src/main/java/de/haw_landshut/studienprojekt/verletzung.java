@@ -2,16 +2,10 @@ package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CpuUsageInfo;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.graphics.Color;
 import android.widget.Button;
-import android.widget.TextView;
-import de.haw_landshut.studienprojekt.MotionSensor;
-import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
-import de.haw_landshut.studienprojekt.settings.Profile_Settings;
 
 public class verletzung extends AndroidBaseActivity {
 
@@ -28,11 +22,11 @@ public class verletzung extends AndroidBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verletzung);
-//        MotionSensor.instantiate(this);
+
 
 //        // getting boolean for motion and walking
-//        ms = MotionSensor.getMotionSensor();
-//        ws = MotionSensor.getMotionSensor();
+        ms = MotionSensor.getMotionSensor();
+        ws = MotionSensor.getMotionSensor();
 
         motionBtn = findViewById(R.id.motionBtn);
         walkingBtn = findViewById(R.id.walkingBtn);

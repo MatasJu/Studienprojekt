@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "de.haw_landshut.studienprojekt"
-        minSdkVersion 19
+        minSdkVersion 25
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -44,6 +44,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-
+    //ACRA
+    def acraVersion = '5.1.3'
+    implementation "ch.acra:acra-mail:$acraVersion"
 
 }

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
-
 public class kontakte_rot extends AndroidBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

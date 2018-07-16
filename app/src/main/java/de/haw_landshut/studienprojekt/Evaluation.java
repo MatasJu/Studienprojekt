@@ -4,17 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
 
 enum State {
     ZERO, LOW, NORMAL, HIGH, FALSE, TRUE
@@ -32,9 +28,6 @@ enum Tags {
 
 
 public class Evaluation extends AndroidBaseActivity {
-
-
-    static public List<State> States = new ArrayList<>();
 
 
     //This constant uses the name of the class itself as the tag.
@@ -344,7 +337,7 @@ public class Evaluation extends AndroidBaseActivity {
 
     }
 
-    public void menüEvaluationButtonEventHandler(View view) {
+    public void menuEvaluationButtonEventHandler(View view) {
         Intent intent = new Intent(this,gefuehle.class);
         startActivity(intent);
     }
@@ -366,6 +359,8 @@ public class Evaluation extends AndroidBaseActivity {
     public int getRRseekbarProgress() {
         return RRseekbar.getProgress();
     }
+
+
     //=========END Getters/Setters=========
 
 }

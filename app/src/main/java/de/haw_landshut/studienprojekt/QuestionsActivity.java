@@ -24,10 +24,6 @@ import java.util.Locale;
 import java.util.Random;
 
 
-import de.haw_landshut.studienprojekt.settings.AndroidBaseActivity;
-import de.haw_landshut.studienprojekt.settings.LocaleHelper;
-import de.haw_landshut.studienprojekt.settings.Profile_Settings;
-
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 
 /**Custom Enumerator for getting Question strings and their codes to use with TTS and STT.
@@ -86,7 +82,6 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
 
     /*===============TTS VARIABLES=================*/
-
 
     /**
      * Listener for TTS to know when it has been initialised.
