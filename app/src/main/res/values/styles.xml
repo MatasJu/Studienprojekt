@@ -10,17 +10,17 @@
     <style name="ProfileTitle" parent="android:TextAppearance">
         <item name="android:textAppearance">@android:style/TextAppearance</item>
         <item name="android:textColor">@color/DefaultTextColor</item>
-        <item name="android:textSize">16pt</item>
+        <item name="android:textSize">14pt</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="layout_constraintLeft_toLeftOf">parent</item>
         <item name="layout_constraintRight_toRightOf">parent</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ProfileTextView" parent="android:TextAppearance">
         <item name="android:textColor">@color/DefaultTextColor</item>
-        <item name="android:textSize">11pt</item>
+        <item name="android:textSize">10pt</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">16dp</item>
@@ -29,7 +29,7 @@
 
     <style name="ProfileEditView" parent="android:TextAppearance">
         <item name="android:textColor">@color/DefaultTextColor</item>
-        <item name="android:textSize">11pt</item>
+        <item name="android:textSize">8pt</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">0dp</item>

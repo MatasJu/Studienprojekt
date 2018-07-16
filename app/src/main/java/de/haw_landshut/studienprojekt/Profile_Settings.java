@@ -176,9 +176,11 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         //-----Language-----
 
         languageSpinner = findViewById(R.id.languageSpinner);
-        languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
+        languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_array, android.R.layout.simple_spinner_item);
+        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageAdapter);
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 languageString = parent.getItemAtPosition(position).toString();

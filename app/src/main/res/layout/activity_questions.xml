@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/answer"
         android:layout_width="213dp"
-        android:layout_height="450dp"
+        android:layout_height="412dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="44dp"
         android:isScrollContainer="true"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="menüActivityQButtonEventHandler"
-        android:text="menü"
+        android:text="@string/menue_btn_txt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
