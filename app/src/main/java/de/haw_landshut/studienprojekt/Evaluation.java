@@ -20,6 +20,7 @@ enum Tags {
     RED(Color.RED), YELLOW(Color.YELLOW), BLACK(Color.BLACK), GREEN(Color.GREEN);
 
     final int color;
+    String text;
 
     Tags(int c) {
         color = c;
@@ -180,21 +181,21 @@ public class Evaluation extends AndroidBaseActivity {
         if (currentHR >= HRHIGH) {
             HR = State.HIGH;
             HRtag.setBackgroundColor(Color.RED);
-            HRtag.setText(HR.name());
+            HRtag.setText("HOCH");
 
         }
 
         if ((currentHR >= HRNORM) && currentHR < HRHIGH) {
             HR = State.NORMAL;
             HRtag.setBackgroundColor(Color.GREEN);
-            HRtag.setText(HR.name());
+            HRtag.setText("NORMAL");
 
         }
 
         if (currentHR < HRNORM) {
             HR = State.LOW;
             HRtag.setBackgroundColor(Color.RED);
-            HRtag.setText(HR.name());
+            HRtag.setText("LOW");
 
         }
         if(currentHR==0){

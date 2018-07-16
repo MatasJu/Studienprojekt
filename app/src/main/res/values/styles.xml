@@ -10,7 +10,6 @@
     <style name="ProfileTitle" parent="android:TextAppearance">
         <item name="android:textAppearance">@android:style/TextAppearance</item>
         <item name="android:textColor">@color/DefaultTextColor</item>
-        <item name="android:background">@color/DefaultTextBackgroundColor</item>
         <item name="android:textSize">16pt</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -21,7 +20,6 @@
 
     <style name="ProfileTextView" parent="android:TextAppearance">
         <item name="android:textColor">@color/DefaultTextColor</item>
-        <item name="android:background">@color/DefaultTextBackgroundColor</item>
         <item name="android:textSize">11pt</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -31,7 +29,6 @@
 
     <style name="ProfileEditView" parent="android:TextAppearance">
         <item name="android:textColor">@color/DefaultTextColor</item>
-        <item name="android:background">@color/DefaultTextBackgroundColor</item>
         <item name="android:textSize">11pt</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    >
 
     <Button
         android:id="@+id/button11"
@@ -15,6 +15,7 @@
         android:layout_marginTop="64dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Wie stark ist Ihre Verletzung?"
+        android:textAppearance="@style/ProfileEditView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="onClickListener"
         app:layout_constraintEnd_toStartOf="@+id/redBtn2"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toEndOf="@+id/greenBtn2"
         app:layout_constraintTop_toBottomOf="@+id/button11"
         tools:ignore="MissingConstraints" />
@@ -64,13 +65,14 @@
         android:id="@+id/weiterBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="menüverletzungButtonEventHandler"
-        android:text="menü"
+        android:text="@string/menue_btn_txt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -81,7 +83,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Walking"
+        android:text="Gehfähigkeit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
@@ -99,7 +101,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Motion"
+        android:text="Beweglichkeit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/weiterBtn"
         app:layout_constraintHorizontal_bias="0.545"

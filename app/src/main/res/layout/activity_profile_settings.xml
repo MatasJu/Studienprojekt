@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,82 +20,111 @@
 
         android:text="@string/first_name"
 
+        android:textAppearance="@style/ProfileTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_profile_title" />
 
     <EditText
         android:id="@+id/firstName"
         style="@style/ProfileEditView"
+        android:layout_height="50dp"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="@+id/firstNameTV" />
+        app:layout_constraintTop_toTopOf="@+id/firstNameTV"
+        tools:layout_editor_absoluteX="297dp" />
 
     <!--Last Name-->
     <TextView
         android:id="@+id/lastNameTV"
         style="@style/ProfileTextView"
+        android:layout_marginStart="8dp"
         android:text="@string/last_name"
+        android:textAppearance="@style/ProfileTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstNameTV" />
 
     <EditText
         android:id="@+id/lastName"
         style="@style/ProfileEditView"
+        android:layout_height="42dp"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="@+id/lastNameTV" />
+        app:layout_constraintTop_toTopOf="@+id/lastNameTV"
+        tools:layout_editor_absoluteX="230dp" />
 
     <!--gender-->
 
     <TextView
         android:id="@+id/genderTV"
         style="@style/ProfileTextView"
+        android:layout_marginStart="8dp"
         android:text="@string/gender"
+        android:textAppearance="@style/ProfileTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastNameTV" />
 
     <Spinner
         android:id="@+id/gender_Spinner"
         style="@style/ProfileEditView"
+        android:layout_width="92dp"
+        android:layout_height="38dp"
         android:hint="@string/gender"
-        app:layout_constraintTop_toTopOf="@+id/genderTV" />
+        app:layout_constraintTop_toTopOf="@+id/genderTV"
+        tools:layout_editor_absoluteX="303dp" />
 
     <!--Birthday-->
     <TextView
         android:id="@+id/birthdayTV"
         style="@style/ProfileTextView"
+        android:layout_marginStart="8dp"
         android:text="@string/birthday"
+        android:textAppearance="@style/ProfileTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genderTV" />
 
     <EditText
         android:id="@+id/birthday"
         style="@style/ProfileEditView"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
         android:cursorVisible="false"
         android:hint="@string/birthday"
         android:inputType="date"
         android:longClickable="false"
         android:onClick="showDatePickerDialog"
         android:textIsSelectable="false"
-        app:layout_constraintTop_toTopOf="@+id/birthdayTV" />
+        app:layout_constraintTop_toTopOf="@+id/birthdayTV"
+        tools:layout_editor_absoluteX="280dp" />
 
     <!--Height-->
     <TextView
         android:id="@+id/editText5"
         style="@style/ProfileTextView"
+        android:layout_marginStart="8dp"
         android:text="@string/height"
+        android:textAppearance="@style/ProfileTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthdayTV" />
 
     <EditText
         android:id="@+id/height"
         style="@style/ProfileEditView"
+        android:layout_width="103dp"
+        android:layout_height="40dp"
         android:hint="@string/height"
         android:inputType="number"
-        app:layout_constraintTop_toTopOf="@+id/editText5" />
+        app:layout_constraintTop_toTopOf="@+id/editText5"
+        tools:layout_editor_absoluteX="293dp" />
 
 
     <!--Weight-->
     <TextView
         android:id="@+id/weightTV"
         style="@style/ProfileTextView"
+        android:layout_marginStart="8dp"
         android:text="@string/weight"
+        android:textAppearance="@style/ProfileTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
     <EditText
@@ -108,7 +138,10 @@
     <TextView
         android:id="@+id/editText15"
         style="@style/ProfileTextView"
+        android:layout_marginStart="8dp"
         android:text="@string/email"
+        android:textAppearance="@style/ProfileTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weightTV" />
 
     <EditText
@@ -126,13 +159,18 @@
         android:layout_marginStart="8dp"
         android:text="@string/language"
 
+        android:textAppearance="@style/ProfileTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText15" />
 
     <Spinner
         android:id="@+id/languageSpinner"
         style="@style/ProfileEditView"
-        app:layout_constraintTop_toTopOf="@+id/languageTV" />
+        android:layout_width="96dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="@+id/languageTV"
+        tools:layout_editor_absoluteX="277dp" />
 
 
     <!--not finished TODO:add image? rename buttons?-->
@@ -140,11 +178,11 @@
 
     <Button
         android:id="@+id/weiterBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:text="weiter"
+        android:text="Weiter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

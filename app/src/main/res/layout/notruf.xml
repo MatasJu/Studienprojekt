@@ -8,12 +8,13 @@
 
     <Button
         android:id="@+id/button19"
-        android:layout_width="217dp"
-        android:layout_height="146dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="251dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@android:color/background_light"
         android:text="Der notruf wurde betätigt. der notarzt ist in wenigen minuten bei ihnen. bitte bewahren sie ruhe!"
+        android:textAppearance="@style/ProfileEditView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -22,11 +23,11 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="menüNotrufButtonEventHandler"
-        android:text="menü"
+        android:text="@string/menue_btn_txt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

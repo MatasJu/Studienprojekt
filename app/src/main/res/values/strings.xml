@@ -22,7 +22,7 @@
     <string name="email">Email</string>
     <string name="language">Sprache</string>
     <string name="questionnaireBTNSTR">Fragebogen</string>
-    <string name="evaliuationBTNSTR">Evaliuation</string>
+    <string name="evaliuationBTNSTR">Triage SK</string>
 
 
 
@@ -38,6 +38,8 @@
     <string name="eval_mental_state">Bewusstseinszustand</string>
     <string name="is_patient_walking">Gehfähigkeit</string>
     <string name="is_patient_moving">Beweglichkeit</string>
+    <string name="eval_heart_rate_txt">Atemfrequenz (Atemzüge pro Minute)</string>
+
 
     <!--Tag Colors-->
     <string name="tag_color_deceased">Black</string>
@@ -879,6 +881,8 @@
     <string name="random_word498">"Das Auf"</string>
     <string name="random_word499">"Das Park"</string>
     <string name="random_word500">"Das Frühstück"</string>
+    <string name="eval_rr_txt">Pulsfrequenz  (Schläge pro Minute)</string>
+    <string name="menue_btn_txt">Menü</string>
 
 
 </resources>

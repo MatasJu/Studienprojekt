@@ -802,5 +802,8 @@
     <string name="email">Email</string>
     <string name="language">Language</string>
 
+    <string name="eval_heart_rate_txt">Heart Rate (beat/min) =</string>
+    <string name="menue_btn_txt">Menü</string>
+
 
 </resources>
