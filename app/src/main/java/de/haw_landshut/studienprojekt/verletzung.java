@@ -28,11 +28,11 @@ public class verletzung extends AndroidBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verletzung);
-        MotionSensor.instantiate(this);
+//        MotionSensor.instantiate(this);
 
-        // getting boolean for motion and walking
-        ms = MotionSensor.getMotionSensor();
-        ws = MotionSensor.getMotionSensor();
+//        // getting boolean for motion and walking
+//        ms = MotionSensor.getMotionSensor();
+//        ws = MotionSensor.getMotionSensor();
 
         motionBtn = findViewById(R.id.motionBtn);
         walkingBtn = findViewById(R.id.walkingBtn);

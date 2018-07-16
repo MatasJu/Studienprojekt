@@ -1,15 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="android:Theme">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
-    <style name="ProfileTitle" parent="TextAppearance.AppCompat">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
+    <style name="ProfileTitle" parent="android:TextAppearance">
+        <item name="android:textAppearance">@android:style/TextAppearance</item>
         <item name="android:textColor">@color/DefaultTextColor</item>
         <item name="android:background">@color/DefaultTextBackgroundColor</item>
         <item name="android:textSize">16pt</item>
@@ -20,7 +18,7 @@
         <item name="android:textStyle">bold|italic</item>
     </style>
 
-    <style name="ProfileTextView" parent="TextAppearance.AppCompat">
+    <style name="ProfileTextView" parent="android:TextAppearance">
         <item name="android:textColor">@color/DefaultTextColor</item>
         <item name="android:background">@color/DefaultTextBackgroundColor</item>
         <item name="android:textSize">11pt</item>
@@ -30,7 +28,7 @@
         <item name="layout_constraintLeft_toLeftOf">parent</item>
     </style>
 
-    <style name="ProfileEditView" parent="TextAppearance.AppCompat">
+    <style name="ProfileEditView" parent="android:TextAppearance">
         <item name="android:textColor">@color/DefaultTextColor</item>
         <item name="android:background">@color/DefaultTextBackgroundColor</item>
         <item name="android:textSize">11pt</item>
