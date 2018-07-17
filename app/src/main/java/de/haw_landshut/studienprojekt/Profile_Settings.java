@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Saves data to sharedPreferences
  * <p>
@@ -33,7 +36,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     //TextViews
     TextView firstNameTV;
     TextView lastNameTV;
-    TextView birthdayTV;
+    TextView birthdayET;
     TextView heightTV;
     TextView weightTV;
     TextView emailTV;
@@ -69,14 +72,7 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
         //====Get saved Shared Preferences ====
         sharedPrefs = getSharedPreferences(Profile_Settings.class.getName(), MODE_PRIVATE);
-    }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //---------init Views---------
 
         //weiterBtn
         weiterBtn = findViewById(R.id.weiterBtn);
@@ -120,22 +116,29 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
 
         //------Birthday-----
-        birthdayTV = findViewById(R.id.birthday);
+        birthdayET = findViewById(R.id.birthday);
 
         //settings so we can use DatePicker instead of keyboard input.
-        birthdayTV.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus)
-                showDatePickerDialog(v);
+        birthdayET.setOnFocusChangeListener((v, hasFocus) -> {
+            if(v.getId()==R.id.birthday) {
+                if (hasFocus)
+                    showDatePickerDialog(v);
+            }
         });
 
+
+
         //this so the on-screen keyboard does not appear
-        birthdayTV.setKeyListener(null);
+        birthdayET.setKeyListener(null);
 
         //Load Values, or set Default ones..
         setBirthdayTV(
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_DAY.toString(), 1),
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_MONTH.toString(), 1),
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_YEAR.toString(), 1950));
+
+        //---------init Views---------
+
 
 
         //-----Gender-----
@@ -202,8 +205,36 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
 
 
+
+
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
 
     /**
      * Saves data to SharedPreferences.
@@ -279,7 +310,17 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         bDay = day;
         bMonth = month;
         bYear = year;
-        birthdayTV.setText(String.format(Locale.getDefault(), "%d.%d.%d", day, month, year));
+        birthdayET.setText(String.format(Locale.getDefault(), "%d.%d.%d", day, month, year));
+        if(getCurrentFocus()!=null){
+            Log.d(TAG, "setBirthdayTV: ");
+            Log.d(TAG, "setBirthdayTV: "+ getCurrentFocus().getId());
+            Log.d(TAG, "setBirthdayTV: "+R.id.birthday);
+            if(getCurrentFocus().getId()==R.id.birthday){
+                Log.d(TAG, "setBirthdayTV: 2");
+                //todo: this gives focus to the top most focusable view... it`s kind of a work around to the bug: https://trello.com/c/XcNX9YeH/40-bug-fixing-geburtstag
+                birthdayET.clearFocus();
+            }
+        }
     }
 
     private void showDatePickerDialog(View v) {
