@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="menüverletzungButtonEventHandler"
+        android:onClick="menuVerletzungButtonEventHandler"
         android:text="@string/menue_btn_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

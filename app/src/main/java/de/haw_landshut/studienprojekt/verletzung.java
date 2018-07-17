@@ -2,6 +2,7 @@ package de.haw_landshut.studienprojekt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.graphics.Color;
@@ -11,29 +12,43 @@ public class verletzung extends AndroidBaseActivity {
 
     private static final String TAG = "verletzung";
 
-    MotionSensor ms;
-    MotionSensor ws;
+    /**This is the amount of seconds between checks of the Motion Sensors
+     */
+    private static final int delayToCheckSensorsInSec = 1;
 
+
+    private MotionSensor motionSensor;
+    private Handler checkSensorsHandler = new Handler();
     Button motionBtn;
     Button walkingBtn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verletzung);
 
-
 //        // getting boolean for motion and walking
-        ms = MotionSensor.getMotionSensor();
-        ws = MotionSensor.getMotionSensor();
-
+        motionSensor = MotionSensor.getMotionSensor();
         motionBtn = findViewById(R.id.motionBtn);
         walkingBtn = findViewById(R.id.walkingBtn);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
 
         // Starts thread for switching color
-        MotionWalkingThread thread = new MotionWalkingThread(100000);
-        thread.start();
+        runOnUiThread(checkMotionWalking);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+        checkSensorsHandler.removeCallbacks(checkMotionWalking);
     }
 
     public void onClickListener(View v){
@@ -55,58 +70,51 @@ public class verletzung extends AndroidBaseActivity {
         }
     }
 
-    public void menüverletzungButtonEventHandler(View view) {
+    public void menuVerletzungButtonEventHandler(View view) {
         Intent intent = new Intent(this,gefuehle.class);
         startActivity(intent);
     }
 
-    // Switching MotionButton Color - Green / Red
-    public void calcMotion() {
-        Log.d("test", "calcMotion: ");
-
-        if (ms.isMovement()){
+    /**Checks the Motion Sensors for Movement state, and sets the buttons to according colors
+     */
+    public void checkMovement() {
+        if (motionSensor.isMovement()){
+            Log.d("test", "calcMotion:  true");
             motionBtn.setBackgroundColor(Color.GREEN);
         }else {
+            Log.d("test", "calcMotion: false");
             motionBtn.setBackgroundColor(Color.RED);
         }
 
     }
 
-    // Switching WalkingButton Color - Green / Red
-    public void calcWalking() {
-        Log.d("test", "calcWalking: ");
+    /**Checks the Motion Sensors for Walking state, and sets the buttons to according colors.
+     *
+     */
+    public void checkWalking() {
 
-        if (ws.isWalking()){
+        if (motionSensor.isWalking()){
+            Log.d("test", "calcWalking: true ");
             walkingBtn.setBackgroundColor(Color.GREEN);
         }   else {
+            Log.d("test", "calcWalking: false");
             walkingBtn.setBackgroundColor(Color.RED);
         }
-
     }
 
-
-    // Checks every second the walking and motion value
-    class MotionWalkingThread extends Thread {
-        int seconds;
-
-        MotionWalkingThread(int seconds) {
-            this.seconds = seconds;
-        }
+    /**A runnable to be run on UI Thread for checking the Motion Sensors Regulary
+     *
+      */
+    private Runnable checkMotionWalking = new Runnable() {
 
         @Override
         public void run() {
-            for (int i = 0; i < seconds; i++) {
-                calcWalking();
-                calcMotion();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            {
+                checkWalking();
+                checkMovement();
+                checkSensorsHandler.postDelayed(this, delayToCheckSensorsInSec * 1000);
             }
         }
-
-    }
-
+    };
 }
 

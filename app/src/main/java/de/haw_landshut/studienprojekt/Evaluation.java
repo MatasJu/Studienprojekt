@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import static android.content.ContentValues.TAG;
 
 
 enum State {
@@ -34,6 +37,8 @@ public class Evaluation extends AndroidBaseActivity {
     //This constant uses the name of the class itself as the tag.
     private static final String LOG_TAG = Evaluation.class.getSimpleName();
 
+    private static final int delayToCheckSensorsInSec = 1;
+
     //view vars
     private SeekBar HRseekbar;
     private SeekBar RRseekbar;
@@ -56,8 +61,9 @@ public class Evaluation extends AndroidBaseActivity {
     private static final int HRHIGH = 120;
     private static final int HRNORM = 51;
 
-    MotionSensor ms;
-    MotionSensor ws;
+    MotionSensor motionSensor;
+    private Handler checkSensorsHandler = new Handler();
+
 
 
     @Override
@@ -114,11 +120,6 @@ public class Evaluation extends AndroidBaseActivity {
             calcTag();
         });
 
-
-
-
-
-
         //test
         TextView t = findViewById(R.id.correctTV);
         t.setText(String.valueOf(correct));
@@ -133,12 +134,25 @@ public class Evaluation extends AndroidBaseActivity {
         isWalking.setEnabled(false);
         isMoving.setEnabled(false);
         // getting boolean for motion and walking
-        ms = MotionSensor.getMotionSensor();
-        ws = MotionSensor.getMotionSensor();
-        // starting thread
-        CBMotionWalkingThread thread = new CBMotionWalkingThread(100000);
-        thread.start();
+        motionSensor = MotionSensor.getMotionSensor();
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+
+        // Starts thread for switching color
+        runOnUiThread(checkMotionWalking);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+        checkSensorsHandler.removeCallbacks(checkMotionWalking);
+    }
+
 
     /**
      * The seek bar notification listener
@@ -278,11 +292,12 @@ public class Evaluation extends AndroidBaseActivity {
 
     }
 
-
-    public void calcMotion() {
+    /**Checks the Motion Sensors for Movement state, and sets the buttons to according colors
+     */
+    public void checkMovement() {
         Log.d("test", "calcMotion: ");
 
-        if (ms.isMovement()){
+        if (motionSensor.isMovement()){
             isMoving.setChecked(true);
         }else {
             isMoving.setChecked(false);
@@ -290,11 +305,13 @@ public class Evaluation extends AndroidBaseActivity {
 
     }
 
-    // Switching WalkingButton Color - Green / Red
-    public void calcWalking() {
+    /**Checks the Motion Sensors for Walking state, and sets the buttons to according colors.
+     *
+     */
+    public void checkWalking() {
         Log.d("test", "calcWalking: ");
 
-        if (ws.isWalking()){
+        if (motionSensor.isWalking()){
             isWalking.setChecked(true);
         }   else {
             isWalking.setChecked(false);
@@ -302,41 +319,20 @@ public class Evaluation extends AndroidBaseActivity {
 
     }
 
-    // try to avoid sending false data by accident
- /*   public void doNothing(View view) {
-        if (ws.isWalking()){
-            isWalking.setChecked(true);
-        }   else {
-            isWalking.setChecked(false);
-        }
-        if (ms.isMovement()){
-            isMoving.setChecked(true);
-        }else {
-            isMoving.setChecked(false);
-        }
-    }*/
-
-    class CBMotionWalkingThread extends Thread {
-        int seconds;
-
-        CBMotionWalkingThread(int seconds) {
-            this.seconds = seconds;
-        }
+    /**A runnable to be run on UI Thread for checking the Motion Sensors Regulary
+     *
+     */
+    private Runnable checkMotionWalking = new Runnable() {
 
         @Override
         public void run() {
-            for (int i = 0; i < seconds; i++) {
-                calcWalking();
-                calcMotion();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            {
+                checkWalking();
+                checkMovement();
+                checkSensorsHandler.postDelayed(this, delayToCheckSensorsInSec * 1000);
             }
         }
-
-    }
+    };
 
     public void menuEvaluationButtonEventHandler(View view) {
         Intent intent = new Intent(this,gefuehle.class);
