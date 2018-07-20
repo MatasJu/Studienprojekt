@@ -152,7 +152,8 @@ public class QuestionsActivity extends AndroidBaseActivity {
     public static final int CODE_WHAT_MONTH = 400;
     public static final int CODE_REPEAT_WORDS = 500;
     private static final int REPEAT_OR_FORWARD = 652;
-    private final int AMOUNT_RANDOM_WORDS = 3;
+    private final static int AMOUNT_RANDOM_WORDS = 3;
+    private final static int TOTAL_RANDOM_WORD_COUNT = 97; // has to be 1 lower than the actual nr of the last random_wordXX.
 
 
     private Questions currentQuestion;
@@ -607,7 +608,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
         for (int i = 0; i < r.length; i++) {
             String RANDOM_WORD_ID = "random_word";
-            int TOTAL_RANDOM_WORD_COUNT = 499;
+
             r[i] = getString(getResources().getIdentifier(
                     RANDOM_WORD_ID + (new Random().nextInt(TOTAL_RANDOM_WORD_COUNT) + 1),
                     "string", getPackageName())
