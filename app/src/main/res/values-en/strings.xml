@@ -15,7 +15,7 @@
 
 
     <!--MainActivity-->
-    <string name="remember_words">Please remember these three words:</string>
+    <string name="remember_words">I would like to ask you some questions that may ask you to use your memory. I am going to name three objects. Please wait until i say all three words, then repeat them. Remember these words for me:</string>
 
     <!--Tag Colors-->
     <string name="tag_color_deceased">Black</string>

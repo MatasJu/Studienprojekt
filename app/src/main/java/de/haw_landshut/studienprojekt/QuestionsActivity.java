@@ -26,7 +26,8 @@ import java.util.Random;
 
 import static de.haw_landshut.studienprojekt.BuildConfig.DEBUG;
 
-/**Custom Enumerator for getting Question strings and their codes to use with TTS and STT.
+/**
+ * Custom Enumerator for getting Question strings and their codes to use with TTS and STT.
  */
 enum Questions {
     REMEMBER_WORDS(QuestionsActivity.getContext().getString(R.string.remember_words), QuestionsActivity.CODE_REMEMBER_WORDS),
@@ -45,12 +46,12 @@ enum Questions {
 
     private static final Questions[] values = values();
 
-    public boolean hasNext(){
-        return this.ordinal()<values.length-1;
+    public boolean hasNext() {
+        return this.ordinal() < values.length - 1;
     }
 
-    public Questions next(){
-        return values[(this.ordinal()+1)%values.length];
+    public Questions next() {
+        return values[(this.ordinal() + 1) % values.length];
     }
 
 
@@ -73,7 +74,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
     private static final String TAG = QuestionsActivity.class.getSimpleName();
     //so we can reference to this from enum
     private static Context mContext;
-    private int correct=0;
+    private int correct = 0;
 
     public static Context getContext() {
         return mContext;
@@ -85,8 +86,6 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
     /**
      * Listener for TTS to know when it has been initialised.
-     *
-     *
      */
     private final TextToSpeech.OnInitListener TTSonInitListener =
             status -> {
@@ -100,8 +99,6 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
     /**
      * TTS progress listener to know when TTS has finished speaking and other states.
-     *
-     *
      */
     private final UtteranceProgressListener utteranceProgressListener =
             new UtteranceProgressListener() {
@@ -137,7 +134,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
     //HANDLER TAGS:
 
-    private static final int REPEAT_OR_FORWARD = 652;
+
 
 
 
@@ -154,6 +151,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
     public static final int CODE_WHAT_DAY = 300;
     public static final int CODE_WHAT_MONTH = 400;
     public static final int CODE_REPEAT_WORDS = 500;
+    private static final int REPEAT_OR_FORWARD = 652;
     private final int AMOUNT_RANDOM_WORDS = 3;
 
 
@@ -223,20 +221,20 @@ public class QuestionsActivity extends AndroidBaseActivity {
      */
     private boolean questionsFlow() {
 
-        if(currentQuestion.qID==CODE_REMEMBER_WORDS) {
+        if (currentQuestion.qID == CODE_REMEMBER_WORDS) {
             askToRemember();
-        }else {
+        } else {
             askQuestion();
         }
 
         return false;
     }
 
-    /**Asks a normal question""
-     *
+    /**
+     * Asks a normal question""
      */
     private void askQuestion() {
-        addToTTSQueue(currentQuestion.qString,"GetAnswer");
+        addToTTSQueue(currentQuestion.qString, "GetAnswer");
     }
 
     /**
@@ -249,43 +247,58 @@ public class QuestionsActivity extends AndroidBaseActivity {
             temp = temp.concat(randomWordsList[i] + TTS_PAUSE);
         }
 
-        addToTTSQueue(temp, "QuestionDone");
+        addToTTSQueue(temp, "RememberWords");
     }
 
     private void checkAnswer(String result) {
         switch (currentQuestion.qID) {
 
+            case CODE_REMEMBER_WORDS:
+                checkRememberWords(result);
+                break;
+
             case CODE_WHAT_YEAR:
-                if(checkYearAnswer(result)){
+                if (checkYearAnswer(result)) {
                     correct++;
                 }
-                    askToRepeatOrGoForward() ;
+                askToRepeatOrGoForward();
 
 
                 break;
 
             case CODE_WHAT_MONTH:
-                if(checkMonthAnswer(result)){
+                if (checkMonthAnswer(result)) {
                     correct++;
                 }
-                    askToRepeatOrGoForward();
+                askToRepeatOrGoForward();
 
                 break;
 
             case CODE_WHAT_DAY:
-                if(checkDayAnswer(result)) {
+                if (checkDayAnswer(result)) {
                     correct++;
                 }
-                    askToRepeatOrGoForward();
+                askToRepeatOrGoForward();
 
                 break;
             //TODO: So currently if a person repeats the three words he gets extra points, why not? must be conscious if he can repeat them many times...
             case CODE_REPEAT_WORDS:
-                correct+=checkWordsAnswer(result);
+                correct += checkWordsAnswer(result);
                 askToRepeatOrGoForward();
                 break;
 
         }
+
+    }
+
+    private void checkRememberWords(String result) {
+
+        if (checkWordsAnswer(result) > 0) {
+            askToRepeatOrGoForward();
+        } else {
+            questionsFlow();
+        }
+
 
     }
 
@@ -340,13 +353,16 @@ public class QuestionsActivity extends AndroidBaseActivity {
     private void TTSHandler(String utteranceId) {
         switch (utteranceId) {
             case "GetAnswer":
-                displaySpeechRecognizer(currentQuestion.qString,currentQuestion.qID);
+                displaySpeechRecognizer(currentQuestion.qString, currentQuestion.qID);
                 break;
             case "QuestionDone":
                 askToRepeatOrGoForward();
                 break;
             case "AskedWhatToDo":
-                displaySpeechRecognizer(getString(R.string.next_question) + " " +getString(R.string.repeat_question), REPEAT_OR_FORWARD);
+                displaySpeechRecognizer(getString(R.string.next_question) + " " + getString(R.string.repeat_question), REPEAT_OR_FORWARD);
+                break;
+            case "RememberWords":
+                displaySpeechRecognizer(getString(R.string.remember_words), CODE_REMEMBER_WORDS);
                 break;
             default:
                 questionsFlow();
@@ -357,7 +373,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
     }
 
     private void askToRepeatOrGoForward() {
-        addToTTSandFlush( getString(R.string.repeat_question)+ TTS_PAUSE + getString(R.string.next_question), "AskedWhatToDo");
+        addToTTSandFlush(getString(R.string.repeat_question) + TTS_PAUSE + getString(R.string.next_question), "AskedWhatToDo");
     }
 
     /*================END TTS METHODS==================*/
@@ -378,7 +394,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, LocaleHelper.getPersistedLocale(this));
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
-        intent.putExtra(RecognizerIntent.ACTION_VOICE_SEARCH_HANDS_FREE,true);
+        intent.putExtra(RecognizerIntent.ACTION_VOICE_SEARCH_HANDS_FREE, true);
 
         //Offline recognition will work only above api lvl 23, also has to be downloaded outside the app in the language settings.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -409,11 +425,11 @@ public class QuestionsActivity extends AndroidBaseActivity {
             List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             if (DEBUG) {
-                testSpeechRecResult.append("Spoken Text: " + results.get(0));
+                testSpeechRecResult.append("\nSpoken Text Recognized: " + results.get(0));
             }
             //Call a handler with the text.
             //the result at place 0 is the best guess at this time....
-            STTHandler(requestCode,results.get(0));
+            STTHandler(requestCode, results.get(0));
 
         }
 
@@ -425,7 +441,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
      * Handles the STT result.
      */
 
-    private void STTHandler(int requestCode,String result) {
+    private void STTHandler(int requestCode, String result) {
         switch (requestCode) {
             case REPEAT_OR_FORWARD:
                 repeatOrForward(result);
@@ -439,13 +455,13 @@ public class QuestionsActivity extends AndroidBaseActivity {
     private void repeatOrForward(String result) {
         //if result had "forward" in it select next question.
         if (result.contains(getString(R.string.answer_next_question))) {
-            if(currentQuestion.hasNext()) {
-                currentQuestion= currentQuestion.next();
+            if (currentQuestion.hasNext()) {
+                currentQuestion = currentQuestion.next();
                 questionsFlow();
-            }else {
+            } else {
                 done();
             }
-        //else just repeat same question.
+            //else just repeat same question.
         } else {
             questionsFlow();
         }
@@ -457,16 +473,17 @@ public class QuestionsActivity extends AndroidBaseActivity {
 
     /*============== END STT functions====================*/
 
-    /**When we done with questions:
+    /**
+     * When we done with questions:
      * TODO: THIS;
      */
     private void done() {
-        testSpeechRecResult.append("Points:" +correct);
+        testSpeechRecResult.append("\nPoints:" + correct);
         TTSEngine.stop();
 
 
         Intent intent = new Intent(this, Evaluation.class);
-        intent.putExtra("correct",correct);
+        intent.putExtra("correct", correct);
         startActivity(intent);
 
     }
@@ -595,11 +612,10 @@ public class QuestionsActivity extends AndroidBaseActivity {
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
 
-        if(TTSEngine != null){
+        if (TTSEngine != null) {
             TTSEngine.shutdown();
         }
     }
@@ -612,7 +628,7 @@ public class QuestionsActivity extends AndroidBaseActivity {
     }
 
     public void menüActivityQButtonEventHandler(View view) {
-        Intent intent = new Intent(this,gefuehle.class);
+        Intent intent = new Intent(this, gefuehle.class);
         startActivity(intent);
     }
 

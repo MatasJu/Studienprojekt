@@ -31,7 +31,7 @@
 
 
     <!--MainActivity-->
-    <string name="remember_words">"Bitte merken sie sich diese drei Wörter."</string>
+    <string name="remember_words">" "Ich nenne ihnen Drei Dinge. Bitte warten Sie, bis ich alle 3 Wörter gesagt habe, und wiederholen Sie sie dann. Merken Sie sich die Wörter, denn ich frage Sie demnächst noch einmal danach. Bitte wiederholen Sie:"</string>
 
 
     <!--Evaluation Activity -->
