@@ -503,16 +503,23 @@ public class QuestionsActivity extends AndroidBaseActivity {
         int correct = 0;
 
         for (String aRandomWordsList : randomWordsList) {
+            testSpeechRecResult.append("\nWords that have been asked to remember:");
             testSpeechRecResult.append("\n" + aRandomWordsList);
-            if (result.toLowerCase().contains(aRandomWordsList.toLowerCase()))
-                correct++;
+            if (LocaleHelper.getPersistedLocale(getContext()).equals(Locale.GERMAN)) {
+                if (result.toLowerCase().contains(aRandomWordsList.toLowerCase().substring(4))) {
+                    correct++;
+                }
+            } else {
+                if (result.toLowerCase().contains(aRandomWordsList.toLowerCase())) {
+                    correct++;
+                }
+            }
         }
 
         if (DEBUG) {
             Log.d(TAG, " checkWordsAnswer called with: result = [" + result + "]");
             testSpeechRecResult.append("\nTTS Answer:" + result);
             testSpeechRecResult.append("\nCorrect:" + correct);
-            testSpeechRecResult.append("\nWords that have been asked to remember:");
         }
         return correct;
     }
