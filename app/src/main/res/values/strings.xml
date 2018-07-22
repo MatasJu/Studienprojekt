@@ -38,7 +38,7 @@
     <string name="eval_mental_state">Bewusstseinszustand</string>
     <string name="is_patient_walking">Gehfähigkeit</string>
     <string name="is_patient_moving">Beweglichkeit</string>
-    <string name="eval_heart_rate_txt">Atemfrequenz (Atemzüge pro Minute)</string>
+    <string name="eval_heart_rate_txt">Puls (Schläge pro Minute)</string>
 
 
     <!--Tag Colors-->
@@ -251,8 +251,11 @@
 
 
 
-    <string name="eval_rr_txt">Pulsfrequenz  (Schläge pro Minute)</string>
+    <string name="eval_rr_txt">Atemfrequenz (Atemzüge pro Minute)</string>
     <string name="menue_btn_txt">Menü</string>
+    <string name="eval_txt_low">NIEDRIG</string>
+    <string name="eval_txt_normal">NORMAL</string>
+    <string name="eval_txt_high">HOCH</string>
 
 
 </resources>

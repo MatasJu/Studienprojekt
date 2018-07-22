@@ -195,21 +195,21 @@ public class Evaluation extends AndroidBaseActivity {
         if (currentHR >= HRHIGH) {
             HR = State.HIGH;
             HRtag.setBackgroundColor(Color.RED);
-            HRtag.setText("HOCH");
+            HRtag.setText(getString(R.string.eval_txt_high));
 
         }
 
         if ((currentHR >= HRNORM) && currentHR < HRHIGH) {
             HR = State.NORMAL;
             HRtag.setBackgroundColor(Color.GREEN);
-            HRtag.setText("NORMAL");
+            HRtag.setText(getString(R.string.eval_txt_normal));
 
         }
 
         if (currentHR < HRNORM) {
             HR = State.LOW;
             HRtag.setBackgroundColor(Color.RED);
-            HRtag.setText("LOW");
+            HRtag.setText(getString(R.string.eval_txt_low));
 
         }
         if(currentHR==0){
@@ -224,7 +224,7 @@ public class Evaluation extends AndroidBaseActivity {
         if ((currentRR>= RRHIGH)) {
             RR = State.HIGH;
             RRtag.setBackgroundColor(Color.RED);
-            RRtag.setText(RR.name());
+            RRtag.setText(getString(R.string.eval_txt_high));
 
 
         }
@@ -232,14 +232,14 @@ public class Evaluation extends AndroidBaseActivity {
         if ((currentRR >= RRNORM) && currentRR< RRHIGH) {
             RR = State.NORMAL;
             RRtag.setBackgroundColor(Color.GREEN);
-            RRtag.setText(RR.name());
+            RRtag.setText(getString(R.string.eval_txt_normal));
 
         }
 
         if (currentRR < RRNORM) {
             RR = State.LOW;
             RRtag.setBackgroundColor(Color.RED);
-            RRtag.setText(RR.name());
+            RRtag.setText(R.string.eval_txt_low);
 
         }
         if(currentRR==0){
@@ -247,7 +247,6 @@ public class Evaluation extends AndroidBaseActivity {
             RRtag.setBackgroundColor(Color.BLACK);
             RRtag.setText(RR.name());
         }
-
 
         calcTag();
 

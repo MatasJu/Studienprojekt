@@ -64,11 +64,11 @@
         android:layout_width="345dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:max="50"
         android:progress="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/HRseekBar"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
@@ -112,6 +112,7 @@
         android:id="@+id/HRTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="9999"
         android:textIsSelectable="false"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -121,6 +122,7 @@
         android:id="@+id/RRtag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="TextView"
         android:textIsSelectable="false"
         app:layout_constraintStart_toEndOf="@+id/RRTextView"
@@ -130,6 +132,7 @@
         android:id="@+id/HRtag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="TextView"
         android:textIsSelectable="false"
         app:layout_constraintStart_toEndOf="@+id/HRTextView"

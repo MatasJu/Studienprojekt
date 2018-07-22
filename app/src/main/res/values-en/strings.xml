@@ -171,8 +171,12 @@
     <string name="email">Email</string>
     <string name="language">Language</string>
 
-    <string name="eval_heart_rate_txt">Heart Rate (beat/min) =</string>
+    <string name="eval_heart_rate_txt">Heart Rate (beat/min)</string>
     <string name="menue_btn_txt">Menü</string>
+    <string name="eval_rr_txt">Respiratory Rate(Breats/min)</string>
+    <string name="eval_txt_low">LOW</string>
+    <string name="eval_txt_normal">NORMAL</string>
+    <string name="eval_txt_high">HIGH</string>
 
 
 </resources>
