@@ -8,5 +8,7 @@
     <color name="DefaultTextBackgroundColor">#FFFFFF</color>
     <color name="greenColor">#32CD32</color>
     <color name="redColor">#FF0000</color>
+    <color name="whiteColor">#FFFFFF</color>
+
 
 </resources>
