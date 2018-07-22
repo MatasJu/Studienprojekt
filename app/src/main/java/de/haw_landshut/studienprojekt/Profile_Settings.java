@@ -92,7 +92,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         //Set onFocusChange Listener to save data after leaving a field.
 
 
-
         //-----Last Name-----
         lastNameTV = findViewById(R.id.lastName);
         lastNameTV.setText(sharedPrefs.getString(SPkeys.LAST_NAME.toString(), ""));
@@ -113,19 +112,16 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         emailTV.setText(sharedPrefs.getString(SPkeys.EMAIL.toString(), ""));
 
 
-
-
         //------Birthday-----
         birthdayET = findViewById(R.id.birthday);
 
         //settings so we can use DatePicker instead of keyboard input.
         birthdayET.setOnFocusChangeListener((v, hasFocus) -> {
-            if(v.getId()==R.id.birthday) {
+            if (v.getId() == R.id.birthday) {
                 if (hasFocus)
                     showDatePickerDialog(v);
             }
         });
-
 
 
         //this so the on-screen keyboard does not appear
@@ -138,7 +134,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
                 sharedPrefs.getInt(SPkeys.BIRTHDAY_YEAR.toString(), 1950));
 
         //---------init Views---------
-
 
 
         //-----Gender-----
@@ -175,7 +170,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
                         SPkeys.GENDER.toString(), Objects.requireNonNull(genderAdapter.getItem(0)).toString())));
 
 
-
         //-----Language-----
 
         languageSpinner = findViewById(R.id.languageSpinner);
@@ -202,9 +196,6 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         languageSpinner.setSelection(languageAdapter.getPosition(
                 sharedPrefs.getString(
                         SPkeys.LANGUAGE.toString(), languageAdapter.getItem(0).toString())));
-
-
-
 
 
     }
@@ -238,10 +229,9 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
 
     /**
      * Saves data to SharedPreferences.
-     *
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void saveData(){
+    private void saveData() {
 
         //save
         editor = sharedPrefs.edit();
@@ -257,22 +247,26 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         editor.putString(SPkeys.LANGUAGE.toString(), languageString);
         editor.apply();
 
+        /*Toast for testing saved data.
+
         if (BuildConfig.DEBUG) {
             StringBuilder temp = new StringBuilder();
             temp.append("Saved Text:\n");
+
+
             sharedPrefs.getAll().forEach((key, value) ->
             {
                 temp.append(key).append(" = ").append(value).append('\n');
             });
-            Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
-            toast.show();
+             Toast toast = Toast.makeText(this, temp, Toast.LENGTH_LONG);
+             toast.show();
         }
-
+*/
 
     }
 
-    /**Save on back press.
-     *
+    /**
+     * Save on back press.
      */
     @Override
     public void onBackPressed() {
@@ -282,8 +276,8 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
         }
     }
 
-    /** Save on toolbar back button.
-     *
+    /**
+     * Save on toolbar back button.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -299,23 +293,24 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     }
 
 
-    /** Helping function to set text to Birthday TextView.
+    /**
+     * Helping function to set text to Birthday TextView.
      * Used in Date Picker Fragment.
      *
-     * @param day day
+     * @param day   day
      * @param month month
-     * @param year year
+     * @param year  year
      */
     public void setBirthdayTV(int day, int month, int year) {
         bDay = day;
         bMonth = month;
         bYear = year;
         birthdayET.setText(String.format(Locale.getDefault(), "%d.%d.%d", day, month, year));
-        if(getCurrentFocus()!=null){
+        if (getCurrentFocus() != null) {
             Log.d(TAG, "setBirthdayTV: ");
-            Log.d(TAG, "setBirthdayTV: "+ getCurrentFocus().getId());
-            Log.d(TAG, "setBirthdayTV: "+R.id.birthday);
-            if(getCurrentFocus().getId()==R.id.birthday){
+            Log.d(TAG, "setBirthdayTV: " + getCurrentFocus().getId());
+            Log.d(TAG, "setBirthdayTV: " + R.id.birthday);
+            if (getCurrentFocus().getId() == R.id.birthday) {
                 Log.d(TAG, "setBirthdayTV: 2");
                 //todo: this gives focus to the top most focusable view... it`s kind of a work around to the bug: https://trello.com/c/XcNX9YeH/40-bug-fixing-geburtstag
                 birthdayET.clearFocus();
@@ -330,7 +325,9 @@ public class Profile_Settings extends AndroidBaseActivity implements Profile_Set
     }
 
 
-    /** Fragment for Date Picker
+    /**
+     * Fragment for Date Picker
+     *
      * @see "https://developer.android.com/guide/topics/ui/controls/pickers"
      */
     public static class DatePickerFragment extends DialogFragment
@@ -374,6 +371,7 @@ enum SPkeys {
     LANGUAGE("language");
 
     private final String string;
+
     SPkeys(String name) {
         this.string = name;
     }
