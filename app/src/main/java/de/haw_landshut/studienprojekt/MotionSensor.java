@@ -5,17 +5,27 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
+
+import static android.content.ContentValues.TAG;
+import static android.os.Looper.prepare;
 
 
 public class MotionSensor {
+    private static final long STEP_VALID_FOR_AMOUNT_OF_SEC = 10;
+
     private static MotionSensor singleton;
     private final SensorManager sMgr;
     private final Sensor stepSensor;
     private final Sensor accelSensor;
     //Buffer for StepSensor
-    private final int bufferLimit = 9;
-    private long[] stepTimes = new long[bufferLimit + 1];
+    private final int bufferLimit = 50;
+    /**
+     * Collection of timestamps
+     */
+    private long[] stepsTimestamps = new long[bufferLimit + 1];
     private int current = 0;
     //Motion Detection
     private boolean movement;
@@ -25,7 +35,11 @@ public class MotionSensor {
     //shutoff
     private boolean active = true;
 
-    /**
+
+    /**Funktionsweise:
+     *SensorenApi hat Eventhandler übergeben bekommen, die bei Bewegung bzw Schritterkennung aufgerufen werden.
+     *Eventhandler speichern bei bewegung den Zeitstempel der letzten bewegung, bei Schritten wird der Zeitstempel in einem Buffer gespeichert
+     *alle 5 Sekunden prüft ein HintergrungThread ob Die bewegung bzw Schritte noch aktuell ( <10 sec) sind und ändert werte entsprechend und bereinigt den Buffer.
      * @param cont DeviceContext
      */
 
@@ -41,7 +55,7 @@ public class MotionSensor {
 
                 public void onSensorChanged(SensorEvent event) {
                     if (current < bufferLimit) {
-                        stepTimes[current] = event.timestamp;
+                        stepsTimestamps[current] = System.nanoTime();
                         current++;
                     }
                 }
@@ -99,27 +113,43 @@ public class MotionSensor {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 while (active) {
 
                     if (current > 0) {
                         int j = 0;
-                        long time = 10000000000L;
+                        long stepValidNanoTime = STEP_VALID_FOR_AMOUNT_OF_SEC* 1000000000L;
                         long[] replacement = new long[bufferLimit + 1];
+                        StringBuilder temp = new StringBuilder();
+                        Log.i(TAG, "MotionSensor run: ");
                         for (int i = 0; i < current; i++) {
-                            if (System.nanoTime() - stepTimes[i] < time) {
-                                replacement[j] = stepTimes[i];
+                            if (System.nanoTime() - stepsTimestamps[i] < stepValidNanoTime) {
+                                Log.i(TAG, "System.nanoTime() = " + System.nanoTime());
+                                Log.i(TAG, "System.nanoTime() - stepsTimestamps[i] = "+ (System.nanoTime() - stepsTimestamps[i]));
+                                replacement[j] = stepsTimestamps[i];
+
+                                Log.i(TAG,"i:  "+i);
+
+                                Log.i(TAG,"stepTimes:  "+ stepsTimestamps[i]+"\n");
+                                Log.i(TAG,"replacement:  "+ replacement[j]+"\n");
+
                                 j++;
                             }
                         }
-                        stepTimes = replacement;
-                        if (j > 3)
+                        //clear the step count Buffer.
+                        stepsTimestamps = replacement.clone();
+
+                        Log.i(TAG,"j:  "+j+"\n");
+
+                        if (j > 3) {
                             walking = true;
-                        else
-                            walking=false;
-
-
+                        } else {
+                            walking = false;
+                        }
                         current = j;
                     }
+
+
                     if (System.nanoTime() - lastUpdate < 10000000000L) {
                         movement = false;
                         lastUpdate = System.nanoTime();
@@ -128,7 +158,7 @@ public class MotionSensor {
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
-                        Log.i("MotionSensor","sleep interupted");
+                        Log.i("MotionSensor", "sleep interupted");
                     }
                 }
             }
