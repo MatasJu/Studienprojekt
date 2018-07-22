@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.graphics.Color;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class verletzung extends AndroidBaseActivity {
 
@@ -19,8 +20,8 @@ public class verletzung extends AndroidBaseActivity {
 
     private MotionSensor motionSensor;
     private Handler checkSensorsHandler = new Handler();
-    Button motionBtn;
-    Button walkingBtn;
+    TextView motionBtn;
+    TextView walkingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +82,11 @@ public class verletzung extends AndroidBaseActivity {
         if (motionSensor.isMovement()){
             Log.d("test", "calcMotion:  true");
             motionBtn.setBackgroundColor(Color.GREEN);
+            motionBtn.setTextColor(Color.BLACK);
         }else {
             Log.d("test", "calcMotion: false");
             motionBtn.setBackgroundColor(Color.RED);
+            motionBtn.setTextColor(Color.WHITE);
         }
 
     }
@@ -96,9 +99,11 @@ public class verletzung extends AndroidBaseActivity {
         if (motionSensor.isWalking()){
             Log.d("test", "calcWalking: true ");
             walkingBtn.setBackgroundColor(Color.GREEN);
+            walkingBtn.setTextColor(Color.BLACK);
         }   else {
             Log.d("test", "calcWalking: false");
             walkingBtn.setBackgroundColor(Color.RED);
+            walkingBtn.setTextColor(Color.WHITE);
         }
     }
 
